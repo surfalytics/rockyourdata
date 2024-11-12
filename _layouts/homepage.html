@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+
+      <!-- data from head.html -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="description" content="{{site.description}}">
+
+      <meta charset="utf-8">
+      <title>{{ page.title }}</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <link rel="stylesheet" href="{{site.baseurl}}/assets/gitbook/custom.css">
+
+      <meta name="HandheldFriendly" content="true"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{site.baseurl}}/assets/gitbook/images/apple-touch-icon-precomposed-152.png">
+      <link rel="shortcut icon" href="{{site.baseurl}}/{{site.favicon_path}}" type="image/x-icon">
+      <!-- End data from head.html -->
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="./assets/gitbook/homepage.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <link rel="stylesheet" href="path-to-iconify-font.css">
+
+      <!-- Google fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+     <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FT018TBY84"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            window.dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-FT018TBY84');
+    </script>
+    <!-- End Google Analytics -->
+    </head>
+
+    <body>
+
+      {%- include header.html -%}
+
+      <main>
+            <!-- Hero -->
+            <section class="hero blur-bg">
+                <div class="hero">
+                  <div class="h-row">
+                    <h1 class="white">Engineering Analytics.<br>
+                      Insightful.</h1>
+                  </div>
+                  <p class="white">We use data engineering and analytics to help our clients improve performance outcomes</p>
+                  <a href="mailto:hello@rockyourdata.cloud" target="_blank">
+                    <button class="cta-filled">Get a Data Services Quote</button>
+                  </a>  
+                  <a target="_blank" href="https://surfalytics.com/">
+                    <button class="hero-price">Start Data Career with Surfalytics</button>
+                  </a>
+                </div>            
+            </section>
+
+            
+            <!-- About -->
+            <section>
+              <div class="abt-section card-color">
+                <div class="abt-left">
+                  <h5>Your Hub for</h5>
+                  <h2 class="gradient">Enabling cloud analytics.<br>
+                    Your data. Our skills.
+                  </h2>
+                </div>
+                <div class="abt-right">
+                  <p>Rock Your Data is a consulting and technology firm that delivers secure and scalable cloud analytics in North America.</p>
+                  <p>We help organizations to make distinctive, lasting, and substantial improvements in their performance by leveraging their data and cutting-edge technology.</p>
+                  <a href="/pages/about">Learn more about us</a>
+                </div>  
+              </div>
+            </section>
+
+          <!-- Our Services -->
+
+          <section>
+            <h2 class="centered gradient">Our Services</h2>
+            <div class="perks-wrap">
+              <div class="perks-card card-interactive card-color">
+                <img src="/public/images/hospitality-performance-dashboard.png" />
+                <div class="perks-info">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                    <path d="M14 24.5H24.5V56H14V24.5ZM17.5 52.5H21V28H17.5V52.5ZM28 31.5H38.5V56H28V31.5ZM31.5 52.5H35V35H31.5V52.5ZM0 38.5H10.5V56H0V38.5ZM3.5 52.5H7V42H3.5V52.5ZM42 17.5H52.5V56H42V17.5ZM45.5 52.5H49V21H45.5V52.5ZM37.9805 16.9805C38.3268 17.7279 38.5 18.4844 38.5 19.25C38.5 19.9792 38.3633 20.6628 38.0898 21.3008C37.8164 21.9388 37.4427 22.4948 36.9688 22.9688C36.4948 23.4427 35.9388 23.8164 35.3008 24.0898C34.6628 24.3633 33.9792 24.5 33.25 24.5C32.5208 24.5 31.8372 24.3633 31.1992 24.0898C30.5612 23.8164 30.0052 23.4427 29.5312 22.9688C29.0573 22.4948 28.6836 21.9388 28.4102 21.3008C28.1367 20.6628 28 19.9792 28 19.25V18.9219C28 18.8125 28.0091 18.7031 28.0273 18.5938L22.8867 16.0234C22.4128 16.4974 21.8568 16.862 21.2188 17.1172C20.5807 17.3724 19.9245 17.5 19.25 17.5C18.4844 17.5 17.7279 17.3268 16.9805 16.9805L9.98047 23.9805C10.3268 24.7279 10.5 25.4844 10.5 26.25C10.5 26.9792 10.3633 27.6628 10.0898 28.3008C9.81641 28.9388 9.44271 29.4948 8.96875 29.9688C8.49479 30.4427 7.9388 30.8164 7.30078 31.0898C6.66276 31.3633 5.97917 31.5 5.25 31.5C4.52083 31.5 3.83724 31.3633 3.19922 31.0898C2.5612 30.8164 2.00521 30.4427 1.53125 29.9688C1.05729 29.4948 0.683594 28.9388 0.410156 28.3008C0.136719 27.6628 0 26.9792 0 26.25C0 25.5208 0.136719 24.8372 0.410156 24.1992C0.683594 23.5612 1.05729 23.0052 1.53125 22.5312C2.00521 22.0573 2.5612 21.6836 3.19922 21.4102C3.83724 21.1367 4.52083 21 5.25 21C6.01562 21 6.77214 21.1732 7.51953 21.5195L14.5195 14.5195C14.1732 13.7721 14 13.0156 14 12.25C14 11.5208 14.1367 10.8372 14.4102 10.1992C14.6836 9.5612 15.0573 9.00521 15.5312 8.53125C16.0052 8.05729 16.5612 7.68359 17.1992 7.41016C17.8372 7.13672 18.5208 7 19.25 7C19.9792 7 20.6628 7.13672 21.3008 7.41016C21.9388 7.68359 22.4948 8.05729 22.9688 8.53125C23.4427 9.00521 23.8164 9.5612 24.0898 10.1992C24.3633 10.8372 24.5 11.5208 24.5 12.25V12.5781C24.5 12.6875 24.4909 12.7969 24.4727 12.9062L29.6133 15.4766C30.0872 15.0026 30.6432 14.638 31.2812 14.3828C31.9193 14.1276 32.5755 14 33.25 14C34.0156 14 34.7721 14.1732 35.5195 14.5195L42.5195 7.51953C42.1732 6.77214 42 6.01562 42 5.25C42 4.52083 42.1367 3.83724 42.4102 3.19922C42.6836 2.5612 43.0573 2.00521 43.5312 1.53125C44.0052 1.05729 44.5612 0.683594 45.1992 0.410156C45.8372 0.136719 46.5208 0 47.25 0C47.9792 0 48.6628 0.136719 49.3008 0.410156C49.9388 0.683594 50.4948 1.05729 50.9688 1.53125C51.4427 2.00521 51.8164 2.5612 52.0898 3.19922C52.3633 3.83724 52.5 4.52083 52.5 5.25C52.5 5.97917 52.3633 6.66276 52.0898 7.30078C51.8164 7.9388 51.4427 8.49479 50.9688 8.96875C50.4948 9.44271 49.9388 9.81641 49.3008 10.0898C48.6628 10.3633 47.9792 10.5 47.25 10.5C46.4844 10.5 45.7279 10.3268 44.9805 9.98047L37.9805 16.9805ZM5.25 28C5.72396 28 6.13411 27.8268 6.48047 27.4805C6.82682 27.1341 7 26.724 7 26.25C7 25.776 6.82682 25.3659 6.48047 25.0195C6.13411 24.6732 5.72396 24.5 5.25 24.5C4.77604 24.5 4.36589 24.6732 4.01953 25.0195C3.67318 25.3659 3.5 25.776 3.5 26.25C3.5 26.724 3.67318 27.1341 4.01953 27.4805C4.36589 27.8268 4.77604 28 5.25 28ZM47.25 3.5C46.776 3.5 46.3659 3.67318 46.0195 4.01953C45.6732 4.36589 45.5 4.77604 45.5 5.25C45.5 5.72396 45.6732 6.13411 46.0195 6.48047C46.3659 6.82682 46.776 7 47.25 7C47.724 7 48.1341 6.82682 48.4805 6.48047C48.8268 6.13411 49 5.72396 49 5.25C49 4.77604 48.8268 4.36589 48.4805 4.01953C48.1341 3.67318 47.724 3.5 47.25 3.5ZM19.25 14C19.724 14 20.1341 13.8268 20.4805 13.4805C20.8268 13.1341 21 12.724 21 12.25C21 11.776 20.8268 11.3659 20.4805 11.0195C20.1341 10.6732 19.724 10.5 19.25 10.5C18.776 10.5 18.3659 10.6732 18.0195 11.0195C17.6732 11.3659 17.5 11.776 17.5 12.25C17.5 12.724 17.6732 13.1341 18.0195 13.4805C18.3659 13.8268 18.776 14 19.25 14ZM33.25 21C33.724 21 34.1341 20.8268 34.4805 20.4805C34.8268 20.1341 35 19.724 35 19.25C35 18.776 34.8268 18.3659 34.4805 18.0195C34.1341 17.6732 33.724 17.5 33.25 17.5C32.776 17.5 32.3659 17.6732 32.0195 18.0195C31.6732 18.3659 31.5 18.776 31.5 19.25C31.5 19.724 31.6732 20.1341 32.0195 20.4805C32.3659 20.8268 32.776 21 33.25 21Z" fill="#023047"/>
+                  </svg>
+                  <h5>Analytics and Data Engineering Solutions Implementation using Modern Data Stack</h5>
+                  <ul>
+                    <li>Data ingestion (Fivetran, Stitch)</li>
+                    <li>Data Storage and Warehousing (Snowflake, BigQuery)</li>
+                    <li>Data Transformation (dbt)</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="perks-card card-interactive card-color">
+                <div class="perks-info">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="57" viewBox="0 0 56 57" fill="none">
+                    <path d="M16.333 42.0597V37.3931M27.9997 42.0597V35.0597M39.6663 42.0597V30.3931M5.83301 28.0597C5.83301 17.6111 5.83301 12.3844 9.07867 9.13873C12.3243 5.89307 17.5487 5.89307 27.9997 5.89307C38.4483 5.89307 43.675 5.89307 46.9207 9.13873C50.1663 12.3844 50.1663 17.6087 50.1663 28.0597C50.1663 38.5084 50.1663 43.7351 46.9207 46.9807C43.675 50.2264 38.4507 50.2264 27.9997 50.2264C17.551 50.2264 12.3243 50.2264 9.07867 46.9807C5.83301 43.7351 5.83301 38.5107 5.83301 28.0597Z" stroke="#023047" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.9814 26.8605C19.0098 27.0285 30.4128 26.2702 36.8994 15.9755M32.6481 14.7318L37.0254 14.0272C37.5574 13.9595 38.3414 14.3818 38.5351 14.8835L39.6901 18.7055" stroke="#023047" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <h5>Analytics Audit and Optimization with Embedded Data Engineering</h5>
+                  <ul>
+                    <li>Uncover data-driven insights to enhance collaboration</li>
+                    <li>Identify and resolve workflow bottlenecks</li>
+                    <li>Continuously refine data processes for efficiency and better performance</li>
+                  </ul>
+                </div>
+                <img src="/public/images/rawpixel-579231-unsplash.png" />
+              </div>
+              <div class="perks-card card-interactive card-color">
+                <img src="/public/images/matillion-workshop-2.png" />
+                <div class="perks-info">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="57" viewBox="0 0 56 57" fill="none">
+                    <g clip-path="url(#clip0_105_92)">
+                      <path d="M18.6663 26.2469C21.7605 26.2469 24.728 25.0177 26.9159 22.8298C29.1038 20.6419 30.333 17.6744 30.333 14.5802C30.333 11.486 29.1038 8.51859 26.9159 6.33066C24.728 4.14274 21.7605 2.91357 18.6663 2.91357C15.5721 2.91357 12.6047 4.14274 10.4168 6.33066C8.22884 8.51859 6.99967 11.486 6.99967 14.5802C6.99967 17.6744 8.22884 20.6419 10.4168 22.8298C12.6047 25.0177 15.5721 26.2469 18.6663 26.2469ZM18.6663 26.2469C23.3633 26.2469 27.4677 28.0202 30.3867 30.9672C32.1173 32.7219 33.412 34.8581 34.1667 37.2042M18.6663 26.2469C9.33301 26.2469 2.33301 33.2469 2.33301 42.5802V54.2469H25.6663M27.9997 44.5029L37.7763 51.9136L53.6663 30.9136" stroke="#023047" stroke-width="4.66667"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_105_92">
+                        <rect width="56" height="56" fill="white" transform="translate(0 0.580078)"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <h5>Certified Data Analytics and Engineering Experts</h5>
+                  <ul>
+                    <li>Platform Expertise (Snowflake, Databricks, dbt)</li>
+                    <li>Qualified and certified analytics and engineering staff</li>
+                    <li>Proficient in a range of modern data tools</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="perks-card card-interactive card-color">
+                <div class="perks-info">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="57" viewBox="0 0 56 57" fill="none">
+                    <path d="M34.9996 12.6567C34.9996 14.5133 34.2621 16.2937 32.9494 17.6065C31.6366 18.9192 29.8561 19.6567 27.9996 19.6567C26.1431 19.6567 24.3626 18.9192 23.0499 17.6065C21.7371 16.2937 20.9996 14.5133 20.9996 12.6567C20.9996 10.8002 21.7371 9.01975 23.0499 7.70699C24.3626 6.39424 26.1431 5.65674 27.9996 5.65674C29.8561 5.65674 31.6366 6.39424 32.9494 7.70699C34.2621 9.01975 34.9996 10.8002 34.9996 12.6567ZM48.9996 14.0567C48.9996 15.542 48.4096 16.9663 47.3594 18.0165C46.3092 19.0667 44.8848 19.6567 43.3996 19.6567C41.9144 19.6567 40.49 19.0667 39.4398 18.0165C38.3896 16.9663 37.7996 15.542 37.7996 14.0567C37.7996 12.5715 38.3896 11.1471 39.4398 10.0969C40.49 9.04674 41.9144 8.45674 43.3996 8.45674C44.8848 8.45674 46.3092 9.04674 47.3594 10.0969C48.4096 11.1471 48.9996 12.5715 48.9996 14.0567ZM12.5996 19.6567C14.0848 19.6567 15.5092 19.0667 16.5594 18.0165C17.6096 16.9663 18.1996 15.542 18.1996 14.0567C18.1996 12.5715 17.6096 11.1471 16.5594 10.0969C15.5092 9.04674 14.0848 8.45674 12.5996 8.45674C11.1144 8.45674 9.69001 9.04674 8.63981 10.0969C7.58961 11.1471 6.99961 12.5715 6.99961 14.0567C6.99961 15.542 7.58961 16.9663 8.63981 18.0165C9.69001 19.0667 11.1144 19.6567 12.5996 19.6567ZM16.7996 25.9567C16.7996 24.0247 18.3676 22.4567 20.2996 22.4567H35.6996C37.3936 22.4567 38.8076 23.6607 39.1296 25.2567H37.7996C36.1654 25.2565 34.5827 25.8281 33.3256 26.8724C32.0686 27.9166 31.2166 29.3678 30.9172 30.9743C29.3107 31.2737 27.8595 32.1258 26.8152 33.3828C25.771 34.6398 25.1994 36.2225 25.1996 37.8567V49.0567C25.1996 49.4207 25.2267 49.7763 25.2808 50.1235C22.8579 49.5172 20.7071 48.1184 19.1704 46.1495C17.6337 44.1805 16.7992 41.7544 16.7996 39.2567V25.9567ZM50.282 30.9743L50.3996 30.9967V25.9567C50.3996 24.0247 48.8316 22.4567 46.8996 22.4567H40.9384C41.4872 23.2743 41.8484 24.2291 41.9604 25.2567H43.3996C45.0338 25.2565 46.6166 25.8281 47.8736 26.8724C49.1306 27.9166 49.9826 29.3678 50.282 30.9743ZM13.9996 25.9567C13.9996 24.6603 14.3916 23.4591 15.0608 22.4567H9.09961C7.16761 22.4567 5.59961 24.0247 5.59961 25.9567V36.4567C5.59948 37.6555 5.85592 38.8404 6.35169 39.9318C6.84747 41.0232 7.5711 41.9958 8.47396 42.7844C9.37682 43.5729 10.438 44.1591 11.5862 44.5035C12.7344 44.8479 13.943 44.9426 15.1308 44.7811C14.3829 43.0355 13.9981 41.1559 13.9996 39.2567V25.9567ZM33.5996 33.6567V32.2567C33.5996 31.1428 34.0421 30.0745 34.8298 29.2869C35.6174 28.4992 36.6857 28.0567 37.7996 28.0567H43.3996C44.5135 28.0567 45.5818 28.4992 46.3695 29.2869C47.1571 30.0745 47.5996 31.1428 47.5996 32.2567V33.6567H48.9996C50.1135 33.6567 51.1818 34.0992 51.9695 34.8869C52.7571 35.6745 53.1996 36.7428 53.1996 37.8567V42.0567H47.5996V40.6567C47.5996 40.2854 47.4521 39.9293 47.1896 39.6668C46.927 39.4042 46.5709 39.2567 46.1996 39.2567C45.8283 39.2567 45.4722 39.4042 45.2097 39.6668C44.9471 39.9293 44.7996 40.2854 44.7996 40.6567V42.0567H36.3996V40.6567C36.3996 40.2854 36.2521 39.9293 35.9896 39.6668C35.727 39.4042 35.3709 39.2567 34.9996 39.2567C34.6283 39.2567 34.2722 39.4042 34.0097 39.6668C33.7471 39.9293 33.5996 40.2854 33.5996 40.6567V42.0567H27.9996V37.8567C27.9996 36.7428 28.4421 35.6745 29.2298 34.8869C30.0174 34.0992 31.0857 33.6567 32.1996 33.6567H33.5996ZM36.3996 32.2567V33.6567H44.7996V32.2567C44.7996 31.8854 44.6521 31.5293 44.3896 31.2668C44.127 31.0042 43.7709 30.8567 43.3996 30.8567H37.7996C37.4283 30.8567 37.0722 31.0042 36.8097 31.2668C36.5471 31.5293 36.3996 31.8854 36.3996 32.2567ZM47.5996 46.2567V44.8567H53.1996V49.0567C53.1996 50.1706 52.7571 51.2389 51.9695 52.0266C51.1818 52.8142 50.1135 53.2567 48.9996 53.2567H32.1996C31.0857 53.2567 30.0174 52.8142 29.2298 52.0266C28.4421 51.2389 27.9996 50.1706 27.9996 49.0567V44.8567H33.5996V46.2567C33.5996 46.628 33.7471 46.9841 34.0097 47.2467C34.2722 47.5092 34.6283 47.6567 34.9996 47.6567C35.3709 47.6567 35.727 47.5092 35.9896 47.2467C36.2521 46.9841 36.3996 46.628 36.3996 46.2567V44.8567H44.7996V46.2567C44.7996 46.628 44.9471 46.9841 45.2097 47.2467C45.4722 47.5092 45.8283 47.6567 46.1996 47.6567C46.5709 47.6567 46.927 47.5092 47.1896 47.2467C47.4521 46.9841 47.5996 46.628 47.5996 46.2567Z" fill="#023047"/>
+                  </svg>
+                  <h5>Data Engineering Team Development</h5>
+                  <ul>
+                    <li>Hiring and developing versatile data engineering teams</li>
+                    <li>15 Years of proven experience building teams in North America</li>
+                    <li>Dedicated to driving impactful business results</li>
+                  </ul>
+                </div>
+                <img src="/public/images/matillion-workshop-3.png" />
+              </div>
+            </div>
+          </section>
+
+            <!-- How we interact -->
+            <section>
+              <h2 class="centered gradient">How we interact</h2>
+              <div class="potential-wrap">
+                <div class="potential-card card-color">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="57" viewBox="0 0 56 57" fill="none">
+                    <g clip-path="url(#clip0_41_484)">
+                      <path d="M18.6663 25.7391C21.7605 25.7391 24.728 24.5099 26.9159 22.322C29.1038 20.1341 30.333 17.1666 30.333 14.0724C30.333 10.9782 29.1038 8.01077 26.9159 5.82285C24.728 3.63492 21.7605 2.40576 18.6663 2.40576C15.5721 2.40576 12.6047 3.63492 10.4168 5.82285C8.22884 8.01077 6.99967 10.9782 6.99967 14.0724C6.99967 17.1666 8.22884 20.1341 10.4168 22.322C12.6047 24.5099 15.5721 25.7391 18.6663 25.7391ZM18.6663 25.7391C23.3633 25.7391 27.4677 27.5124 30.3867 30.4594C32.1173 32.2141 33.412 34.3503 34.1667 36.6964M18.6663 25.7391C9.33301 25.7391 2.33301 32.7391 2.33301 42.0724V53.7391H25.6663M27.9997 43.9951L37.7763 51.4058L53.6663 30.4058" stroke="#023047" stroke-width="4.66667"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_41_484">
+                        <rect width="56" height="56" fill="white" transform="translate(0 0.0722656)"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <h4>The expert role</h4>
+                  <p>
+                    We are responsible for results, accept the responsibility, and implement action plan.
+                  </p>
+                  <p>
+                    Technical control is in our hands. You don’t have to be involved in technical details and only should be responsive and provide assistance needed to solve the problem.
+                  </p>
+                </div>
+                <div class="potential-card card-color">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="57" height="57" viewBox="0 0 57 57" fill="none">
+                    <path d="M28.176 5.64898C29.305 4.89662 30.6284 4.48858 31.985 4.4745C33.3417 4.46041 34.6732 4.84089 35.8177 5.56965L45.5103 11.739H49.5003C50.1192 11.739 50.7127 11.9848 51.1502 12.4224C51.5878 12.86 51.8337 13.4535 51.8337 14.0723V35.0723C51.8337 35.6912 51.5878 36.2846 51.1502 36.7222C50.7127 37.1598 50.1192 37.4056 49.5003 37.4056H45.9537C46.0285 38.5419 45.7881 39.6767 45.2591 40.685C44.73 41.6933 43.9328 42.5359 42.9553 43.12L31.0717 50.2506C30.3415 50.6884 29.5054 50.9181 28.6541 50.9148C27.8027 50.9115 26.9684 50.6754 26.2417 50.232C25.423 50.9553 24.3766 51.3685 23.2847 51.3996C22.1927 51.4307 21.1245 51.0778 20.266 50.4023L8.27266 40.978C7.4343 40.3202 6.84634 39.3952 6.6065 38.3569C6.36667 37.3186 6.48941 36.2295 6.95433 35.2706C6.39714 34.8338 5.94666 34.2759 5.637 33.6392C5.32734 33.0025 5.16661 32.3037 5.16699 31.5956V14.0723C5.16699 13.4535 5.41283 12.86 5.85041 12.4224C6.288 11.9848 6.88149 11.739 7.50033 11.739H19.0433L28.176 5.64898ZM10.2373 31.913L11.852 30.5013C13.2319 29.2943 15.0302 28.6767 16.8606 28.7815C18.6909 28.8862 20.4071 29.7048 21.6403 31.0613L27.945 37.996C28.9337 39.0835 29.555 40.4546 29.7208 41.9149C29.8867 43.3753 29.5886 44.8508 28.869 46.1323L40.5567 39.1207C40.8613 38.9359 41.0925 38.6512 41.2108 38.315C41.3291 37.9789 41.3272 37.6122 41.2053 37.2773L30.8757 22.8153C30.5928 22.419 30.193 22.121 29.7323 21.9633C29.2716 21.8055 28.7731 21.7959 28.3067 21.9356L22.506 23.674C21.2955 24.0371 20.0092 24.0657 18.7838 23.7567C17.5583 23.4478 16.4394 22.8129 15.5457 21.9193L14.862 21.238C14.2419 20.618 13.8091 19.8358 13.613 18.9812C13.417 18.1265 13.4657 17.2339 13.7537 16.4056H9.83366V31.5956L10.2373 31.913ZM33.314 9.50832C32.932 9.26498 32.4875 9.13805 32.0347 9.14302C31.5818 9.148 31.1402 9.28465 30.7637 9.53631L18.1637 17.9363L18.845 18.62C19.1432 18.9178 19.5165 19.1294 19.9253 19.2321C20.3341 19.3348 20.7631 19.3248 21.1667 19.2033L26.965 17.465C28.3641 17.0454 29.8595 17.0741 31.2415 17.5469C32.6235 18.0197 33.8231 18.913 34.672 20.1016L43.702 32.739H47.167V16.4056H45.5127C44.6249 16.4055 43.7555 16.1522 43.0067 15.6753L33.314 9.50832ZM14.9227 34.0106L11.152 37.31L23.1453 46.7343L24.7903 43.8596C25.0348 43.4315 25.1373 42.9369 25.0832 42.4469C25.0291 41.9569 24.8212 41.4965 24.4893 41.132L18.187 34.1973C17.7759 33.7454 17.204 33.4726 16.5941 33.4377C15.9842 33.4028 15.3826 33.6085 14.9227 34.0106Z" fill="#023047"/>
+                  </svg>
+                  <h4>The Pair-of-Hands Role</h4>
+                  <p>
+                    You leverage us as an extra pair of hands that helps you to solve problems. 
+                  </p>  
+                  <p>
+                    You have full control, defines goals, and develops action plan. We take a passive role, control rests with you.                 
+                  </p>
+                </div>
+                <div class="potential-card card-color">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="57" viewBox="0 0 56 57" fill="none">
+                    <path d="M10.5 36.8223V35.0723H7V36.8223C7 40.0712 8.29062 43.187 10.5879 45.4843C12.8853 47.7816 16.0011 49.0723 19.25 49.0723H24.5V45.5723H19.25C16.9294 45.5723 14.7038 44.6504 13.0628 43.0095C11.4219 41.3685 10.5 39.1429 10.5 36.8223ZM42 19.3223V21.0723H45.5V19.3223C45.5 16.0734 44.2094 12.9575 41.9121 10.6602C39.6147 8.36289 36.4989 7.07227 33.25 7.07227H28V10.5723H33.25C34.3991 10.5723 35.5369 10.7986 36.5985 11.2383C37.6601 11.6781 38.6247 12.3226 39.4372 13.1351C40.2497 13.9476 40.8942 14.9122 41.3339 15.9738C41.7737 17.0354 42 18.1732 42 19.3223ZM19.25 19.3223H8.75C7.35761 19.3223 6.02226 19.8754 5.03769 20.86C4.05312 21.8445 3.5 23.1799 3.5 24.5723V28.0723H7V24.5723C7 24.1081 7.18437 23.663 7.51256 23.3348C7.84075 23.0066 8.28587 22.8223 8.75 22.8223H19.25C19.7141 22.8223 20.1592 23.0066 20.4874 23.3348C20.8156 23.663 21 24.1081 21 24.5723V28.0723H24.5V24.5723C24.5 23.1799 23.9469 21.8445 22.9623 20.86C21.9777 19.8754 20.6424 19.3223 19.25 19.3223ZM14 17.5723C15.3845 17.5723 16.7378 17.1617 17.889 16.3926C19.0401 15.6234 19.9373 14.5301 20.4672 13.2511C20.997 11.972 21.1356 10.5645 20.8655 9.20664C20.5954 7.84877 19.9287 6.60149 18.9497 5.62252C17.9708 4.64355 16.7235 3.97687 15.3656 3.70677C14.0078 3.43668 12.6003 3.5753 11.3212 4.10511C10.0421 4.63493 8.94888 5.53213 8.17971 6.68328C7.41054 7.83442 7 9.1878 7 10.5723C7 12.4288 7.7375 14.2093 9.05025 15.522C10.363 16.8348 12.1435 17.5723 14 17.5723ZM14 7.07227C14.6922 7.07227 15.3689 7.27754 15.9445 7.66213C16.5201 8.04671 16.9687 8.59333 17.2336 9.23288C17.4985 9.87242 17.5678 10.5762 17.4327 11.2551C17.2977 11.934 16.9644 12.5577 16.4749 13.0471C15.9854 13.5366 15.3617 13.87 14.6828 14.005C14.0039 14.1401 13.3001 14.0708 12.6606 13.8058C12.0211 13.5409 11.4744 13.0923 11.0899 12.5168C10.7053 11.9412 10.5 11.2645 10.5 10.5723C10.5 9.64401 10.8687 8.75377 11.5251 8.09739C12.1815 7.44102 13.0717 7.07227 14 7.07227ZM47.25 43.8223H36.75C35.3576 43.8223 34.0223 44.3754 33.0377 45.36C32.0531 46.3445 31.5 47.6799 31.5 49.0723V52.5723H35V49.0723C35 48.6081 35.1844 48.163 35.5126 47.8348C35.8408 47.5066 36.2859 47.3223 36.75 47.3223H47.25C47.7141 47.3223 48.1592 47.5066 48.4874 47.8348C48.8156 48.163 49 48.6081 49 49.0723V52.5723H52.5V49.0723C52.5 47.6799 51.9469 46.3445 50.9623 45.36C49.9777 44.3754 48.6424 43.8223 47.25 43.8223ZM35 35.0723C35 36.4567 35.4105 37.8101 36.1797 38.9613C36.9489 40.1124 38.0421 41.0096 39.3212 41.5394C40.6003 42.0692 42.0078 42.2079 43.3656 41.9378C44.7235 41.6677 45.9708 41.001 46.9497 40.022C47.9287 39.043 48.5954 37.7958 48.8655 36.4379C49.1356 35.08 48.997 33.6726 48.4672 32.3935C47.9373 31.1144 47.0401 30.0212 45.889 29.252C44.7378 28.4828 43.3845 28.0723 42 28.0723C40.1435 28.0723 38.363 28.8098 37.0503 30.1225C35.7375 31.4353 35 33.2158 35 35.0723ZM45.5 35.0723C45.5 35.7645 45.2947 36.4412 44.9101 37.0168C44.5256 37.5923 43.9789 38.0409 43.3394 38.3058C42.6999 38.5708 41.9961 38.6401 41.3172 38.505C40.6383 38.37 40.0146 38.0366 39.5251 37.5471C39.0356 37.0577 38.7023 36.434 38.5673 35.7551C38.4322 35.0762 38.5015 34.3724 38.7664 33.7329C39.0313 33.0933 39.4799 32.5467 40.0555 32.1621C40.6311 31.7775 41.3078 31.5723 42 31.5723C42.9283 31.5723 43.8185 31.941 44.4749 32.5974C45.1312 33.2538 45.5 34.144 45.5 35.0723Z" fill="#023047"/>
+                  </svg>
+                  <h4>The Collaborative Role</h4>
+                  <p>
+                    Yours knowledge is put together with ours specialized knowledge and problem solving is based on collaboration. 
+                  </p>
+                  <p>
+                    We don’t solve problems for you but we apply our special skills to help you solve problems themselves.                  
+                  </p>
+                </div>
+
+              </div>
+            </section>
+
+            {%- include partners-logos.html -%}
+
+            {%- include swag-section.html -%}
+            <!-- About the founder - PUT ON SEPARATE ABOUT PAGE -->
+            <!-- <section class="founder-card">
+              <div class="two-col card-color">
+                <img class="founder-photo" src="./assets/images/founder.png" alt="founder Dmitry Anoshin photo" />
+                <div class="founder-text-block">
+                  <h5>Meet the founder</h5>
+                  <h2 class="gradient">Dmitry Anoshin</h2>
+                  <ul class="founder-ul">
+                    <li>14 years in data analytics, 8 years in MAANG (Amazon, Microsoft)</li>
+                    <li>Founder of Rock Your Data - data analytics consulting company</li>
+                    <li>Author of numerous books on Data Analytics</li>
+                    <li>Teaching Cloud Computing Fundamentals at the University of Victoria since 2021</li>
+                  </ul>
+                  <ul class="logos">
+                    <li><img src="assets/images/microsoft-azure.svg" /></li>
+                    <li><img src="assets/images/amazon.svg" /></li>
+                    <li><img src="assets/images/shield-horz-white-1.svg" /></li>
+                  </ul>
+                </div>
+              </div>
+            </section> -->
+          
+        </main>
+
+        <script>
+
+          var gitbook = gitbook || [];
+          gitbook.push(function() {
+              gitbook.page.hasChanged({%- include metadata-home.json.tpl -%});
+          });
+
+        </script>
+
+        <!-- JavaScript -->
+        <script>
+
+          // Menu modal
+          function toggleMenu() {
+              var menuModal = document.getElementById('menuModal');
+              menuModal.style.display = (menuModal.style.display === 'none' || menuModal.style.display === '') ? 'flex' : 'none';
+              var nav = document.getElementById('nav')
+              nav.style.display = (menuModal.style.display === 'none' || menuModal.style.display === '') ? 'flex' : 'none';
+          }
+        </script>
+
+        
+
+      {%- include footer.html -%}
+
+      <!-- Footer -->
+
+      <footer>              
+        
+        <!-- Subscribe -->
+        <div class="container two-col">
+          <div class="subscribe">
+            <h4 class="orange-txt">Subscribe to our newsletter</h4>
+  
+              <!-- Embedded Substack API -->
+              <div id="custom-substack-embed"></div>
+              <script>
+                window.CustomSubstackWidget = {
+                  substackUrl: "blog.surfalytics.com",
+                  placeholder: "example@gmail.com",
+                  buttonText: "Subscribe",
+                  theme: "purple",
+                };
+              </script>
+              <script src="https://substackapi.com/widget.js" async></script>
+            </div>
+  
+  
+          <!-- Socials -->
+          <div>
+            <ul class="socials">
+              <li>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/surfalytics/">
+                  <iconify-icon icon="fa:instagram" style="color: #2B3673; font-size: 35px;"></iconify-icon>
+                </a>
+              </li>
+              <li>
+                <!-- Telegram -->
+                <a href="https://t.me/surfalytics">
+                  <iconify-icon icon="icon-park-outline:telegram" style="color: #2B3673; font-size: 35px;"></iconify-icon>
+                </a>
+              </li>
+              <li>
+                <!-- Linkedin -->
+                <a href="https://www.linkedin.com/company/surfalytics/">
+                  <iconify-icon icon="ri:linkedin-fill" style="color: #2B3673;" width="35"></iconify-icon>
+                </a>
+              </li>
+              <li>
+                <!-- Tiktok -->
+                <a href="https://www.tiktok.com/@surfalytics">
+                  <iconify-icon icon="ic:baseline-tiktok" style="color: #2B3673; font-size: 35px;"></iconify-icon>
+                </a>
+              </li>
+              <li>
+                <!-- Github -->
+                <a href="https://github.com/surfalytics/surfalytics">
+                  <iconify-icon icon="mdi:github" style="color: #2B3673; font-size: 35px;"></iconify-icon>
+                </a>
+              </li>
+            </ul>
+            <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>    
+          </div>
+  
+        </div>
+         <!-- Copyright info -->
+        <p>Designed and developed by <a target=’_blank’ href="https://www.lalajafarova.com/">Lala Jafarova</a>.</p>
+      </footer>
+    </body>
+</html>
