@@ -309,7 +309,7 @@ a {
 }
 
 .blur-bg {
-    background: url('/assets/blur.png');
+    background: url('./assets/blur.png');
     background-position-y: -100px;
 }
 
