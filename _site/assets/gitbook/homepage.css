@@ -36,7 +36,7 @@ body {
 
 main {
     padding: 5em 1em 1em 1em;
-    background-image: url('./public/main-bg.png');
+    background: url('{{ site.baseurl }}/public/images/main-bg.png');
     background-position: top;
     background-repeat: no-repeat;
 }
