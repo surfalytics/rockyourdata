@@ -8,8 +8,7 @@ description: >
 version:          1.0
 gitbook_version:  3.2.3
 
-url:              'https://surfalytics.com'
-# baseurl:          '/surfalytics-gitbook'
+url:              'lajafar.github.io/rockyourdata/'
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself
