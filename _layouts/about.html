@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+
+      <!-- data from head.html -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="description" content="{{site.description}}">
+
+      <meta charset="utf-8">
+      <title>{{ page.title }}</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <link rel="stylesheet" href="{{site.baseurl}}/assets/gitbook/custom.css">
+
+      <meta name="HandheldFriendly" content="true"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{site.baseurl}}/assets/gitbook/images/apple-touch-icon-precomposed-152.png">
+      <link rel="shortcut icon" href="{{site.baseurl}}/{{site.favicon_path}}" type="image/x-icon">
+      <!-- End data from head.html -->
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="/assets/gitbook/homepage.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <link rel="stylesheet" href="path-to-iconify-font.css">
+
+      <!-- Google fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+     <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FT018TBY84"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            window.dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-FT018TBY84');
+    </script>
+    <!-- End Google Analytics -->
+    </head>
+
+    <body>
+            {%- include header.html -%}
+
+            <!-- About -->
+            <section>
+              <div class="abt-section card-color">
+                <div class="abt-left">
+                  <h5>About Us</h5>
+                  <h2 class="gradient">Empowering Business<br> with Data-Driven<br> Solutions</h2>
+                </div>
+                <div class="abt-right">
+                  <p>At Rock Your Data, we specialize in transforming raw data into actionable insights, helping businesses make smarter, faster decisions.</p>
+                  <p>Our mission is to harness the power of data to drive meaningful change, helping our clients unlock new growth, streamline operations, and innovate with confidence.</p>
+                </div>  
+              </div>
+            </section>
+
+            <!-- How we interact -->
+            <section>
+                <h2 class="centered gradient">Our Values</h2>
+                <div class="potential-wrap">
+                  <div class="potential-card card-color">
+                    <h4>Integrity</h4>
+                    <p>
+                        We are committed to ethical practices and transparency in every interaction, building trust with our clients and partners.                    
+                    </p>
+                  </div>
+                  <div class="potential-card card-color">
+                    <h4>Client-Centricity</h4>
+                    <p>
+                        Our clients' goals drive our efforts. We listen closely to their needs and customize our solutions to deliver measurable, impactful results.                   
+                    </p>  
+                  </div>
+                  <div class="potential-card card-color">
+                    <h4>Innovation</h4>
+                    <p>
+                        We stay at the forefront of technology, constantly refining our methods to deliver advanced, future-ready solutions.                    
+                    </p>
+                  </div>
+  
+                </div>
+              </section>
+  
+            {%- include partners-logos.html -%}
+
+            <!-- {%- include about-founder.html -%}      -->
+               <!-- JavaScript -->
+               <script>
+
+                // Menu modal
+                function toggleMenu() {
+                    var menuModal = document.getElementById('menuModal');
+                    menuModal.style.display = (menuModal.style.display === 'none' || menuModal.style.display === '') ? 'flex' : 'none';
+                    var nav = document.getElementById('nav')
+                    nav.style.display = (menuModal.style.display === 'none' || menuModal.style.display === '') ? 'flex' : 'none';
+                }
+              </script>
+      
+              
+            <!-- Footer -->
+      
+            <footer>              
+              
+              <!-- Subscribe -->
+              <div class="container two-col">
+                <div class="subscribe">
+                  <h4 class="orange-txt">Subscribe to our newsletter</h4>
+        
+                    <!-- Embedded Substack API -->
+                    <div id="custom-substack-embed"></div>
+                    <script>
+                      window.CustomSubstackWidget = {
+                        substackUrl: "blog.surfalytics.com",
+                        placeholder: "example@gmail.com",
+                        buttonText: "Subscribe",
+                        theme: "purple",
+                      };
+                    </script>
+                    <script src="https://substackapi.com/widget.js" async></script>
+                  </div>
+        
+        
+                <!-- Socials -->
+                <div>
+                  <ul class="socials">
+                    <li>
+                      <!-- Instagram -->
+                      <a href="https://www.instagram.com/surfalytics/">
+                        <iconify-icon icon="fa:instagram" style="color: #2B3673; font-size: 35px;"></iconify-icon>
+                      </a>
+                    </li>
+                    <li>
+                      <!-- Telegram -->
+                      <a href="https://t.me/surfalytics">
+                        <iconify-icon icon="icon-park-outline:telegram" style="color: #2B3673; font-size: 35px;"></iconify-icon>
+                      </a>
+                    </li>
+                    <li>
+                      <!-- Linkedin -->
+                      <a href="https://www.linkedin.com/company/surfalytics/">
+                        <iconify-icon icon="ri:linkedin-fill" style="color: #2B3673;" width="35"></iconify-icon>
+                      </a>
+                    </li>
+                    <li>
+                      <!-- Tiktok -->
+                      <a href="https://www.tiktok.com/@surfalytics">
+                        <iconify-icon icon="ic:baseline-tiktok" style="color: #2B3673; font-size: 35px;"></iconify-icon>
+                      </a>
+                    </li>
+                    <li>
+                      <!-- Github -->
+                      <a href="https://github.com/surfalytics/surfalytics">
+                        <iconify-icon icon="mdi:github" style="color: #2B3673; font-size: 35px;"></iconify-icon>
+                      </a>
+                    </li>
+                  </ul>
+                  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>    
+                </div>
+        
+              </div>
+               <!-- Copyright info -->
+              <p>Designed and developed by <a target=’_blank’ href="https://www.lalajafarova.com/">Lala Jafarova</a>.</p>
+            </footer>
+      
+    </body>
+</html>
