@@ -417,6 +417,9 @@ a {
 }
 
 /* WHY DATA PROFESSIONALS CHOOSE SURFALYTICS */
+.services-top-margin {
+    margin-top: 5em;
+}
 
 .perks-wrap {
     margin-top: 64px;
@@ -433,10 +436,13 @@ a {
     justify-content: center;
     align-items: center;
     align-self: stretch;
+    border-radius: 20px;
+    border: 1px solid #9CA2C6;
+    background: #EDEDEE;
 }
 
 .perks-card img {
-    max-width: 100%;
+display: none;
 }
 
 .perks-info {
@@ -917,6 +923,10 @@ main {
     max-width: 375px;
 }
 
+.services-top-margin {
+    margin-top: 0;
+}
+
 .perks-wrap {
     gap: 64px;
 }
@@ -931,9 +941,13 @@ main {
     flex-direction: row;
     padding: 24px 48px;
     gap: 48px;
+    border: none;
+    background: none;
+    justify-content: space-between;
 }
 
 .perks-card img {
+    display: block;
     max-width: 500px;
 }
 
