@@ -8,8 +8,8 @@ Rock Your Data specializes in empowering businesses with cutting-edge cloud-base
 version:          1.0
 gitbook_version:  3.2.3
 
-url:              'https://surfalytics.github.io/rockyourdata/'
-baseurl:          '/rockyourdata'
+url:              'https:/rockyourdata.cloud'
+# baseurl:          '/rockyourdata'
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself
