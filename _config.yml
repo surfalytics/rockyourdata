@@ -1,15 +1,16 @@
 # Configurations
 title:            Rock Your Data
-longtitle:        Rock Your Data - top cloud analytics consulting company in Canada
+longtitle:        Modern Analytics Consulting Company in North America
 author:           Dmitry Anoshin
 description: >
-Rock Your Data specializes in empowering businesses with cutting-edge cloud-based analytics solutions that drive growth, optimize decision-making, and unlock actionable insights.
+  Rock Your Data specializes in empowering businesses with cutting-edge cloud-based analytics solutions that drive growth, optimize decision-making, and unlock actionable insights.
+
 
 version:          1.0
 gitbook_version:  3.2.3
 
-url:              'https://surfalytics.github.io/rockyourdata/'
-baseurl:          '/rockyourdata'
+url:              'https://rockyourdata.cloud/'
+# baseurl:          '/rockyourdata'
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself
