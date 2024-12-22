@@ -34,13 +34,6 @@ body {
     margin: 0px;
 }
 
-main {
-    padding: 5em 1em 1em 1em;
-    background: url('./images/main-bg.png');
-    background-position: top;
-    background-repeat: no-repeat;
-}
-
 footer {
     padding: 2.5em 0;
     margin: 0 1em;
@@ -308,9 +301,11 @@ a {
     align-items: center;
 }
 
-.blur-bg {
-    background: url('./assets/blur.png');
-    background-position-y: -100px;
+.hero-bg {
+    background: url('./images/main-bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 6em 1em;
 }
 
 .hero img {
@@ -882,8 +877,9 @@ input {
      width: 42%;
 }
 
-main {
-    background-size: contain;
+.hero-bg {
+    padding: 10em 1em;
+    max-width: 100vw;
 }
 
 .hero button {
@@ -1078,10 +1074,6 @@ section {
 
 .desktop-banner {
     display: flex;
-}
-
-main {
-    padding-top: 9em;
 }
 
 nav .container,
