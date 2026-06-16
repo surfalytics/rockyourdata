@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Self-hosted display typeface (brand: Futura).                      */
+/*  Body type (Inter Variable) is imported in BaseLayout.              */
+/* ------------------------------------------------------------------ */
+@font-face {
+  font-family: "Futura";
+  src: url("/fonts/futura/futura-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Futura";
+  src: url("/fonts/futura/futura-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Futura";
+  src: url("/fonts/futura/futura-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens — editorial / light / minimal.                       */
+/* ------------------------------------------------------------------ */
+@theme {
+  /* Brand */
+  --color-navy: #1e2657; /* deep brand ink for headings */
+  --color-navy-700: #161d44;
+  --color-navy-900: #0d1230;
+  --color-periwinkle: #5468e8;
+  --color-periwinkle-200: #aab2e6;
+  --color-accent: #fe6a3c;
+  --color-accent-600: #ef5526;
+
+  /* Surfaces & neutrals (near-monochrome) */
+  --color-paper: #ffffff; /* page background */
+  --color-mist: #f6f7fa; /* alternating section tint */
+  --color-fog: #eef0f6; /* chips / subtle fills */
+  --color-line: #e7e9f2; /* hairline borders */
+  --color-lilac: #8a90ad; /* muted captions */
+  --color-ink: #12141c; /* body text (near-black) */
+  --color-ink-soft: #41465c; /* secondary text */
+
+  /* Typography */
+  --font-display: "Futura", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+
+  /* Radii — architectural, not pill-y */
+  --radius-card: 1rem;
+  --radius-btn: 0.625rem;
+  --radius-pill: 999px;
+
+  /* Shadows — barely-there; editorial leans on hairlines, not elevation */
+  --shadow-soft: 0 1px 1px rgba(18, 20, 28, 0.03);
+  --shadow-lift: 0 1px 2px rgba(18, 20, 28, 0.04),
+    0 12px 32px rgba(18, 20, 28, 0.08);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base layer                                                         */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background-color: var(--color-paper);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-navy);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-periwinkle);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Components                                                         */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Subtle brand gradient on text — used sparingly as an accent now */
+  .text-gradient {
+    background-image: linear-gradient(
+      94deg,
+      var(--color-navy) 0%,
+      var(--color-periwinkle) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Centered, padded content shell — wide & airy */
+  .shell {
+    width: 100%;
+    max-width: 76rem; /* ~1216px */
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Primary CTA — solid, flat, confident */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--color-navy);
+    transition: transform 0.25s var(--ease-out-soft),
+      background-color 0.25s var(--ease-out-soft);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    background-color: var(--color-navy-700);
+  }
+
+  /* Secondary CTA — hairline outline */
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    color: var(--color-navy);
+    border: 1px solid var(--color-line);
+    background: transparent;
+    transition: border-color 0.25s var(--ease-out-soft),
+      background 0.25s var(--ease-out-soft);
+  }
+  .btn-outline:hover {
+    border-color: var(--color-navy);
+    background: var(--color-mist);
+  }
+
+  /* Accent CTA — single sharp action color */
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--color-accent);
+    transition: transform 0.25s var(--ease-out-soft),
+      background-color 0.25s var(--ease-out-soft);
+  }
+  .btn-accent:hover {
+    transform: translateY(-1px);
+    background-color: var(--color-accent-600);
+  }
+
+  /* Flat card — defined by a hairline, not a shadow */
+  .card {
+    background-color: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+
+  /* Uppercase eyebrow label */
+  .eyebrow {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-periwinkle);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Entrance animation (one tasteful staggered reveal)                 */
+/* ------------------------------------------------------------------ */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: reveal-up 0.7s var(--ease-out-soft) forwards;
+  }
+  @keyframes reveal-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hairline rule between full-width sections */
+  .divide-hairline {
+    border-top: 1px solid var(--color-line);
+  }
+}

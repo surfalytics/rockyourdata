@@ -1,0 +1,228 @@
+---
+import MarketingLayout from "../layouts/MarketingLayout.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../data/site";
+import { roadmap, skillGroups, salaries, gains } from "../data/dataAnalyst";
+
+// Sticky side-nav sections (the original layout's 7 anchors).
+const sections = [
+  { id: "about-role", label: "About the role" },
+  { id: "who", label: "Who is this for" },
+  { id: "tools", label: "Analytics tools" },
+  { id: "roadmap", label: "Career roadmap" },
+  { id: "salaries", label: "Salaries" },
+  { id: "course", label: "How the course helps" },
+  { id: "community", label: "How the community helps" },
+];
+
+const audience = [
+  "Career switchers moving into data from another field",
+  "Recent graduates looking for their first analytics role",
+  "Analysts and BI developers ready to level up their skills",
+  "Anyone who wants a structured, mentor-guided path into data",
+];
+
+const communityPerks = [
+  "Expert-led workshops and live sessions",
+  "A portfolio of real, reviewed projects",
+  "Peer accountability and networking",
+  "Ongoing support — from first application to onboarding",
+];
+---
+
+<MarketingLayout
+  title="Data Career Track"
+  description="A structured, mentor-guided career track to become a Data Analyst — the role, the tools, the roadmap, salaries, and how Surfalytics helps you get hired."
+>
+  <!-- Hero -->
+  <section class="bg-paper">
+    <div class="shell pt-32 pb-16 text-center md:pt-40 md:pb-20">
+      <span class="reveal eyebrow">Career track</span>
+      <h1 class="reveal mx-auto mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl" style="animation-delay:80ms">
+        Your guided path to a data career
+      </h1>
+      <p class="reveal mx-auto mt-6 max-w-2xl text-lg text-ink-soft" style="animation-delay:160ms">
+        Everything you need to break into data — the role, the tools, a proven roadmap,
+        real salary data, and the community that gets you hired.
+      </p>
+      <a href="/data-analyst/#membership" class="btn-primary reveal mt-9 text-base" style="animation-delay:240ms">
+        Explore the program
+      </a>
+    </div>
+  </section>
+
+  <div class="shell grid gap-12 py-16 md:py-20 lg:grid-cols-[16rem_1fr]">
+    <!-- Sticky side-nav -->
+    <aside class="hidden lg:block">
+      <nav aria-label="On this page" class="sticky top-28">
+        <p class="eyebrow mb-4">On this page</p>
+        <ul class="space-y-1 border-l border-lilac/30">
+          {
+            sections.map((s) => (
+              <li>
+                <a
+                  href={`#${s.id}`}
+                  data-spy={s.id}
+                  class="block border-l-2 border-transparent -ml-px py-2 pl-4 text-sm font-medium text-ink/60 transition-colors hover:text-navy"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Content -->
+    <div class="max-w-3xl space-y-16">
+      <section id="about-role" class="scroll-mt-28">
+        <h2 class="text-navy text-3xl font-extrabold">About the role</h2>
+        <p class="mt-4 text-lg leading-relaxed text-ink/80">
+          Data Analysts transform raw data into actionable insights that drive business
+          decisions. They collect, process, and analyze large datasets to identify trends
+          and patterns — then communicate what they find to stakeholders who act on it.
+        </p>
+      </section>
+
+      <section id="who" class="scroll-mt-28">
+        <h2 class="text-navy text-3xl font-extrabold">Who is this for</h2>
+        <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+          {
+            audience.map((a) => (
+              <li class="card flex gap-3 p-4 text-[0.975rem] text-ink/80">
+                <span class="shrink-0 text-periwinkle"><Icon name="check" size={20} /></span>
+                {a}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section id="tools" class="scroll-mt-28">
+        <h2 class="text-navy text-3xl font-extrabold">Analytics tools</h2>
+        <p class="mt-3 text-ink/70">The modern data stack you'll learn to work with.</p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {
+            skillGroups.map((group) => (
+              <div class="card p-5">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-periwinkle">
+                  {group.heading}
+                </h3>
+                <ul class="mt-3 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li class="rounded-full bg-fog px-3 py-1 text-sm font-medium text-navy">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="roadmap" class="scroll-mt-28">
+        <h2 class="text-navy text-3xl font-extrabold">Career roadmap</h2>
+        <div class="mt-6 space-y-5">
+          {
+            roadmap.map((phase, i) => (
+              <div class="card p-6">
+                <div class="flex items-baseline gap-3">
+                  <span class="flex h-8 w-8 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
+                    {i + 1}
+                  </span>
+                  <h3 class="text-xl font-bold text-navy">{phase.title}</h3>
+                </div>
+                <ul class="mt-4 grid gap-3 sm:grid-cols-3">
+                  {phase.steps.map((step) => (
+                    <li>
+                      <h4 class="text-sm font-semibold text-navy">{step.title}</h4>
+                      <p class="mt-1 text-sm leading-relaxed text-ink/70">{step.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="salaries" class="scroll-mt-28">
+        <h2 class="text-navy text-3xl font-extrabold">Salaries</h2>
+        <p class="mt-3 text-ink/70">$120k CAD — average Data Analyst salary in 2024.</p>
+        <div class="card mt-6 flex items-end justify-between gap-4 p-8" style="height: 260px;">
+          {
+            salaries.map((s) => (
+              <div class="flex h-full flex-1 flex-col items-center justify-end gap-2">
+                <span class="text-sm font-bold text-navy">{s.amount}</span>
+                <div
+                  class="w-full rounded-t-lg bg-navy"
+                  style={`height: ${s.height}%`}
+                />
+                <span class="text-xs font-medium text-lilac">{s.level}</span>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="course" class="scroll-mt-28">
+        <h2 class="text-navy text-3xl font-extrabold">How the course helps</h2>
+        <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+          {
+            gains.map((g) => (
+              <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/80">
+                <span class="mt-0.5 shrink-0 text-periwinkle"><Icon name="check" size={20} /></span>
+                {g}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section id="community" class="scroll-mt-28">
+        <h2 class="text-navy text-3xl font-extrabold">How the community helps</h2>
+        <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+          {
+            communityPerks.map((c) => (
+              <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/80">
+                <span class="mt-0.5 shrink-0 text-periwinkle"><Icon name="check" size={20} /></span>
+                {c}
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="/data-analyst/#membership" class="btn-primary">Join the program</a>
+          <a href={site.surfalytics} target="_blank" rel="noopener" class="btn-outline">
+            Visit Surfalytics
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</MarketingLayout>
+
+<script>
+  // Scroll-spy: highlight the side-nav link for the section in view.
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-spy]")
+  );
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        links.forEach((l) => {
+          const on = l.dataset.spy === id;
+          l.classList.toggle("text-navy", on);
+          l.classList.toggle("border-periwinkle", on);
+          l.classList.toggle("text-ink/60", !on);
+        });
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+  document.querySelectorAll("section[id]").forEach((s) => observer.observe(s));
+</script>

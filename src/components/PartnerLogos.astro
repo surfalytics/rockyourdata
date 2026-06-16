@@ -1,0 +1,36 @@
+---
+// Platform partners / expertise. Rendered as clean, uniform wordmarks for a
+// consistent, professional row (replaces the mismatched inline brand SVGs).
+const partners = [
+  "Snowflake",
+  "Databricks",
+  "dbt",
+  "AWS",
+  "Microsoft Azure",
+  "Google Cloud",
+];
+
+interface Props {
+  heading?: string;
+}
+const { heading = "Platforms we partner with" } = Astro.props;
+---
+
+<section class="shell py-14 md:py-16">
+  <p class="text-center text-sm font-semibold uppercase tracking-[0.18em] text-lilac">
+    {heading}
+  </p>
+  <ul
+    class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16"
+  >
+    {
+      partners.map((name) => (
+        <li
+          class="font-display text-xl font-bold text-navy/45 transition-colors hover:text-navy md:text-2xl"
+        >
+          {name}
+        </li>
+      ))
+    }
+  </ul>
+</section>

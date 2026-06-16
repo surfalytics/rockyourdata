@@ -1,0 +1,62 @@
+---
+import cloudNetwork from "../assets/services/cloud-network.svg?url";
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+
+const perks = [
+  "Exclusive content & resources",
+  "Expert-led workshops",
+  "Project showcases",
+  "Networking opportunities",
+];
+---
+
+<section class="shell py-16 md:py-20">
+  <div
+    class="relative overflow-hidden rounded-[1.5rem] bg-navy px-7 py-12 text-white md:px-14 md:py-16"
+  >
+    <div
+      class="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-accent/15 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="grid items-center gap-10 md:grid-cols-[1.3fr_1fr]">
+      <div>
+        <h2 class="text-3xl font-extrabold leading-tight md:text-4xl">
+          Empower your data career with Surfalytics 🏄
+        </h2>
+        <p class="mt-4 max-w-xl text-white/80">
+          Join a community built for data enthusiasts and professionals passionate
+          about advancing their careers and achieving their goals.
+        </p>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+          {
+            perks.map((p) => (
+              <li class="flex items-center gap-2.5 text-[0.975rem] text-white/90">
+                <span class="text-accent">
+                  <Icon name="check" size={20} />
+                </span>
+                {p}
+              </li>
+            ))
+          }
+        </ul>
+        <a
+          href={site.surfalytics}
+          target="_blank"
+          rel="noopener"
+          class="btn-accent mt-8 text-base"
+        >
+          Learn more
+        </a>
+      </div>
+      <img
+        src={cloudNetwork}
+        alt=""
+        loading="lazy"
+        class="mx-auto w-full max-w-sm"
+        aria-hidden="true"
+      />
+    </div>
+  </div>
+</section>

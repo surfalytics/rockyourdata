@@ -1,0 +1,21 @@
+---
+import FeatureIcon from "./FeatureIcon.astro";
+import type { FeatureIconName } from "./FeatureIcon.astro";
+
+interface Props {
+  icon: FeatureIconName;
+  title: string;
+  description: string;
+}
+const { icon, title, description } = Astro.props;
+---
+
+<article class="card group h-full p-7 transition-shadow hover:shadow-lift">
+  <span
+    class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-fog text-navy transition-colors group-hover:bg-navy group-hover:text-white"
+  >
+    <FeatureIcon name={icon} size={26} />
+  </span>
+  <h3 class="mt-5 text-lg font-bold text-navy">{title}</h3>
+  <p class="mt-3 text-[0.975rem] leading-relaxed text-ink/75">{description}</p>
+</article>

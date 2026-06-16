@@ -1,0 +1,41 @@
+---
+import MarketingLayout from "../layouts/MarketingLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import InteractionCard from "../components/InteractionCard.astro";
+import PartnerLogos from "../components/PartnerLogos.astro";
+import FounderCard from "../components/FounderCard.astro";
+import { values } from "../data/services";
+---
+
+<MarketingLayout
+  title="About"
+  description="Rock Your Data turns raw data into actionable insights, helping businesses make smarter, faster decisions with cloud analytics."
+>
+  <!-- Intro -->
+  <section class="shell pt-20 pb-4 md:pt-28">
+    <div class="mx-auto max-w-3xl text-center">
+      <span class="eyebrow">About us</span>
+      <h1 class="text-navy mt-3 text-4xl font-extrabold leading-tight md:text-5xl">
+        Empowering business with data-driven solutions
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-ink/80">
+        At Rock Your Data, we specialize in transforming raw data into actionable
+        insights, helping businesses make smarter, faster decisions. Our mission is
+        to harness the power of data to drive meaningful change — unlocking new
+        growth, streamlining operations, and innovating with confidence.
+      </p>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="shell pt-16 md:pt-20">
+    <SectionHeading eyebrow="What we stand for" title="Our values" />
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {values.map((v) => <InteractionCard {...v} />)}
+    </div>
+  </section>
+
+  <FounderCard />
+
+  <PartnerLogos heading="Platforms we're certified on" />
+</MarketingLayout>

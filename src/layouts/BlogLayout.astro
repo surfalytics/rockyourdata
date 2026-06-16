@@ -1,0 +1,154 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  author?: string;
+  date?: Date;
+  category?: string;
+  prev?: { href: string; title: string } | null;
+  next?: { href: string; title: string } | null;
+}
+
+const { title, description, author, date, category, prev, next } = Astro.props;
+const dateStr = date
+  ? new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(date)
+  : null;
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main>
+    <article class="shell max-w-3xl py-14 md:py-20">
+      <header class="mb-10 border-b border-lilac/30 pb-8">
+        <a href="/blog/" class="eyebrow no-underline hover:opacity-80">
+          {category ?? "Blog"}
+        </a>
+        <h1 class="mt-4 text-4xl font-extrabold leading-tight text-navy md:text-5xl">
+          {title}
+        </h1>
+        <p class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-lilac">
+          {author && <span class="font-semibold text-navy">{author}</span>}
+          {author && dateStr && <span aria-hidden="true">·</span>}
+          {dateStr && <time>{dateStr}</time>}
+        </p>
+      </header>
+
+      <div class="prose">
+        <slot />
+      </div>
+
+      {
+        (prev || next) && (
+          <nav
+            class="mt-16 grid gap-4 border-t border-lilac/30 pt-8 sm:grid-cols-2"
+            aria-label="More posts"
+          >
+            {prev ? (
+              <a href={prev.href} class="card group p-5 transition-shadow hover:shadow-lift">
+                <span class="text-xs font-semibold uppercase tracking-widest text-lilac">
+                  Previous
+                </span>
+                <span class="mt-1 block font-semibold text-navy group-hover:text-periwinkle">
+                  {prev.title}
+                </span>
+              </a>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <a
+                href={next.href}
+                class="card group p-5 text-right transition-shadow hover:shadow-lift"
+              >
+                <span class="text-xs font-semibold uppercase tracking-widest text-lilac">
+                  Next
+                </span>
+                <span class="mt-1 block font-semibold text-navy group-hover:text-periwinkle">
+                  {next.title}
+                </span>
+              </a>
+            )}
+          </nav>
+        )
+      }
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style is:global>
+  .prose {
+    color: var(--color-ink);
+    font-size: 1.075rem;
+    line-height: 1.75;
+  }
+  .prose > * + * {
+    margin-top: 1.25em;
+  }
+  .prose h2 {
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .prose h3 {
+    margin-top: 1.6em;
+    margin-bottom: 0.5em;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .prose strong {
+    color: var(--color-navy);
+    font-weight: 700;
+  }
+  .prose a {
+    color: var(--color-periwinkle);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose a:hover {
+    color: var(--color-navy);
+  }
+  .prose ul {
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+  .prose ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+  .prose li {
+    margin-top: 0.4em;
+  }
+  .prose img {
+    border-radius: var(--radius-card);
+    display: inline-block;
+  }
+  .prose code {
+    background: var(--color-fog);
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+    font-size: 0.9em;
+  }
+  .prose pre {
+    background: var(--color-navy-900);
+    color: #e7e9f5;
+    padding: 1.1rem 1.25rem;
+    border-radius: var(--radius-card);
+    overflow-x: auto;
+  }
+  .prose pre code {
+    background: transparent;
+    padding: 0;
+  }
+  .prose blockquote {
+    border-left: 3px solid var(--color-periwinkle);
+    padding-left: 1.1rem;
+    color: #4a4f63;
+    font-style: italic;
+  }
+</style>

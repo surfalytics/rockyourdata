@@ -1,0 +1,119 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo/rockyourdata-logo.png";
+import { nav, site } from "../data/site";
+import Icon from "./Icon.astro";
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href.startsWith("/") && !href.includes("#") && path === href;
+---
+
+<header class="fixed inset-x-0 top-0 z-50">
+  <nav
+    class="mx-3 mt-3 rounded-2xl border border-white/40 bg-white/70 shadow-soft backdrop-blur-xl md:mx-6"
+    aria-label="Primary"
+  >
+    <div class="shell flex items-center justify-between gap-4 py-3">
+      <a href="/" class="flex shrink-0 items-center" aria-label="Rock Your Data — home">
+        <Image src={logo} alt="Rock Your Data" height={40} densities={[1, 2]} class="h-10 w-auto" />
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden items-center gap-8 lg:flex">
+        <ul class="flex items-center gap-7 text-[0.95rem] font-medium text-navy">
+          {
+            nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    "relative transition-colors hover:text-periwinkle",
+                    isActive(item.href) && "text-periwinkle",
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a href={site.surfalytics} target="_blank" rel="noopener" class="btn-primary">
+          Surfalytics Community
+        </a>
+      </div>
+
+      <!-- Mobile toggle -->
+      <button
+        type="button"
+        id="menu-toggle"
+        class="inline-flex items-center justify-center rounded-lg p-2 text-navy lg:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <Icon name="menu" size={28} />
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 z-40 hidden bg-navy/95 backdrop-blur-md lg:hidden"
+  >
+    <div class="shell flex min-h-screen flex-col gap-2 pt-24 pb-12">
+      <button
+        type="button"
+        id="menu-close"
+        class="absolute right-5 top-7 inline-flex rounded-lg p-2 text-white"
+        aria-label="Close menu"
+      >
+        <Icon name="close" size={30} />
+      </button>
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="border-b border-white/15 py-4 text-2xl font-semibold text-white transition-colors hover:text-accent"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={site.surfalytics}
+        target="_blank"
+        rel="noopener"
+        class="btn-accent mt-6 self-start"
+      >
+        Surfalytics Community
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Spacer so fixed header doesn't overlap content -->
+<div aria-hidden="true" class="h-[4.75rem]"></div>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const close = document.getElementById("menu-close");
+  const menu = document.getElementById("mobile-menu");
+
+  function setOpen(open: boolean) {
+    if (!menu || !toggle) return;
+    menu.classList.toggle("hidden", !open);
+    toggle.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+
+  toggle?.addEventListener("click", () => setOpen(true));
+  close?.addEventListener("click", () => setOpen(false));
+  menu?.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => setOpen(false))
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+</script>

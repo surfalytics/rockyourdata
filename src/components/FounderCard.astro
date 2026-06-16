@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import founder from "../assets/people/founder.png";
+
+const credentials = [
+  "14 years in data analytics, 8 of them at MAANG (Amazon, Microsoft)",
+  "Founder of Rock Your Data — a data analytics consulting company",
+  "Author of numerous books on data analytics",
+  "Teaching Cloud Computing Fundamentals at the University of Victoria since 2021",
+];
+const stack = ["Amazon Web Services", "Microsoft Azure", "Snowflake"];
+---
+
+<section class="shell py-16 md:py-20">
+  <div class="card grid items-center gap-10 overflow-hidden p-6 md:grid-cols-[0.9fr_1.1fr] md:p-10">
+    <Image
+      src={founder}
+      alt="Dmitry Anoshin, founder of Rock Your Data"
+      widths={[360, 600, 900]}
+      sizes="(min-width: 768px) 24rem, 80vw"
+      class="mx-auto w-full max-w-sm rounded-xl border border-line object-cover"
+    />
+    <div>
+      <span class="eyebrow">Meet the founder</span>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+        Dmitry Anoshin
+      </h2>
+      <ul class="mt-6 space-y-3">
+        {
+          credentials.map((c) => (
+            <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/80">
+              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-periwinkle" />
+              {c}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-navy/45">
+        {stack.map((s) => <span>{s}</span>)}
+      </div>
+    </div>
+  </div>
+</section>

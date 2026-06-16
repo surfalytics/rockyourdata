@@ -1,0 +1,29 @@
+---
+import { site } from "../data/site";
+---
+
+<div class="w-full">
+  <!-- Substack custom widget mounts here -->
+  <div id="custom-substack-embed" class="min-h-[44px]"></div>
+  <noscript>
+    <a href={`https://${site.substackUrl}`} class="btn-primary mt-2" target="_blank" rel="noopener">
+      Subscribe on Substack
+    </a>
+  </noscript>
+</div>
+
+<script is:inline define:vars={{ substackUrl: site.substackUrl }}>
+  window.CustomSubstackWidget = {
+    substackUrl,
+    placeholder: "you@example.com",
+    buttonText: "Subscribe",
+    theme: "custom",
+    colors: {
+      primary: "#2b3673",
+      input: "#ffffff",
+      email: "#1c2030",
+      text: "#ffffff",
+    },
+  };
+</script>
+<script is:inline async src="https://substackapi.com/widget.js"></script>

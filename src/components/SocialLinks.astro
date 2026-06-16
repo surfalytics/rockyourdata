@@ -1,0 +1,29 @@
+---
+import { socials } from "../data/socials";
+import Icon from "./Icon.astro";
+
+interface Props {
+  class?: string;
+  tone?: "navy" | "light";
+}
+const { class: className, tone = "navy" } = Astro.props;
+const color = tone === "light" ? "text-white/80 hover:text-white" : "text-navy hover:text-periwinkle";
+---
+
+<ul class:list={["flex items-center gap-4", className]}>
+  {
+    socials.map((s) => (
+      <li>
+        <a
+          href={s.href}
+          target="_blank"
+          rel="noopener"
+          aria-label={s.label}
+          class:list={["inline-flex transition-colors", color]}
+        >
+          <Icon name={s.icon} size={26} title={s.label} />
+        </a>
+      </li>
+    ))
+  }
+</ul>
