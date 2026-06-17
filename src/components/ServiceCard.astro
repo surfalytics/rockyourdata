@@ -1,56 +1,40 @@
 ---
-import { Image } from "astro:assets";
 import FeatureIcon from "./FeatureIcon.astro";
 import Icon from "./Icon.astro";
 import type { Service } from "../data/services";
 
 interface Props {
   service: Service;
-  reversed?: boolean;
 }
-const { service, reversed = false } = Astro.props;
+const { service } = Astro.props;
 ---
 
-<article
-  class:list={[
-    "card grid items-center gap-8 overflow-hidden p-6 md:grid-cols-2 md:gap-10 md:p-8",
-  ]}
+<a
+  href={`/services/${service.slug}/`}
+  class="card group flex flex-col p-7 transition-shadow hover:shadow-lift md:p-8"
 >
-  <div class:list={[reversed && "md:order-2"]}>
-    <span
-      class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-brand text-white"
-    >
-      <FeatureIcon name={service.icon} size={30} />
-    </span>
-    <h3 class="mt-5 text-xl font-bold text-navy md:text-2xl">{service.title}</h3>
-    <ul class="mt-4 space-y-3">
-      {
-        service.bullets.map((b) => (
-          <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/80">
-            <span class="mt-1 shrink-0 text-periwinkle">
-              <Icon name="check" size={18} />
-            </span>
-            {b}
-          </li>
-        ))
-      }
-    </ul>
-    <a
-      href={`/services/${service.slug}/`}
-      class="mt-6 inline-flex items-center gap-2 font-semibold text-periwinkle transition-colors hover:text-navy"
-    >
-      Learn more
-      <Icon name="arrow-right" size={18} />
-    </a>
-  </div>
-
-  <div class:list={[reversed && "md:order-1"]}>
-    <Image
-      src={service.image}
-      alt={service.imageAlt}
-      widths={[400, 700, 1000]}
-      sizes="(min-width: 768px) 36rem, 90vw"
-      class="aspect-[4/3] w-full rounded-xl border border-line object-cover"
-    />
-  </div>
-</article>
+  <span
+    class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-brand text-white"
+  >
+    <FeatureIcon name={service.icon} size={30} />
+  </span>
+  <h3 class="mt-5 text-xl font-bold text-navy group-hover:text-periwinkle md:text-2xl">
+    {service.title}
+  </h3>
+  <ul class="mt-4 space-y-3">
+    {
+      service.bullets.map((b) => (
+        <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/80">
+          <span class="mt-1 shrink-0 text-periwinkle">
+            <Icon name="check" size={18} />
+          </span>
+          {b}
+        </li>
+      ))
+    }
+  </ul>
+  <span class="mt-6 inline-flex items-center gap-2 font-semibold text-periwinkle">
+    Learn more
+    <Icon name="arrow-right" size={18} />
+  </span>
+</a>

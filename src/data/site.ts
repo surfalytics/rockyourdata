@@ -22,5 +22,4 @@ export const nav = [
   { label: "Data Academy", href: "/data-academy/" },
   { label: "About", href: "/about/" },
   { label: "Blog", href: "/blog/" },
-  { label: "Contact", href: "/contact/" },
 ] as const;

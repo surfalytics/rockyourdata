@@ -51,8 +51,8 @@ import { services, interactionModes } from "../data/services";
   <!-- Services -->
   <section id="services" class="shell scroll-mt-24 pt-20 md:pt-28">
     <SectionHeading eyebrow="What we do" title="Our services" />
-    <div class="mt-12 grid gap-6 md:gap-8">
-      {services.map((service, i) => <ServiceCard service={service} reversed={i % 2 === 1} />)}
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {services.map((service) => <ServiceCard service={service} />)}
     </div>
     <div class="mt-10 text-center">
       <a href="/services/" class="btn-outline text-base">
