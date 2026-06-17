@@ -17,5 +17,10 @@ export default defineConfig({
     '/surfalytics/2023-06-04-introduction.html': '/blog/introduction/',
     '/pages/about/': '/about/',
     '/pages/contact/': '/contact/',
+    // Service slugs were renamed when the offering was restructured.
+    '/services/modern-data-stack/': '/services/data-platforms/',
+    '/services/team-development/': '/services/data-teams/',
+    '/services/analytics-audit/': '/services/',
+    '/services/certified-experts/': '/services/',
   },
 });

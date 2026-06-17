@@ -26,6 +26,7 @@ export const founder = {
   credentials: [
     "16+ years building modern analytics platforms across cloud and hybrid environments",
     "8 years in big tech, including Amazon and Microsoft",
+    "Three years in space manufacturing before a career in data & IT — now also founder of Player One Space",
     "Instructor of Cloud Computing Fundamentals at the University of Victoria (2019–2025)",
     "Founder of Rock Your Data and the Surfalytics data community",
   ],

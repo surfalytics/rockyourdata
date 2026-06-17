@@ -21,6 +21,10 @@ const paths = {
   target: "M12 21a9 9 0 100-18 9 9 0 000 18zM12 16a4 4 0 100-8 4 4 0 000 8zM12 12h.01",
   // innovation / spark
   spark: "M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18",
+  // AI engineering / chip
+  cpu: "M6 6h12v12H6zM10 10h4v4h-4zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3",
+  // space / orbit (planet + orbital path)
+  orbit: "M12 8.6a3.4 3.4 0 100 6.8 3.4 3.4 0 000-6.8zM6.4 17C4.1 18.5 2.7 19.9 3.2 20.8c.9 1.6 6.2.5 11.8-2.4s9.5-6.7 8.6-8.3c-.5-.9-2.5-.9-5.2-.1",
 } as const;
 
 export type FeatureIconName = keyof typeof paths;
