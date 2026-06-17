@@ -5,6 +5,7 @@ import InteractionCard from "../components/InteractionCard.astro";
 import PlatformLogos from "../components/PlatformLogos.astro";
 import FounderCard from "../components/FounderCard.astro";
 import { values } from "../data/services";
+import { founder, initials } from "../data/founder";
 ---
 
 <MarketingLayout
@@ -36,6 +37,60 @@ import { values } from "../data/services";
   </section>
 
   <FounderCard />
+
+  <!-- Founder stats -->
+  <section class="shell pt-12 md:pt-16">
+    <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {
+        founder.stats.map((s) => (
+          <div class="card p-6 text-center">
+            <p class="font-display text-4xl font-extrabold text-navy md:text-5xl">
+              {s.value}
+            </p>
+            <p class="mt-2 text-sm text-ink-soft">{s.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Companies worked with -->
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading
+      eyebrow="Track record"
+      title="Companies Dmitry has worked with"
+    />
+    <div class="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+      {
+        founder.companies.map((name) => (
+          <div class="card flex items-center gap-3 p-4">
+            <span
+              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white"
+              aria-hidden="true"
+            >
+              {initials(name)}
+            </span>
+            <span class="text-sm font-semibold text-navy">{name}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Books -->
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading eyebrow="Published author" title="10 technical books" />
+    <div class="mx-auto mt-12 grid max-w-4xl gap-3 sm:grid-cols-2">
+      {
+        founder.books.map((book) => (
+          <div class="card flex items-baseline justify-between gap-4 p-5">
+            <span class="font-semibold leading-snug text-navy">{book.title}</span>
+            <span class="shrink-0 text-sm font-medium text-lilac">{book.year}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
 
   <PlatformLogos heading="Platforms we're certified on" />
 </MarketingLayout>
