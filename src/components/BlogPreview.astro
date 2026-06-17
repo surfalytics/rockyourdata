@@ -1,8 +1,8 @@
 ---
-import { getLatestPosts } from "../lib/substack";
+import { getArchivePosts } from "../lib/substack";
 import Icon from "./Icon.astro";
 
-const posts = await getLatestPosts(3);
+const posts = await getArchivePosts(3);
 const subscribeUrl = "https://blog.surfalytics.com/subscribe";
 const blogUrl = "https://blog.surfalytics.com/";
 const fmt = (d: Date) =>

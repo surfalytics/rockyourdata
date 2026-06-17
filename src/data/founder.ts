@@ -13,22 +13,23 @@ export const founder = {
   name: "Dmitry Anoshin",
   role: "Founder of Rock Your Data & Surfalytics",
   bio: [
-    "Dmitry Anoshin is an engineering leader, author, and educator with 16+ years building modern analytics platforms across cloud, on-premise, and hybrid environments.",
-    "He has delivered data and analytics solutions for organizations ranging from global enterprises like Amazon, Microsoft, and Deloitte to fast-growing startups — and founded Rock Your Data and the Surfalytics community to help data professionals advance their careers.",
+    "Dmitry Anoshin is an engineering leader, author, and educator with 15+ years building data and AI platforms across cloud, on-premise, and hybrid environments.",
+    "His career began in space: he built spacecraft hardware at Khrunichev — on the Proton and Angara launch vehicles — and later worked on LEO satellites at Amazon. He holds a PhD in Mechanical Engineering.",
+    "He has delivered data and AI solutions for organizations from global enterprises like Amazon, Microsoft, and Deloitte to fast-growing startups, and founded Rock Your Data, the Surfalytics community, and Player One Space.",
     "Dmitry taught Cloud Computing Fundamentals at the University of Victoria from 2019 to 2025 and has authored 10 technical books on analytics and data engineering.",
   ],
   stats: [
-    { value: "16+", label: "Years in data & analytics" },
+    { value: "15+", label: "Years building data & AI" },
     { value: "10", label: "Technical books authored" },
     { value: "40k+", label: "Community followers" },
     { value: "19+", label: "Companies served" },
   ],
   credentials: [
-    "16+ years building modern analytics platforms across cloud and hybrid environments",
-    "8 years in big tech, including Amazon and Microsoft",
-    "Three years in space manufacturing before a career in data & IT — now also founder of Player One Space",
+    "PhD in Mechanical Engineering",
+    "Built spacecraft hardware at Khrunichev (Proton & Angara) and worked on LEO satellites at Amazon",
+    "15+ years building data and AI platforms, including at Amazon and Microsoft",
     "Instructor of Cloud Computing Fundamentals at the University of Victoria (2019–2025)",
-    "Founder of Rock Your Data and the Surfalytics data community",
+    "Founder of Rock Your Data, the Surfalytics community, and Player One Space",
   ],
   // Organizations Dmitry has worked with / delivered solutions for.
   companies: [

@@ -1,57 +1,87 @@
 ---
-import { getCollection } from "astro:content";
 import MarketingLayout from "../../layouts/MarketingLayout.astro";
 import Icon from "../../components/Icon.astro";
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
-);
+import { getArchivePosts } from "../../lib/substack";
+
+const posts = await getArchivePosts(40);
+const subscribeUrl = "https://blog.surfalytics.com/subscribe";
 const fmt = (d: Date) =>
-  new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(d);
+  isNaN(d.getTime())
+    ? ""
+    : new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(d);
 ---
 
 <MarketingLayout
   title="Blog"
-  description="Insights on cloud analytics, data engineering, and building a data career from Rock Your Data."
+  description="Writing on data engineering, AI, analytics, space data, and building a data career — from the Surfalytics blog."
 >
   <section class="shell pt-20 pb-8 md:pt-28">
-    <div class="mx-auto max-w-3xl text-center">
-      <span class="eyebrow">Insights</span>
-      <h1 class="text-navy mt-3 text-4xl font-extrabold leading-tight md:text-5xl">
-        From the blog
-      </h1>
-      <p class="mt-6 text-lg leading-relaxed text-ink/80">
-        Notes on cloud analytics, data engineering, and building a career in data.
-      </p>
+    <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+      <div>
+        <span class="eyebrow">Insights</span>
+        <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-navy md:text-5xl">
+          From the Blog
+        </h1>
+      </div>
+      <a href={subscribeUrl} target="_blank" rel="noopener" class="btn-primary shrink-0">
+        Subscribe
+        <Icon name="arrow-right" size={18} />
+      </a>
     </div>
   </section>
 
-  <section class="shell pb-20">
-    <div class="mx-auto grid max-w-4xl gap-5">
-      {
-        posts.map((post) => (
-          <a
-            href={`/blog/${post.id}/`}
-            class="card group flex flex-col p-7 transition-shadow hover:shadow-lift"
-          >
-            <span class="flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-lilac">
-              {post.data.category ?? "Article"}
-              <span aria-hidden="true">·</span>
-              <time>{fmt(post.data.date)}</time>
-            </span>
-            <h2 class="mt-3 text-2xl font-bold text-navy group-hover:text-periwinkle">
-              {post.data.title}
-            </h2>
-            {post.data.description && (
-              <p class="mt-2 text-ink/75">{post.data.description}</p>
-            )}
-            <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
-              Read article
-              <Icon name="arrow-right" size={16} />
-            </span>
-          </a>
-        ))
-      }
-    </div>
+  <section class="shell pb-24">
+    {
+      posts.length === 0 ? (
+        <p class="text-ink-soft">
+          Posts are published on{" "}
+          <a href="https://blog.surfalytics.com/" target="_blank" rel="noopener" class="text-periwinkle hover:text-navy">
+            blog.surfalytics.com
+          </a>.
+        </p>
+      ) : (
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <a
+              href={post.link}
+              target="_blank"
+              rel="noopener"
+              class="card group flex flex-col overflow-hidden transition-shadow hover:shadow-lift"
+            >
+              {post.image && (
+                <div class="aspect-[16/9] overflow-hidden border-b border-line">
+                  <img
+                    src={post.image}
+                    alt=""
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+              )}
+              <div class="flex flex-1 flex-col p-6">
+                {fmt(post.date) && (
+                  <time class="text-xs font-semibold uppercase tracking-widest text-lilac">
+                    {fmt(post.date)}
+                  </time>
+                )}
+                <h2 class="mt-2 text-lg font-bold leading-snug text-navy group-hover:text-periwinkle">
+                  {post.title}
+                </h2>
+                {post.excerpt && (
+                  <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
+                    {post.excerpt}…
+                  </p>
+                )}
+                <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
+                  Read on Substack
+                  <Icon name="arrow-up-right" size={16} />
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )
+    }
   </section>
 </MarketingLayout>

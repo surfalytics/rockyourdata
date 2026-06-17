@@ -14,7 +14,7 @@ export default defineConfig({
   // Preserve the single legacy GitBook permalink so existing inbound links
   // (and search-engine results) don't 404 after the migration.
   redirects: {
-    '/surfalytics/2023-06-04-introduction.html': '/blog/introduction/',
+    '/surfalytics/2023-06-04-introduction.html': '/blog/',
     '/pages/about/': '/about/',
     '/pages/contact/': '/contact/',
     // Service slugs were renamed when the offering was restructured.

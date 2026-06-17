@@ -8,6 +8,38 @@ export interface SubstackPost {
   image?: string;
 }
 
+/**
+ * Fetches posts from the Substack archive API (richer + complete: titles,
+ * subtitles, cover images, dates). Returns [] on any failure so the build
+ * never breaks if the feed is unreachable.
+ */
+export async function getArchivePosts(limit = 30): Promise<SubstackPost[]> {
+  try {
+    const url = `https://blog.surfalytics.com/api/v1/archive?sort=new&search=&offset=0&limit=${limit}`;
+    const res = await fetch(url, {
+      headers: { "User-Agent": "rockyourdata.cloud build" },
+    });
+    if (!res.ok) return [];
+    const items = (await res.json()) as Array<Record<string, unknown>>;
+    if (!Array.isArray(items)) return [];
+
+    return items
+      .map((it) => {
+        const subtitle = String(it.subtitle ?? it.description ?? "");
+        return {
+          title: String(it.title ?? "").trim(),
+          link: String(it.canonical_url ?? ""),
+          date: new Date(String(it.post_date ?? "")),
+          excerpt: subtitle.slice(0, 160).trim(),
+          image: (it.cover_image as string) || undefined,
+        } satisfies SubstackPost;
+      })
+      .filter((p) => p.title && p.link);
+  } catch {
+    return [];
+  }
+}
+
 function stripHtml(html: string): string {
   return html
     .replace(/<[^>]+>/g, " ")
