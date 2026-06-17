@@ -27,41 +27,47 @@
 }
 
 /* ------------------------------------------------------------------ */
-/*  Design tokens — editorial / light / minimal.                       */
+/*  Design tokens — dark, editorial, minimal.                          */
+/*  Note: `navy` is the LIGHT heading/emphasis color (text-navy);      */
+/*  `brand` is the navy panel/surface color (bg-brand).                */
 /* ------------------------------------------------------------------ */
 @theme {
-  /* Brand */
-  --color-navy: #1e2657; /* deep brand ink for headings */
-  --color-navy-700: #161d44;
-  --color-navy-900: #0d1230;
-  --color-periwinkle: #5468e8;
-  --color-periwinkle-200: #aab2e6;
-  --color-accent: #fe6a3c;
-  --color-accent-600: #ef5526;
+  /* Text / emphasis (light on dark) */
+  --color-navy: #eef1fb; /* headings + `text-navy` emphasis */
+  --color-ink: #e8ebf7; /* body text */
+  --color-ink-soft: #abb2d0; /* secondary text */
+  --color-lilac: #8d94b8; /* muted captions */
 
-  /* Surfaces & neutrals (near-monochrome) */
-  --color-paper: #ffffff; /* page background */
-  --color-mist: #f6f7fa; /* alternating section tint */
-  --color-fog: #eef0f6; /* chips / subtle fills */
-  --color-line: #e7e9f2; /* hairline borders */
-  --color-lilac: #8a90ad; /* muted captions */
-  --color-ink: #12141c; /* body text (near-black) */
-  --color-ink-soft: #41465c; /* secondary text */
+  /* Brand accents */
+  --color-periwinkle: #7488f6;
+  --color-periwinkle-200: #b9c0ee;
+  --color-accent: #ff7a4d;
+  --color-accent-600: #ff6a37;
+
+  /* Navy brand panels / chips (bg-brand) */
+  --color-brand: #2a3470;
+  --color-brand-700: #222a5c;
+
+  /* Surfaces (dark) */
+  --color-paper: #090c18; /* page background */
+  --color-surface: #11152b; /* cards */
+  --color-mist: #0e1326; /* subtle fills / badges */
+  --color-fog: #1a2039; /* chips */
+  --color-line: #283057; /* hairline borders */
 
   /* Typography */
   --font-display: "Futura", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, sans-serif;
 
-  /* Radii — architectural, not pill-y */
+  /* Radii */
   --radius-card: 1rem;
   --radius-btn: 0.625rem;
   --radius-pill: 999px;
 
-  /* Shadows — barely-there; editorial leans on hairlines, not elevation */
-  --shadow-soft: 0 1px 1px rgba(18, 20, 28, 0.03);
-  --shadow-lift: 0 1px 2px rgba(18, 20, 28, 0.04),
-    0 12px 32px rgba(18, 20, 28, 0.08);
+  /* Shadows + glow (subtle on dark) */
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-lift: 0 12px 40px rgba(0, 0, 0, 0.5);
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -73,6 +79,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
   }
 
   body {
@@ -101,7 +108,7 @@
   }
 
   ::selection {
-    background-color: var(--color-navy);
+    background-color: var(--color-periwinkle);
     color: #fff;
   }
 
@@ -128,7 +135,7 @@
 /*  Components                                                         */
 /* ------------------------------------------------------------------ */
 @layer components {
-  /* Subtle brand gradient on text — used sparingly as an accent now */
+  /* Brand gradient on text — used sparingly as an accent */
   .text-gradient {
     background-image: linear-gradient(
       94deg,
@@ -153,7 +160,7 @@
     }
   }
 
-  /* Primary CTA — solid, flat, confident */
+  /* Primary CTA — periwinkle, pops on dark */
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -163,13 +170,13 @@
     border-radius: var(--radius-btn);
     font-weight: 600;
     color: #fff;
-    background-color: var(--color-navy);
+    background-color: var(--color-periwinkle);
     transition: transform 0.25s var(--ease-out-soft),
-      background-color 0.25s var(--ease-out-soft);
+      filter 0.25s var(--ease-out-soft);
   }
   .btn-primary:hover {
     transform: translateY(-1px);
-    background-color: var(--color-navy-700);
+    filter: brightness(1.1);
   }
 
   /* Secondary CTA — hairline outline */
@@ -181,15 +188,15 @@
     padding: 0.8rem 1.5rem;
     border-radius: var(--radius-btn);
     font-weight: 600;
-    color: var(--color-navy);
+    color: var(--color-ink);
     border: 1px solid var(--color-line);
     background: transparent;
     transition: border-color 0.25s var(--ease-out-soft),
       background 0.25s var(--ease-out-soft);
   }
   .btn-outline:hover {
-    border-color: var(--color-navy);
-    background: var(--color-mist);
+    border-color: var(--color-periwinkle);
+    background: var(--color-surface);
   }
 
   /* Accent CTA — single sharp action color */
@@ -211,9 +218,9 @@
     background-color: var(--color-accent-600);
   }
 
-  /* Flat card — defined by a hairline, not a shadow */
+  /* Elevated card — defined by surface + hairline */
   .card {
-    background-color: var(--color-paper);
+    background-color: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
   }
@@ -245,7 +252,6 @@
     }
   }
 
-  /* Hairline rule between full-width sections */
   .divide-hairline {
     border-top: 1px solid var(--color-line);
   }

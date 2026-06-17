@@ -1,0 +1,85 @@
+---
+import { getLatestPosts } from "../lib/substack";
+import Icon from "./Icon.astro";
+
+const posts = await getLatestPosts(3);
+const subscribeUrl = "https://blog.surfalytics.com/subscribe";
+const blogUrl = "https://blog.surfalytics.com/";
+const fmt = (d: Date) =>
+  isNaN(d.getTime())
+    ? ""
+    : new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(d);
+---
+
+{
+  posts.length > 0 && (
+    <section class="shell pt-20 md:pt-28">
+      <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+        <div>
+          <span class="eyebrow">From the blog</span>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl md:text-5xl">
+            Latest from Surfalytics
+          </h2>
+          <p class="mt-3 max-w-xl text-ink-soft">
+            Practical writing on data engineering, analytics, and building a data career.
+          </p>
+        </div>
+        <a href={subscribeUrl} target="_blank" rel="noopener" class="btn-primary shrink-0">
+          Subscribe
+          <Icon name="arrow-right" size={18} />
+        </a>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {posts.map((post) => (
+          <a
+            href={post.link}
+            target="_blank"
+            rel="noopener"
+            class="card group flex flex-col overflow-hidden transition-shadow hover:shadow-lift"
+          >
+            {post.image && (
+              <div class="aspect-[16/9] overflow-hidden border-b border-line">
+                <img
+                  src={post.image}
+                  alt=""
+                  loading="lazy"
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+            )}
+            <div class="flex flex-1 flex-col p-6">
+              {fmt(post.date) && (
+                <time class="text-xs font-semibold uppercase tracking-widest text-lilac">
+                  {fmt(post.date)}
+                </time>
+              )}
+              <h3 class="mt-2 text-lg font-bold leading-snug text-navy group-hover:text-periwinkle">
+                {post.title}
+              </h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
+                {post.excerpt}…
+              </p>
+              <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
+                Read on Substack
+                <Icon name="arrow-up-right" size={16} />
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-8 text-center">
+        <a
+          href={blogUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 font-semibold text-periwinkle hover:text-navy"
+        >
+          View all posts
+          <Icon name="arrow-right" size={18} />
+        </a>
+      </div>
+    </section>
+  )
+}

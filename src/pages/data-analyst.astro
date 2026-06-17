@@ -87,13 +87,13 @@ import {
           <div class="card flex flex-col p-7">
             <div class="flex items-baseline justify-between">
               <span class="eyebrow">{phase.phase}</span>
-              <span class="font-display text-5xl font-extrabold text-fog">{i + 1}</span>
+              <span class="font-display text-5xl font-extrabold text-white/15">{i + 1}</span>
             </div>
             <h3 class="mt-1 text-2xl font-bold text-navy">{phase.title}</h3>
             <ol class="mt-5 space-y-5">
               {phase.steps.map((step, si) => (
                 <li class="flex gap-4">
-                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
                     {si + 1}
                   </span>
                   <div>
@@ -111,7 +111,7 @@ import {
 
   <!-- CTA band -->
   <section class="shell pt-16 md:pt-20">
-    <div class="rounded-[2rem] bg-navy px-7 py-12 text-center text-white md:px-14">
+    <div class="rounded-[2rem] bg-brand px-7 py-12 text-center text-white md:px-14">
       <h2 class="mx-auto max-w-3xl text-2xl font-extrabold leading-snug md:text-3xl">
         Join our community and get professional support on your journey to a successful
         Data Analyst career in Canada
@@ -147,7 +147,7 @@ import {
               <div class="flex h-full flex-1 flex-col items-center justify-end gap-2">
                 <span class="text-sm font-bold text-navy">{s.amount}</span>
                 <div
-                  class="w-full rounded-t-lg bg-navy"
+                  class="w-full rounded-t-lg bg-brand"
                   style={`height: ${s.height}%`}
                 />
                 <span class="text-xs font-medium text-lilac">{s.level}</span>
@@ -228,7 +228,7 @@ import {
         </ul>
       </div>
 
-      <div class="flex flex-col rounded-2xl bg-navy p-8 text-white">
+      <div class="flex flex-col rounded-2xl bg-brand p-8 text-white">
         <p class="text-sm font-semibold uppercase tracking-widest text-white/70">
           {pricing.label}
         </p>
@@ -243,7 +243,7 @@ import {
             href={pricing.yearlyUrl}
             target="_blank"
             rel="noopener"
-            class="btn-outline border-white/40 bg-white/10 text-white hover:bg-white hover:text-navy"
+            class="btn-outline border-white/40 bg-white/10 text-white hover:bg-white hover:text-paper"
           >
             Yearly payment (59% off)
           </a>

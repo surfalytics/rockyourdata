@@ -32,7 +32,7 @@ const { service, others } = Astro.props;
           All services
         </a>
         <span
-          class="mt-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-navy text-white"
+          class="mt-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-brand text-white"
         >
           <FeatureIcon name={service.icon} size={30} />
         </span>
@@ -111,7 +111,7 @@ const { service, others } = Astro.props;
         {
           service.process.map((step, i) => (
             <li class="card p-6">
-              <span class="font-display text-3xl font-extrabold text-fog">
+              <span class="font-display text-3xl font-extrabold text-white/15">
                 0{i + 1}
               </span>
               <h3 class="mt-2 text-lg font-bold text-navy">{step.title}</h3>
@@ -127,7 +127,7 @@ const { service, others } = Astro.props;
 
   <!-- CTA band -->
   <section class="shell pt-16 md:pt-20">
-    <div class="rounded-[1.5rem] bg-navy px-7 py-12 text-center text-white md:px-14 md:py-14">
+    <div class="rounded-[1.5rem] bg-brand px-7 py-12 text-center text-white md:px-14 md:py-14">
       <h2 class="mx-auto max-w-2xl text-2xl font-extrabold leading-snug md:text-3xl">
         Ready to talk about {service.title.toLowerCase()}?
       </h2>
@@ -137,7 +137,7 @@ const { service, others } = Astro.props;
           href={site.calendly}
           target="_blank"
           rel="noopener"
-          class="btn-outline border-white/40 bg-white/10 text-base text-white hover:bg-white hover:text-navy"
+          class="btn-outline border-white/40 bg-white/10 text-base text-white hover:bg-white hover:text-paper"
         >
           Book a discovery call
         </a>
@@ -155,7 +155,7 @@ const { service, others } = Astro.props;
             href={`/services/${o.slug}/`}
             class="card group flex items-center gap-4 p-5 transition-shadow hover:shadow-lift"
           >
-            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-fog text-navy transition-colors group-hover:bg-navy group-hover:text-white">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-fog text-navy transition-colors group-hover:bg-brand group-hover:text-white">
               <FeatureIcon name={o.icon} size={22} />
             </span>
             <span class="font-semibold text-navy group-hover:text-periwinkle">

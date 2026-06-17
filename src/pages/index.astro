@@ -6,6 +6,7 @@ import ServiceCard from "../components/ServiceCard.astro";
 import InteractionCard from "../components/InteractionCard.astro";
 import PlatformLogos from "../components/PlatformLogos.astro";
 import SwagSection from "../components/SwagSection.astro";
+import BlogPreview from "../components/BlogPreview.astro";
 import Icon from "../components/Icon.astro";
 import { services, interactionModes } from "../data/services";
 ---
@@ -70,6 +71,8 @@ import { services, interactionModes } from "../data/services";
       {interactionModes.map((m) => <InteractionCard {...m} />)}
     </div>
   </section>
+
+  <BlogPreview />
 
   <SwagSection />
 </MarketingLayout>

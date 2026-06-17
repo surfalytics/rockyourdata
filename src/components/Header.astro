@@ -11,12 +11,12 @@ const isActive = (href: string) =>
 
 <header class="fixed inset-x-0 top-0 z-50">
   <nav
-    class="mx-3 mt-3 rounded-2xl border border-white/40 bg-white/70 shadow-soft backdrop-blur-xl md:mx-6"
+    class="mx-3 mt-3 rounded-2xl border border-white/10 bg-paper/70 shadow-soft backdrop-blur-xl md:mx-6"
     aria-label="Primary"
   >
     <div class="shell flex items-center justify-between gap-4 py-3">
       <a href="/" class="flex shrink-0 items-center" aria-label="Rock Your Data — home">
-        <Image src={logo} alt="Rock Your Data" height={40} densities={[1, 2]} class="h-10 w-auto" />
+        <Image src={logo} alt="Rock Your Data" height={40} densities={[1, 2]} class="h-10 w-auto brightness-0 invert" />
       </a>
 
       <!-- Desktop nav -->
@@ -60,7 +60,7 @@ const isActive = (href: string) =>
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 z-40 hidden bg-navy/95 backdrop-blur-md lg:hidden"
+    class="fixed inset-0 z-40 hidden bg-brand/95 backdrop-blur-md lg:hidden"
   >
     <div class="shell flex min-h-screen flex-col gap-2 pt-24 pb-12">
       <button

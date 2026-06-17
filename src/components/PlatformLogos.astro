@@ -36,14 +36,14 @@ const { heading = "Platforms we partner with", class: className } = Astro.props;
 </section>
 
 <style>
-  /* Uniform logo wall: muted grayscale by default, true brand color on hover. */
+  /* Dark logo wall: uniform white silhouettes by default, true brand color on hover. */
   .logo-mark {
-    filter: grayscale(1);
-    opacity: 0.55;
+    filter: grayscale(1) brightness(0) invert(1);
+    opacity: 0.6;
     transition: filter 0.3s var(--ease-out-soft), opacity 0.3s var(--ease-out-soft);
   }
   .logo-mark:hover {
-    filter: grayscale(0);
+    filter: none;
     opacity: 1;
   }
   @media (prefers-reduced-motion: reduce) {
