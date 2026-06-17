@@ -1,52 +1,63 @@
 ---
+import { Image } from "astro:assets";
+import heroImg from "../assets/hero/data-engineering.jpg";
 import { site } from "../data/site";
 import Icon from "./Icon.astro";
 ---
 
-<section class="relative overflow-hidden bg-paper">
-  <!-- faint editorial grid, barely there -->
+<section class="relative isolate flex min-h-[90vh] items-center overflow-hidden">
+  <!-- Banner image -->
+  <Image
+    src={heroImg}
+    alt=""
+    widths={[768, 1280, 1920, 2400]}
+    sizes="100vw"
+    fetchpriority="high"
+    loading="eager"
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
+  />
+  <!-- Dark overlay for legibility -->
   <div
-    class="pointer-events-none absolute inset-0 -z-10 opacity-[0.5] [background-image:linear-gradient(var(--color-line)_1px,transparent_1px),linear-gradient(90deg,var(--color-line)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"
+    class="absolute inset-0 -z-10 bg-gradient-to-br from-paper/92 via-paper/80 to-brand/70"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="absolute -right-24 top-1/4 -z-10 h-96 w-96 rounded-full bg-periwinkle/20 blur-3xl"
     aria-hidden="true"
   >
   </div>
 
-  <div class="shell flex flex-col items-center pt-32 pb-20 text-center md:pt-40 md:pb-28">
-    <span
-      class="reveal inline-flex items-center gap-2.5 rounded-full border border-line bg-mist px-4 py-1.5 text-sm font-medium text-ink-soft"
-      style="animation-delay: 0ms"
-    >
-      <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
-      Cloud analytics consulting · North America
-    </span>
+  <div class="shell w-full pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="max-w-3xl">
+      <h1
+        class="reveal text-5xl font-extrabold tracking-tight text-navy sm:text-6xl md:text-7xl"
+        style="animation-delay: 60ms"
+      >
+        Modern data engineering that <span class="text-accent">powers your analytics</span>
+      </h1>
 
-    <h1
-      class="reveal mt-7 max-w-4xl text-5xl font-extrabold tracking-tight text-navy sm:text-6xl md:text-[5.25rem]"
-      style="animation-delay: 70ms"
-    >
-      The data foundation your business runs on
-    </h1>
+      <p
+        class="reveal mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl"
+        style="animation-delay: 140ms"
+      >
+        We architect and build the modern data stack — ingestion, transformation,
+        and BI on the cloud — turning your raw data into a secure, scalable
+        foundation your business can run on.
+      </p>
 
-    <p
-      class="reveal mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl"
-      style="animation-delay: 140ms"
-    >
-      We use data engineering and analytics to help our clients make distinctive,
-      lasting improvements in performance — turning raw data into secure, scalable
-      cloud analytics.
-    </p>
-
-    <div
-      class="reveal mt-10 flex flex-col items-center gap-3 sm:flex-row"
-      style="animation-delay: 210ms"
-    >
-      <a href={`mailto:${site.email}`} class="btn-primary text-base">
-        Get a data services quote
-        <Icon name="arrow-right" size={18} />
-      </a>
-      <a href={site.surfalytics} target="_blank" rel="noopener" class="btn-outline text-base">
-        Start a data career
-      </a>
+      <div
+        class="reveal mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+        style="animation-delay: 220ms"
+      >
+        <a href={`mailto:${site.email}`} class="btn-primary text-base">
+          Get a data services quote
+          <Icon name="arrow-right" size={18} />
+        </a>
+        <a href="/services/" class="btn-outline text-base">
+          Explore our services
+        </a>
+      </div>
     </div>
   </div>
 </section>
