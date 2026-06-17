@@ -14,16 +14,10 @@ const fmt = (d: Date) =>
 {
   posts.length > 0 && (
     <section class="shell pt-20 md:pt-28">
-      <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-        <div>
-          <span class="eyebrow">From the blog</span>
-          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl md:text-5xl">
-            Latest from Surfalytics
-          </h2>
-          <p class="mt-3 max-w-xl text-ink-soft">
-            Practical writing on data engineering, analytics, and building a data career.
-          </p>
-        </div>
+      <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+        <h2 class="text-3xl font-extrabold tracking-tight text-navy sm:text-4xl md:text-5xl">
+          Latest from the Blog
+        </h2>
         <a href={subscribeUrl} target="_blank" rel="noopener" class="btn-primary shrink-0">
           Subscribe
           <Icon name="arrow-right" size={18} />

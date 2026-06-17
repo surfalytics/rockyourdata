@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import logo from "../assets/logo/rockyourdata-logo.png";
 import { nav, site } from "../data/site";
 import { services } from "../data/services";
-import Newsletter from "./Newsletter.astro";
 import SocialLinks from "./SocialLinks.astro";
 
 const year = new Date().getFullYear();
@@ -11,7 +10,7 @@ const year = new Date().getFullYear();
 
 <footer class="mt-24 bg-brand text-white">
   <div class="shell py-16">
-    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1.2fr]">
       <!-- Brand -->
       <div>
         <Image
@@ -67,17 +66,6 @@ const year = new Date().getFullYear();
           }
         </ul>
       </nav>
-
-      <!-- Newsletter -->
-      <div>
-        <h2 class="text-sm font-semibold uppercase tracking-widest text-periwinkle-200">
-          Subscribe to our newsletter
-        </h2>
-        <p class="mt-4 mb-4 text-sm text-white/70">
-          Data career tips and analytics insights, straight to your inbox.
-        </p>
-        <Newsletter />
-      </div>
     </div>
 
     <div

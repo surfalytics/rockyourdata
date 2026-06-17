@@ -5,7 +5,7 @@ import InteractionCard from "../components/InteractionCard.astro";
 import PlatformLogos from "../components/PlatformLogos.astro";
 import FounderCard from "../components/FounderCard.astro";
 import { values } from "../data/services";
-import { founder, initials } from "../data/founder";
+import { founder } from "../data/founder";
 ---
 
 <MarketingLayout
@@ -60,17 +60,24 @@ import { founder, initials } from "../data/founder";
       eyebrow="Track record"
       title="Companies Dmitry has worked with"
     />
-    <div class="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    <div class="mx-auto mt-12 grid max-w-5xl grid-cols-3 gap-x-6 gap-y-8 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
       {
-        founder.companies.map((name) => (
-          <div class="card flex items-center gap-3 p-4">
-            <span
-              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              {initials(name)}
+        founder.companies.map((company) => (
+          <div class="group flex flex-col items-center gap-2.5 text-center" title={company.name}>
+            <span class="flex h-14 w-14 items-center justify-center rounded-xl border border-line bg-surface p-2.5">
+              <img
+                src={`https://icon.horse/icon/${company.domain}`}
+                alt={`${company.name} logo`}
+                width="40"
+                height="40"
+                loading="lazy"
+                class="h-full w-full object-contain opacity-80 transition-opacity group-hover:opacity-100"
+                onerror={`this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=${company.domain}&sz=64'`}
+              />
             </span>
-            <span class="text-sm font-semibold text-navy">{name}</span>
+            <span class="text-xs font-medium text-ink-soft transition-colors group-hover:text-navy">
+              {company.name}
+            </span>
           </div>
         ))
       }
@@ -80,13 +87,23 @@ import { founder, initials } from "../data/founder";
   <!-- Books -->
   <section class="shell pt-20 md:pt-28">
     <SectionHeading eyebrow="Published author" title="10 technical books" />
-    <div class="mx-auto mt-12 grid max-w-4xl gap-3 sm:grid-cols-2">
+    <div class="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
       {
         founder.books.map((book) => (
-          <div class="card flex items-baseline justify-between gap-4 p-5">
-            <span class="font-semibold leading-snug text-navy">{book.title}</span>
-            <span class="shrink-0 text-sm font-medium text-lilac">{book.year}</span>
-          </div>
+          <figure class="group flex flex-col">
+            <div class="overflow-hidden rounded-lg border border-line bg-surface shadow-lift">
+              <img
+                src={book.cover}
+                alt={`Cover of ${book.title}`}
+                loading="lazy"
+                class="aspect-[2/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+            </div>
+            <figcaption class="mt-3">
+              <p class="text-sm font-semibold leading-snug text-navy">{book.title}</p>
+              <p class="mt-0.5 text-xs text-lilac">{book.year}</p>
+            </figcaption>
+          </figure>
         ))
       }
     </div>
