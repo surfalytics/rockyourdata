@@ -8,6 +8,7 @@ export const site = {
   gaId: "G-FT018TBY84",
   substackUrl: "blog.surfalytics.com",
   surfalytics: "https://surfalytics.com/",
+  surfalyticsRoadmap: "https://surfalytics.com/roadmap/",
   calendly: "https://calendly.com/surfalytics/surfalytics-intro-consultation",
   blog: "https://medium.com/rock-your-data",
   designCredit: {
@@ -18,8 +19,8 @@ export const site = {
 
 export const nav = [
   { label: "Services", href: "/services/" },
+  { label: "Data Academy", href: "/data-academy/" },
   { label: "About", href: "/about/" },
   { label: "Blog", href: "/blog/" },
-  { label: "Careers", href: "/data-analyst/" },
   { label: "Contact", href: "/contact/" },
 ] as const;

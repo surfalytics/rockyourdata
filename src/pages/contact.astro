@@ -2,81 +2,27 @@
 import MarketingLayout from "../layouts/MarketingLayout.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
-
-const channels = [
-  {
-    label: "Email",
-    value: site.email,
-    href: `mailto:${site.email}`,
-    note: "For project inquiries and data services quotes.",
-  },
-  {
-    label: "LinkedIn",
-    value: "Dmitry Anoshin",
-    href: "https://www.linkedin.com/in/dmitryanoshin/",
-    note: "Connect with the founder directly.",
-  },
-  {
-    label: "Telegram",
-    value: "@dimoobraznii",
-    href: "https://t.me/dimoobraznii",
-    note: "Send a quick message.",
-  },
-  {
-    label: "Community",
-    value: "Surfalytics on Telegram",
-    href: "https://t.me/surfalytics",
-    note: "Join our data community.",
-  },
-];
 ---
 
 <MarketingLayout
   title="Contact"
-  description="Get in touch with Rock Your Data — book a discovery session or reach out about cloud analytics and data engineering."
+  description="Get in touch with Rock Your Data — reach out by email about data engineering, AI, and space analytics."
 >
-  <section class="shell pt-20 pb-8 md:pt-28">
-    <div class="mx-auto max-w-3xl text-center">
+  <section class="shell pt-20 pb-24 md:pt-28">
+    <div class="mx-auto max-w-2xl text-center">
       <span class="eyebrow">Get in touch</span>
       <h1 class="text-navy mt-3 text-4xl font-extrabold leading-tight md:text-5xl">
         Let's start your data journey
       </h1>
-      <p class="mt-6 text-lg leading-relaxed text-ink/80">
-        Have a project in mind or want to talk analytics? Book a free discovery
-        session, or reach out through any of the channels below. 🚀
+      <p class="mt-6 text-lg leading-relaxed text-ink-soft">
+        Have a project in mind or want to talk data engineering, AI, or space
+        analytics? Drop us an email and we'll get back to you. 🚀
       </p>
-      <a
-        href={site.calendly}
-        target="_blank"
-        rel="noopener"
-        class="btn-accent mt-8 text-base"
-      >
-        Book a discovery session
-      </a>
-    </div>
-  </section>
 
-  <section class="shell pb-20">
-    <div class="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
-      {
-        channels.map((c) => (
-          <a
-            href={c.href}
-            target={c.href.startsWith("http") ? "_blank" : undefined}
-            rel={c.href.startsWith("http") ? "noopener" : undefined}
-            class="card group flex flex-col p-6 transition-shadow hover:shadow-lift"
-          >
-            <span class="text-xs font-semibold uppercase tracking-widest text-lilac">
-              {c.label}
-            </span>
-            <span class="mt-1 flex items-center gap-2 text-lg font-bold text-navy group-hover:text-periwinkle">
-              {c.value}
-              <Icon name="arrow-up-right" size={18} />
-            </span>
-            <span class="mt-2 text-sm text-ink/70">{c.note}</span>
-          </a>
-        ))
-      }
+      <a href={`mailto:${site.email}`} class="btn-primary mt-9 text-base">
+        <Icon name="arrow-up-right" size={18} />
+        {site.email}
+      </a>
     </div>
   </section>
 </MarketingLayout>

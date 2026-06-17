@@ -38,9 +38,7 @@ const isActive = (href: string) =>
             ))
           }
         </ul>
-        <a href={site.surfalytics} target="_blank" rel="noopener" class="btn-primary">
-          Surfalytics Community
-        </a>
+        <a href={`mailto:${site.email}`} class="btn-primary">Get in touch</a>
       </div>
 
       <!-- Mobile toggle -->
@@ -81,13 +79,8 @@ const isActive = (href: string) =>
           </a>
         ))
       }
-      <a
-        href={site.surfalytics}
-        target="_blank"
-        rel="noopener"
-        class="btn-accent mt-6 self-start"
-      >
-        Surfalytics Community
+      <a href={`mailto:${site.email}`} class="btn-accent mt-6 self-start">
+        Get in touch
       </a>
     </div>
   </div>
