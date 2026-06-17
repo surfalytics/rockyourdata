@@ -32,8 +32,8 @@ Deploy is automatic: pushing to `main` triggers `.github/workflows/deploy.yml` (
 
 - **`src/data/`** — content lives here as typed TS, not hardcoded in markup. `site.ts` (nav, URLs, GA id, Substack/Calendly/Surfalytics links), `services.ts` (services + interaction modes + values), `dataAnalyst.ts` (landing-page copy, roadmap, salaries, **Stripe links**), `socials.ts`. Edit copy here, not in `.astro` files.
 - **`src/layouts/`** — `BaseLayout` (head, meta/OG, fonts, GA) → `MarketingLayout` (+ Header/Footer) and `BlogLayout` (article chrome + `.prose` styles). Pages pick one.
-- **`src/components/`** — presentational. `Icon.astro` (inline-SVG UI + brand glyphs, replaces the old Iconify/FontAwesome CDNs), `FeatureIcon.astro` (stroked card icons), plus section components (`Hero`, `ServiceCard`, `PartnerLogos`, `SwagSection`, `FounderCard`, etc.).
-- **`src/styles/global.css`** — the design system. Tailwind v4 `@theme` tokens (brand colors `navy`/`periwinkle`/`accent`, `font-display`=Futura, `font-sans`=Source Sans 3), Futura `@font-face` (self-hosted woff2 in `public/fonts/futura/`), and component classes (`.btn-primary`, `.text-gradient`, `.card`, `.shell`, `.eyebrow`). Source Sans 3 is imported via `@fontsource-variable/source-sans-3` in `BaseLayout`.
+- **`src/components/`** — presentational. `Icon.astro` (inline-SVG UI + brand glyphs, replaces the old Iconify/FontAwesome CDNs), `FeatureIcon.astro` (stroked card icons), `PlatformLogos.astro` (real brand marks baked into `src/data/platforms.ts`, shown as a grayscale→color logo wall), `BlogPreview.astro` (build-time Substack RSS via `src/lib/substack.ts`), plus section components (`Hero`, `ServiceCard`, `SwagSection`, `FounderCard`, etc.).
+- **`src/styles/global.css`** — the design system. **Dark theme** (near-black navy surfaces, light text/icons). Tailwind v4 `@theme` tokens, `font-display`=Futura, `font-sans`=Inter. ⚠️ Token nuance: `navy` is the **light heading/emphasis** color (`text-navy`), while `brand` is the **navy panel/surface** color (`bg-brand`) — they were decoupled for dark mode, so don't assume `text-navy`/`bg-navy` are the same hue. Futura `@font-face` self-hosted in `public/fonts/futura/`; Inter via `@fontsource-variable/inter` in `BaseLayout`.
 - **Blog** — Astro content collection (`src/content.config.ts`, glob loader + zod schema) over `src/content/blog/*.md`. Routes: `/blog/` (listing) and `/blog/[...slug]/` (reader). Post slug = filename.
 - **Images** — raster sources in `src/assets/`, rendered through `astro:assets` `<Image>` for automatic webp/resize. Verbose vector SVGs imported with `?url`.
 
@@ -44,4 +44,6 @@ Deploy is automatic: pushing to `main` triggers `.github/workflows/deploy.yml` (
 ## Notes / open items
 
 - `src/pages/career-track.astro` was rebuilt from an empty legacy layout — its body copy (audience, course/community benefits) was **authored during migration** and should be reviewed by the owner; it reuses `dataAnalyst.ts` data for the role/roadmap/salary sections.
-- `PartnerLogos` renders platform names as text wordmarks (the old mismatched inline brand SVGs were dropped for a consistent look).
+- `PlatformLogos` uses real brand marks (Snowflake, Databricks, dbt, AWS, Azure, Google Cloud) baked inline into `src/data/platforms.ts` from the CC0 Iconify `logos` set + simple-icons; rendered as a grayscale logo wall (white silhouettes on dark, full color on hover).
+- The homepage `BlogPreview` fetches `blog.surfalytics.com/feed` at **build time** (returns `[]` on failure, hiding the section). Posts refresh on each rebuild — re-run the deploy to pull new ones.
+- `Services` are data-driven (`src/data/services.ts`, with `slug`): homepage cards, `/services/` index, and `/services/[slug]/` detail pages all read from it.
