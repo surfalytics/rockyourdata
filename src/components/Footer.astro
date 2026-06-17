@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import logo from "../assets/logo/rockyourdata-logo.png";
 import { nav, site } from "../data/site";
+import { services } from "../data/services";
 import Newsletter from "./Newsletter.astro";
 import SocialLinks from "./SocialLinks.astro";
 
@@ -10,7 +11,7 @@ const year = new Date().getFullYear();
 
 <footer class="mt-24 bg-navy text-white">
   <div class="shell py-16">
-    <div class="grid gap-12 md:grid-cols-[1.2fr_1fr_1.4fr]">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
       <!-- Brand -->
       <div>
         <Image
@@ -46,6 +47,24 @@ const year = new Date().getFullYear();
               {site.email}
             </a>
           </li>
+        </ul>
+      </nav>
+
+      <!-- Services -->
+      <nav aria-label="Services">
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-periwinkle-200">
+          Services
+        </h2>
+        <ul class="mt-4 space-y-3 text-sm text-white/80">
+          {
+            services.map((s) => (
+              <li>
+                <a href={`/services/${s.slug}/`} class="transition-colors hover:text-white">
+                  {s.title}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
 

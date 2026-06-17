@@ -4,7 +4,7 @@ import Hero from "../components/Hero.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import InteractionCard from "../components/InteractionCard.astro";
-import PartnerLogos from "../components/PartnerLogos.astro";
+import PlatformLogos from "../components/PlatformLogos.astro";
 import SwagSection from "../components/SwagSection.astro";
 import Icon from "../components/Icon.astro";
 import { services, interactionModes } from "../data/services";
@@ -12,6 +12,9 @@ import { services, interactionModes } from "../data/services";
 
 <MarketingLayout>
   <Hero />
+
+  <!-- Platform credibility strip -->
+  <PlatformLogos class="!pt-10 md:!pt-12" />
 
   <!-- About band -->
   <section class="shell pt-20 md:pt-28">
@@ -49,6 +52,12 @@ import { services, interactionModes } from "../data/services";
     <div class="mt-12 grid gap-6 md:gap-8">
       {services.map((service, i) => <ServiceCard service={service} reversed={i % 2 === 1} />)}
     </div>
+    <div class="mt-10 text-center">
+      <a href="/services/" class="btn-outline text-base">
+        View all services
+        <Icon name="arrow-right" size={18} />
+      </a>
+    </div>
   </section>
 
   <!-- How we interact -->
@@ -61,8 +70,6 @@ import { services, interactionModes } from "../data/services";
       {interactionModes.map((m) => <InteractionCard {...m} />)}
     </div>
   </section>
-
-  <PartnerLogos />
 
   <SwagSection />
 </MarketingLayout>

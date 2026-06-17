@@ -1,0 +1,54 @@
+---
+import { platforms } from "../data/platforms";
+
+interface Props {
+  heading?: string;
+  class?: string;
+}
+const { heading = "Platforms we partner with", class: className } = Astro.props;
+---
+
+<section class:list={["shell py-16 md:py-20", className]}>
+  {
+    heading && (
+      <p class="text-center text-sm font-semibold uppercase tracking-[0.18em] text-lilac">
+        {heading}
+      </p>
+    )
+  }
+  <ul
+    class="mt-9 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:grid-cols-3 md:gap-x-14 lg:grid-cols-6"
+  >
+    {
+      platforms.map((p) => (
+        <li class="flex justify-center" title={p.name}>
+          <svg
+            viewBox={p.viewBox}
+            role="img"
+            aria-label={p.name}
+            class="logo-mark h-8 w-auto max-w-[8.5rem] md:h-9"
+            set:html={p.body}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  /* Uniform logo wall: muted grayscale by default, true brand color on hover. */
+  .logo-mark {
+    filter: grayscale(1);
+    opacity: 0.55;
+    transition: filter 0.3s var(--ease-out-soft), opacity 0.3s var(--ease-out-soft);
+  }
+  .logo-mark:hover {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-mark {
+      transition: none;
+    }
+  }
+</style>

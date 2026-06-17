@@ -35,6 +35,13 @@ const { service, reversed = false } = Astro.props;
         ))
       }
     </ul>
+    <a
+      href={`/services/${service.slug}/`}
+      class="mt-6 inline-flex items-center gap-2 font-semibold text-periwinkle transition-colors hover:text-navy"
+    >
+      Learn more
+      <Icon name="arrow-right" size={18} />
+    </a>
   </div>
 
   <div class:list={[reversed && "md:order-1"]}>
