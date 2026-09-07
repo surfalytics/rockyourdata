@@ -14,9 +14,14 @@ export default defineConfig({
   // Preserve the single legacy GitBook permalink so existing inbound links
   // (and search-engine results) don't 404 after the migration.
   redirects: {
-    '/surfalytics/2023-06-04-introduction.html': '/blog/',
+    // NOTE: legacy URLs that end in `.html` are NOT listed here. Astro's static
+    // redirects emit `<url>/index.html`, so `/foo.html` becomes a *directory*
+    // named `foo.html`, which GitHub Pages does not serve at `/foo.html`.
+    // Those live as real files in `public/` instead. See public/surfalytics/.
     '/pages/about/': '/about/',
     '/pages/contact/': '/contact/',
+    // Pre-Jekyll URL still getting inbound traffic (404 in Search Console).
+    '/contact-us/': '/contact/',
     // Service slugs were renamed when the offering was restructured.
     '/services/modern-data-stack/': '/services/data-platforms/',
     '/services/team-development/': '/services/data-teams/',

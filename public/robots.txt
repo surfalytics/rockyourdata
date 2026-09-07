@@ -1,0 +1,7 @@
+# https://rockyourdata.cloud
+# Allow all crawlers full access to the site.
+User-agent: *
+Allow: /
+
+# Sitemap (generated at build time by @astrojs/sitemap)
+Sitemap: https://rockyourdata.cloud/sitemap-index.xml
