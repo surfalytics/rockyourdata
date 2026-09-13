@@ -1,87 +1,88 @@
 ---
+import { getCollection } from "astro:content";
 import MarketingLayout from "../../layouts/MarketingLayout.astro";
+import CtaBand from "../../components/CtaBand.astro";
 import Icon from "../../components/Icon.astro";
+import { site } from "../../data/site";
 
-import { getArchivePosts } from "../../lib/substack";
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const posts = await getArchivePosts(40);
-const subscribeUrl = "https://blog.surfalytics.com/subscribe";
+// Dates are authored as plain YYYY-MM-DD (UTC midnight), so format in UTC or
+// they render a day early west of Greenwich.
 const fmt = (d: Date) =>
-  isNaN(d.getTime())
-    ? ""
-    : new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(d);
+  new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeZone: "UTC",
+  }).format(d);
 ---
 
 <MarketingLayout
   title="Blog"
-  description="Writing on data engineering, AI, analytics, space data, and building a data career — from the Surfalytics blog."
+  description="Practical writing on Databricks, Snowflake, AI data engineering, and building data platforms that hold up in production."
 >
-  <section class="shell pt-20 pb-8 md:pt-28">
-    <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-      <div>
+  <section class="shell pt-32 pb-10 md:pt-40">
+    <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+      <div class="max-w-2xl">
         <span class="eyebrow">Insights</span>
         <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-navy md:text-5xl">
           From the Blog
         </h1>
+        <p class="mt-5 text-lg leading-relaxed text-ink-soft">
+          What we have learned building and tuning data platforms — written for
+          the engineers and leads who have to run them.
+        </p>
       </div>
-      <a href={subscribeUrl} target="_blank" rel="noopener" class="btn-primary shrink-0">
+      <a
+        href={`https://${site.substackUrl}/subscribe`}
+        target="_blank"
+        rel="noopener"
+        class="btn-outline shrink-0"
+      >
         Subscribe
-        <Icon name="arrow-right" size={18} />
+        <Icon name="arrow-up-right" size={18} />
       </a>
     </div>
   </section>
 
-  <section class="shell pb-24">
+  <section class="shell pb-20 md:pb-28">
     {
       posts.length === 0 ? (
-        <p class="text-ink-soft">
-          Posts are published on{" "}
-          <a href="https://blog.surfalytics.com/" target="_blank" rel="noopener" class="text-periwinkle hover:text-navy">
-            blog.surfalytics.com
-          </a>.
-        </p>
+        <p class="text-ink-soft">No posts yet.</p>
       ) : (
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <a
-              href={post.link}
-              target="_blank"
-              rel="noopener"
-              class="card group flex flex-col overflow-hidden transition-shadow hover:shadow-lift"
+              href={`/blog/${post.id}/`}
+              class="card group flex flex-col p-6 transition-shadow hover:shadow-lift"
             >
-              {post.image && (
-                <div class="aspect-[16/9] overflow-hidden border-b border-line">
-                  <img
-                    src={post.image}
-                    alt=""
-                    loading="lazy"
-                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
-              )}
-              <div class="flex flex-1 flex-col p-6">
-                {fmt(post.date) && (
-                  <time class="text-xs font-semibold uppercase tracking-widest text-lilac">
-                    {fmt(post.date)}
-                  </time>
-                )}
-                <h2 class="mt-2 text-lg font-bold leading-snug text-navy group-hover:text-periwinkle">
-                  {post.title}
-                </h2>
-                {post.excerpt && (
-                  <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
-                    {post.excerpt}…
-                  </p>
-                )}
-                <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
-                  Read on Substack
-                  <Icon name="arrow-up-right" size={16} />
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="rounded-pill bg-fog px-3 py-1 text-xs font-semibold text-periwinkle-200">
+                  {post.data.category}
                 </span>
+                <time class="text-xs font-semibold uppercase tracking-widest text-lilac">
+                  {fmt(post.data.date)}
+                </time>
               </div>
+              <h2 class="mt-3 text-lg font-bold leading-snug text-navy group-hover:text-periwinkle">
+                {post.data.title}
+              </h2>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
+                {post.data.description}
+              </p>
+              <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
+                Read article
+                <Icon name="arrow-right" size={16} />
+              </span>
             </a>
           ))}
         </div>
       )
     }
+
+    <div class="mt-16">
+      <CtaBand />
+    </div>
   </section>
 </MarketingLayout>

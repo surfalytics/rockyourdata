@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Marketing/content website for **Rock Your Data** (a cloud analytics consulting company), built with **Astro 6 + Tailwind CSS v4**, deployed as a static site to **GitHub Pages** at the custom domain `rockyourdata.cloud` (`public/CNAME`).
+Marketing/content website for **Rock Your Data** (a data consulting company — Databricks, Snowflake, and AI data engineering), built with **Astro 6 + Tailwind CSS v4**, deployed as a static site to **GitHub Pages** at the custom domain `rockyourdata.cloud` (`public/CNAME`).
 
 > Migrated from a Jekyll/GitBook site in 2026. If you find references to `_layouts/`, `_includes/`, `_config.yml`, or `jekyll-gitbook`, they are stale.
 
@@ -30,11 +30,11 @@ Deploy is automatic: pushing to `main` triggers `.github/workflows/deploy.yml` (
 
 ## Architecture
 
-- **`src/data/`** — content lives here as typed TS, not hardcoded in markup. `site.ts` (nav, URLs, GA id, Substack/Calendly/Surfalytics links), `services.ts` (services + interaction modes + values), `dataAnalyst.ts` (landing-page copy, roadmap, salaries, **Stripe links**), `socials.ts`. Edit copy here, not in `.astro` files.
+- **`src/data/`** — content lives here as typed TS, not hardcoded in markup. `site.ts` (nav, URLs, GA id, OG image, **Web3Forms key**, Substack/Calendly/Surfalytics links), `services.ts` (services + FAQs + interaction modes + values), `offers.ts` (fixed-scope assessments), `caseStudies.ts` (**placeholder content, gated behind `PUBLISH_CASE_STUDIES`**), `dataAnalyst.ts` (landing-page copy, roadmap, salaries, **Stripe links**), `socials.ts`. Edit copy here, not in `.astro` files.
 - **`src/layouts/`** — `BaseLayout` (head, meta/OG, fonts, GA) → `MarketingLayout` (+ Header/Footer) and `BlogLayout` (article chrome + `.prose` styles). Pages pick one.
-- **`src/components/`** — presentational. `Icon.astro` (inline-SVG UI + brand glyphs, replaces the old Iconify/FontAwesome CDNs), `FeatureIcon.astro` (stroked card icons), `PlatformLogos.astro` (real brand marks baked into `src/data/platforms.ts`, shown as a grayscale→color logo wall), `BlogPreview.astro` (build-time Substack RSS via `src/lib/substack.ts`), plus section components (`Hero`, `ServiceCard`, `SwagSection`, `FounderCard`, etc.).
+- **`src/components/`** — presentational. `Icon.astro` (inline-SVG UI + brand glyphs, replaces the old Iconify/FontAwesome CDNs), `FeatureIcon.astro` (stroked card icons), `PlatformLogos.astro` (real brand marks baked into `src/data/platforms.ts`, shown as a grayscale→color logo wall), `ContactForm.astro`, `FaqList.astro`, `OfferCard.astro`, `CtaBand.astro`, plus section components (`Hero`, `ServiceCard`, `SwagSection`, `FounderCard`, etc.).
 - **`src/styles/global.css`** — the design system. **Dark theme** (near-black navy surfaces, light text/icons). Tailwind v4 `@theme` tokens, `font-display`=Futura, `font-sans`=Inter. ⚠️ Token nuance: `navy` is the **light heading/emphasis** color (`text-navy`), while `brand` is the **navy panel/surface** color (`bg-brand`) — they were decoupled for dark mode, so don't assume `text-navy`/`bg-navy` are the same hue. Futura `@font-face` self-hosted in `public/fonts/futura/`; Inter via `@fontsource-variable/inter` in `BaseLayout`.
-- **Blog** — Astro content collection (`src/content.config.ts`, glob loader + zod schema) over `src/content/blog/*.md`. Routes: `/blog/` (listing) and `/blog/[...slug]/` (reader). Post slug = filename.
+- **Blog** — an Astro content collection (`src/content.config.ts`, glob loader + zod schema imported from `zod`, not the deprecated `astro:content` re-export) over `src/content/blog/*.md`. Routes: `/blog/` (listing) and `/blog/[...slug]/` (reader); post slug = filename. Post dates are plain `YYYY-MM-DD`, so **format them with `timeZone: "UTC"`** or they render a day early. The Substack RSS integration (`BlogPreview.astro`, `Newsletter.astro`, `src/lib/substack.ts`, `fast-xml-parser`) was **removed** — its content no longer matched the positioning. `site.substackUrl` survives only for the Subscribe link on `/blog/`.
 - **Images** — raster sources in `src/assets/`, rendered through `astro:assets` `<Image>` for automatic webp/resize. Verbose vector SVGs imported with `?url`.
 
 ## URL preservation
@@ -45,5 +45,7 @@ Deploy is automatic: pushing to `main` triggers `.github/workflows/deploy.yml` (
 
 - `src/pages/career-track.astro` was rebuilt from an empty legacy layout — its body copy (audience, course/community benefits) was **authored during migration** and should be reviewed by the owner; it reuses `dataAnalyst.ts` data for the role/roadmap/salary sections.
 - `PlatformLogos` uses real brand marks (Snowflake, Databricks, dbt, AWS, Azure, Google Cloud) baked inline into `src/data/platforms.ts` from the CC0 Iconify `logos` set + simple-icons; rendered as a grayscale logo wall (white silhouettes on dark, full color on hover).
-- The homepage `BlogPreview` fetches `blog.surfalytics.com/feed` at **build time** (returns `[]` on failure, hiding the section). Posts refresh on each rebuild — re-run the deploy to pull new ones.
-- `Services` are data-driven (`src/data/services.ts`, with `slug`): homepage cards, `/services/` index, and `/services/[slug]/` detail pages all read from it.
+- `Services` are data-driven (`src/data/services.ts`, with `slug`): homepage cards, `/services/` index, and `/services/[slug]/` detail pages all read from it. `featured: false` keeps a service off the homepage grid (currently only `space-analytics`). Renaming a slug needs a redirect in `astro.config.mjs`.
+- **SEO/structured data** — `BaseLayout` emits `ProfessionalService` + `WebSite` JSON-LD on every page and accepts a `schema` prop for extra blocks; service pages add `Service` + `FAQPage` + `BreadcrumbList`, blog posts add `BlogPosting`. `public/og.png` is the social card (regenerate it if the positioning copy changes).
+- **Contact form** — `ContactForm.astro` posts to Web3Forms (the site is static, so there is no backend). It renders a mailto fallback until `site.web3formsKey` is set.
+- **Case studies** — `/case-studies/` is `src/pages/case-studies/[...page].astro`; its `getStaticPaths` returns `[]` while `PUBLISH_CASE_STUDIES` is false, so the route, the nav link, and the homepage strip all stay hidden. The current entries are placeholders and must not be published as-is.
