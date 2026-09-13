@@ -1,8 +1,10 @@
+import { PUBLISH_CASE_STUDIES } from "./caseStudies";
+
 export const site = {
   name: "Rock Your Data",
-  longTitle: "Modern Cloud Analytics Consulting in North America",
+  longTitle: "Databricks, Snowflake & AI Data Engineering Consulting",
   description:
-    "Rock Your Data is a consulting and technology firm delivering secure, scalable cloud analytics and data engineering across North America.",
+    "Rock Your Data is a data consulting firm delivering Databricks and Snowflake platforms, AI data engineering, and high-performance data teams across North America.",
   url: "https://rockyourdata.cloud",
   email: "hello@rockyourdata.cloud",
   gaId: "G-FT018TBY84",
@@ -11,15 +13,34 @@ export const site = {
   surfalyticsRoadmap: "https://surfalytics.com/roadmap/",
   calendly: "https://calendly.com/surfalytics/surfalytics-intro-consultation",
   blog: "https://medium.com/rock-your-data",
+  /** Default social-share image. Must exist in public/. */
+  ogImage: "/og.png",
+  /** Legal entity location, used in Organization JSON-LD. */
+  location: { city: "Vancouver", region: "BC", country: "CA" },
+  /**
+   * Web3Forms access key for the contact form.
+   * Get one free at https://web3forms.com — enter hello@rockyourdata.cloud and
+   * they email you the key. Paste it here. The key is public by design; it only
+   * allows posting to the form, and submissions go to the email you registered.
+   * While it is empty, the form falls back to a mailto link.
+   */
+  web3formsKey: "9a2c92fc-114f-4a33-ba3d-484fcce69481",
   designCredit: {
     name: "Lala Jafarova",
     url: "https://www.lalajafarova.com/",
   },
 } as const;
 
-export const nav = [
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+// "Case studies" only appears once PUBLISH_CASE_STUDIES is flipped on.
+export const nav: NavItem[] = [
   { label: "Services", href: "/services/" },
+  ...(PUBLISH_CASE_STUDIES ? [{ label: "Case Studies", href: "/case-studies/" }] : []),
   { label: "Data Academy", href: "/data-academy/" },
   { label: "About", href: "/about/" },
   { label: "Blog", href: "/blog/" },
-] as const;
+];

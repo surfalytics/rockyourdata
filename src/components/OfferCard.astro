@@ -1,0 +1,53 @@
+---
+import FeatureIcon from "./FeatureIcon.astro";
+import Icon from "./Icon.astro";
+import type { Offer } from "../data/offers";
+
+interface Props {
+  offer: Offer;
+  /** Hide the "part of X" link when already on that service page. */
+  showServiceLink?: boolean;
+}
+const { offer, showServiceLink = true } = Astro.props;
+---
+
+<div class="card flex flex-col p-7">
+  <div class="flex items-start justify-between gap-4">
+    <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">
+      <FeatureIcon name={offer.icon} size={26} />
+    </span>
+    <span class="rounded-pill bg-fog px-3 py-1 text-xs font-semibold tracking-wide text-periwinkle-200">
+      {offer.duration}
+    </span>
+  </div>
+
+  <h3 class="mt-5 text-xl font-bold text-navy">{offer.title}</h3>
+  <p class="mt-2 leading-relaxed text-ink-soft">{offer.summary}</p>
+
+  <ul class="mt-5 flex-1 space-y-2.5">
+    {
+      offer.outcomes.map((o) => (
+        <li class="flex gap-3 text-[0.95rem] leading-relaxed text-ink/80">
+          <span class="mt-0.5 shrink-0 text-accent">
+            <Icon name="check" size={18} />
+          </span>
+          {o}
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+    <a href="/contact/" class="inline-flex items-center gap-2 font-semibold text-periwinkle hover:text-navy">
+      Request this
+      <Icon name="arrow-right" size={18} />
+    </a>
+    {
+      showServiceLink && (
+        <a href={`/services/${offer.service}/`} class="text-sm text-lilac hover:text-periwinkle">
+          See the full service
+        </a>
+      )
+    }
+  </div>
+</div>

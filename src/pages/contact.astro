@@ -1,28 +1,102 @@
 ---
 import MarketingLayout from "../layouts/MarketingLayout.astro";
+import ContactForm from "../components/ContactForm.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    url: new URL("/contact/", site.url).href,
+    name: "Contact Rock Your Data",
+    mainEntity: { "@id": `${site.url}/#organization` },
+  },
+];
+
+const reasons = [
+  "You need a Databricks or Snowflake platform built, migrated, or tuned.",
+  "Your cloud data bill is growing and nobody can explain why.",
+  "You want to ship an AI feature but the data underneath is not ready.",
+  "You are hiring or growing a data team and want it done right.",
+];
 ---
 
 <MarketingLayout
   title="Contact"
-  description="Get in touch with Rock Your Data — reach out by email about data engineering, AI, and space analytics."
+  description="Talk to Rock Your Data about Databricks, Snowflake, AI data engineering, or building a data team. Book a 30-minute call or send an enquiry."
+  schema={schema}
 >
-  <section class="shell pt-20 pb-24 md:pt-28">
+  <section class="shell pt-32 pb-12 md:pt-40">
     <div class="mx-auto max-w-2xl text-center">
       <span class="eyebrow">Get in touch</span>
-      <h1 class="text-navy mt-3 text-4xl font-extrabold leading-tight md:text-5xl">
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-navy md:text-5xl">
         Let's start your data journey
       </h1>
       <p class="mt-6 text-lg leading-relaxed text-ink-soft">
-        Have a project in mind or want to talk data engineering, AI, or space
-        analytics? Drop us an email and we'll get back to you. 🚀
+        Tell us what you are working on. We reply within one business day, and we
+        will tell you plainly if we are not the right fit.
       </p>
+    </div>
+  </section>
 
-      <a href={`mailto:${site.email}`} class="btn-primary mt-9 text-base">
-        <Icon name="arrow-up-right" size={18} />
-        {site.email}
-      </a>
+  <section class="shell pb-20 md:pb-28">
+    <div class="mx-auto grid max-w-5xl gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-14">
+      <!-- Form -->
+      <div class="card p-7 md:p-9">
+        <h2 class="text-xl font-bold text-navy">Send an enquiry</h2>
+        <p class="mt-2 text-[0.95rem] text-ink-soft">
+          The more detail you give, the more useful our first reply will be.
+        </p>
+        <div class="mt-7">
+          <ContactForm />
+        </div>
+      </div>
+
+      <!-- Side rail -->
+      <div class="space-y-8">
+        <div class="card p-7">
+          <h2 class="text-xl font-bold text-navy">Prefer to talk?</h2>
+          <p class="mt-2 leading-relaxed text-ink-soft">
+            Book a 30-minute call. No pitch deck — we ask about your stack and
+            tell you what we would do.
+          </p>
+          <a
+            href={site.calendly}
+            target="_blank"
+            rel="noopener"
+            class="btn-primary mt-5 w-full text-base"
+          >
+            Book a 30-min call
+            <Icon name="arrow-right" size={18} />
+          </a>
+          <a
+            href={`mailto:${site.email}`}
+            class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle hover:text-navy"
+          >
+            <Icon name="arrow-up-right" size={16} />
+            {site.email}
+          </a>
+        </div>
+
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-navy">
+            Good reasons to call us
+          </h2>
+          <ul class="mt-4 space-y-3">
+            {
+              reasons.map((r) => (
+                <li class="flex gap-3 text-[0.95rem] leading-relaxed text-ink-soft">
+                  <span class="mt-0.5 shrink-0 text-accent">
+                    <Icon name="check" size={18} />
+                  </span>
+                  {r}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 </MarketingLayout>

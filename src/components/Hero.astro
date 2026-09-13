@@ -30,34 +30,40 @@ import Icon from "./Icon.astro";
 
   <div class="shell w-full pt-32 pb-20 md:pt-40 md:pb-28">
     <div class="max-w-3xl">
+      <span class="reveal eyebrow" style="animation-delay: 20ms">
+        Data consulting · North America
+      </span>
+
       <h1
-        class="reveal text-5xl font-extrabold tracking-tight text-navy sm:text-6xl md:text-7xl"
+        class="reveal mt-4 text-5xl font-extrabold tracking-tight text-navy sm:text-6xl md:text-7xl"
         style="animation-delay: 60ms"
       >
-        Data engineering and AI, <span class="text-accent">from the cloud to space</span>
+        Databricks, Snowflake, and <span class="text-accent">AI data engineering</span>
       </h1>
 
       <p
         class="reveal mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl"
         style="animation-delay: 140ms"
       >
-        Rock Your Data builds high-performance data teams and petabyte-scale
-        platforms, ships generative-AI analytics applications, and turns space
-        data — IoT, telemetry, and image recognition — into insight.
+        We build the lakehouses, warehouses, and AI-ready data platforms that
+        your analytics and AI products run on — then hand them over to a team
+        that can keep them running.
       </p>
 
       <div
         class="reveal mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
         style="animation-delay: 220ms"
       >
-        <a href={`mailto:${site.email}`} class="btn-primary text-base">
-          Get a data services quote
+        <a href={site.calendly} target="_blank" rel="noopener" class="btn-primary text-base">
+          Book a 30-min call
           <Icon name="arrow-right" size={18} />
         </a>
-        <a href="/services/" class="btn-outline text-base">
-          Explore our services
-        </a>
+        <a href="/services/" class="btn-outline text-base"> Explore our services </a>
       </div>
+
+      <p class="reveal mt-8 text-sm text-lilac" style="animation-delay: 280ms">
+        15+ years building data platforms and data teams across North America.
+      </p>
     </div>
   </div>
 </section>

@@ -1,0 +1,39 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  body?: string;
+  class?: string;
+}
+const {
+  title = "Let's talk about your data platform",
+  body = "A 30-minute call is usually enough to tell you whether we can help, and what it would take.",
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "rounded-[1.5rem] bg-brand px-7 py-12 text-center text-white md:px-14 md:py-14",
+    className,
+  ]}
+>
+  <h2 class="mx-auto max-w-2xl text-2xl font-extrabold leading-snug md:text-3xl">
+    {title}
+  </h2>
+  <p class="mx-auto mt-4 max-w-xl leading-relaxed text-white/75">{body}</p>
+  <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+    <a href={site.calendly} target="_blank" rel="noopener" class="btn-accent text-base">
+      Book a 30-min call
+      <Icon name="arrow-right" size={18} />
+    </a>
+    <a
+      href="/contact/"
+      class="btn-outline border-white/40 bg-white/10 text-base text-white hover:bg-white hover:text-paper"
+    >
+      Send an enquiry
+    </a>
+  </div>
+</div>

@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
+  schema?: Record<string, unknown>[];
 }
 const props = Astro.props;
 ---

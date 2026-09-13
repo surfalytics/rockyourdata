@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/logo/rockyourdata-logo.png";
-import { nav, site } from "../data/site";
+import { nav } from "../data/site";
 import Icon from "./Icon.astro";
 
 const path = Astro.url.pathname;
@@ -38,7 +38,7 @@ const isActive = (href: string) =>
             ))
           }
         </ul>
-        <a href={`mailto:${site.email}`} class="btn-primary">Get in touch</a>
+        <a href="/contact/" class="btn-primary">Book a call</a>
       </div>
 
       <!-- Mobile toggle -->
@@ -79,8 +79,8 @@ const isActive = (href: string) =>
           </a>
         ))
       }
-      <a href={`mailto:${site.email}`} class="btn-accent mt-6 self-start">
-        Get in touch
+      <a href="/contact/" class="btn-accent mt-6 self-start">
+        Book a call
       </a>
     </div>
   </div>

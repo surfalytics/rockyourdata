@@ -1,0 +1,56 @@
+---
+import { getCollection, render } from "astro:content";
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { site } from "../../data/site";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog"))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      // Newest first, so "next" is the newer neighbour.
+      next: i > 0 ? posts[i - 1] : null,
+      prev: i < posts.length - 1 ? posts[i + 1] : null,
+    },
+  }));
+}
+
+const { post, prev, next } = Astro.props;
+const { Content } = await render(post);
+
+const link = (p: typeof post | null) =>
+  p ? { href: `/blog/${p.id}/`, title: p.data.title } : null;
+
+const pageUrl = new URL(`/blog/${post.id}/`, site.url).href;
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.date.toISOString(),
+    author: { "@type": "Person", name: post.data.author },
+    publisher: { "@id": `${site.url}/#organization` },
+    mainEntityOfPage: pageUrl,
+    url: pageUrl,
+    image: new URL(site.ogImage, site.url).href,
+  },
+];
+---
+
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  author={post.data.author}
+  date={post.data.date}
+  category={post.data.category}
+  prev={link(prev)}
+  next={link(next)}
+  schema={schema}
+>
+  <Content />
+</BlogLayout>

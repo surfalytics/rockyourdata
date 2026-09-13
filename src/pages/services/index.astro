@@ -3,31 +3,54 @@ import MarketingLayout from "../../layouts/MarketingLayout.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
 import InteractionCard from "../../components/InteractionCard.astro";
 import PlatformLogos from "../../components/PlatformLogos.astro";
+import OfferCard from "../../components/OfferCard.astro";
+import CtaBand from "../../components/CtaBand.astro";
 import Icon from "../../components/Icon.astro";
 import FeatureIcon from "../../components/FeatureIcon.astro";
 import { services, interactionModes } from "../../data/services";
+import { offers } from "../../data/offers";
 import { site } from "../../data/site";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Rock Your Data services",
+    itemListElement: services.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: s.seoTitle,
+      url: new URL(`/services/${s.slug}/`, site.url).href,
+    })),
+  },
+];
 ---
 
 <MarketingLayout
-  title="Services"
-  description="Cloud analytics and data engineering services — modern data stack implementation, analytics audits, embedded experts, and data team development."
+  title="Data Consulting Services"
+  description="Databricks and Snowflake consulting, AI data engineering, cloud data platform architecture, and data team building for companies across North America."
+  schema={schema}
 >
   <!-- Intro -->
   <section class="bg-paper">
     <div class="shell pt-32 pb-12 text-center md:pt-40 md:pb-16">
       <span class="eyebrow">Services</span>
-      <h1 class="mx-auto mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl">
-        Data engineering and analytics, end to end
+      <h1
+        class="mx-auto mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl"
+      >
+        Databricks, Snowflake, and AI data engineering
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-        From building your cloud platform to growing the team that runs it — we
-        partner with you across the full analytics lifecycle.
+        From picking the platform to building it, tuning its cost, and growing the
+        team that runs it — we cover the full analytics lifecycle.
       </p>
-      <a href={`mailto:${site.email}`} class="btn-primary mt-9 text-base">
-        Get a data services quote
-        <Icon name="arrow-right" size={18} />
-      </a>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href={site.calendly} target="_blank" rel="noopener" class="btn-primary text-base">
+          Book a 30-min call
+          <Icon name="arrow-right" size={18} />
+        </a>
+        <a href="/contact/" class="btn-outline text-base">Send an enquiry</a>
+      </div>
     </div>
   </section>
 
@@ -46,7 +69,17 @@ import { site } from "../../data/site";
             <h2 class="mt-5 text-xl font-bold text-navy group-hover:text-periwinkle md:text-2xl">
               {service.title}
             </h2>
-            <p class="mt-2 flex-1 text-ink-soft">{service.tagline}</p>
+            <p class="mt-2 text-ink-soft">{service.tagline}</p>
+            <ul class="mt-4 flex-1 space-y-2">
+              {service.bullets.map((b) => (
+                <li class="flex gap-2.5 text-[0.95rem] leading-relaxed text-ink/75">
+                  <span class="mt-0.5 shrink-0 text-periwinkle">
+                    <Icon name="check" size={17} />
+                  </span>
+                  {b}
+                </li>
+              ))}
+            </ul>
             <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
               Explore service
               <Icon name="arrow-right" size={16} />
@@ -54,6 +87,18 @@ import { site } from "../../data/site";
           </a>
         ))
       }
+    </div>
+  </section>
+
+  <!-- Fixed-scope offers -->
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading
+      eyebrow="Start small"
+      title="Fixed-scope assessments"
+      subtitle="Short engagements with a clear deliverable. Use one to de-risk a bigger decision before you commit budget."
+    />
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {offers.map((offer) => <OfferCard offer={offer} />)}
     </div>
   </section>
 
@@ -66,4 +111,8 @@ import { site } from "../../data/site";
   </section>
 
   <PlatformLogos />
+
+  <section class="shell pt-8 md:pt-12">
+    <CtaBand />
+  </section>
 </MarketingLayout>

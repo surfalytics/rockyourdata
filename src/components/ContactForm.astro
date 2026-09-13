@@ -1,0 +1,151 @@
+---
+import { site } from "../data/site";
+import { services } from "../data/services";
+import Icon from "./Icon.astro";
+
+// The site is static (GitHub Pages), so the form posts to Web3Forms.
+// Without a key there is no endpoint to post to, so fall back to mailto.
+const hasKey = site.web3formsKey.length > 0;
+const inputClass =
+  "w-full rounded-btn border border-line bg-mist px-4 py-3 text-ink placeholder:text-lilac focus:border-periwinkle focus:outline-none focus:ring-2 focus:ring-periwinkle/30";
+---
+
+{
+  hasKey ? (
+    <form id="contact-form" class="text-left" novalidate>
+      <input type="hidden" name="access_key" value={site.web3formsKey} />
+      <input type="hidden" name="subject" value="New enquiry from rockyourdata.cloud" />
+      <input type="hidden" name="from_name" value="Rock Your Data website" />
+      {/* Web3Forms honeypot: bots fill it, humans never see it. */}
+      <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="name" class="mb-1.5 block text-sm font-semibold text-navy">
+            Name
+          </label>
+          <input id="name" name="name" type="text" required autocomplete="name" class={inputClass} placeholder="Jane Smith" />
+        </div>
+        <div>
+          <label for="email" class="mb-1.5 block text-sm font-semibold text-navy">
+            Work email
+          </label>
+          <input id="email" name="email" type="email" required autocomplete="email" class={inputClass} placeholder="jane@company.com" />
+        </div>
+      </div>
+
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="company" class="mb-1.5 block text-sm font-semibold text-navy">
+            Company <span class="font-normal text-lilac">(optional)</span>
+          </label>
+          <input id="company" name="company" type="text" autocomplete="organization" class={inputClass} placeholder="Company Inc." />
+        </div>
+        <div>
+          <label for="topic" class="mb-1.5 block text-sm font-semibold text-navy">
+            What do you need?
+          </label>
+          <select id="topic" name="topic" class={inputClass}>
+            {services.map((s) => (
+              <option value={s.title}>{s.title}</option>
+            ))}
+            <option value="Not sure yet">Not sure yet</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <label for="message" class="mb-1.5 block text-sm font-semibold text-navy">
+          Tell us about the project
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          class={inputClass}
+          placeholder="Your current stack, what is not working, and what a good outcome looks like."
+        />
+      </div>
+
+      <button type="submit" class="btn-primary mt-6 w-full text-base sm:w-auto">
+        <span data-label>Send enquiry</span>
+        <Icon name="arrow-right" size={18} />
+      </button>
+
+      <p
+        id="form-status"
+        class="mt-4 hidden rounded-btn px-4 py-3 text-sm"
+        role="status"
+        aria-live="polite"
+      />
+    </form>
+  ) : (
+    <div class="card p-6 text-left">
+      <p class="font-semibold text-navy">Contact form not configured yet.</p>
+      <p class="mt-2 text-sm leading-relaxed text-ink-soft">
+        Add a free Web3Forms access key to <code class="text-periwinkle">src/data/site.ts</code> to
+        switch this block for a real form. Until then, email works:
+      </p>
+      <a href={`mailto:${site.email}`} class="btn-primary mt-5 text-base">
+        <Icon name="arrow-up-right" size={18} />
+        {site.email}
+      </a>
+    </div>
+  )
+}
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
+
+  if (form && status) {
+    const button = form.querySelector("button[type=submit]") as HTMLButtonElement;
+    const label = button.querySelector("[data-label]") as HTMLElement;
+    const original = label.textContent ?? "Send enquiry";
+
+    const show = (message: string, ok: boolean) => {
+      status.textContent = message;
+      status.classList.remove("hidden");
+      status.classList.toggle("bg-periwinkle/15", ok);
+      status.classList.toggle("text-periwinkle-200", ok);
+      status.classList.toggle("bg-accent/15", !ok);
+      status.classList.toggle("text-accent", !ok);
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) return;
+
+      button.disabled = true;
+      label.textContent = "Sending…";
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form),
+        });
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          form.reset();
+          show("Thanks — your message is in. We reply within one business day.", true);
+          // GA4: lets you measure the conversion, not just the traffic.
+          (window as any).gtag?.("event", "generate_lead", {
+            event_category: "contact",
+            event_label: "contact_form",
+          });
+        } else {
+          show(result.message || "Something went wrong. Please email us instead.", false);
+        }
+      } catch {
+        show("Network error. Please email us at hello@rockyourdata.cloud.", false);
+      } finally {
+        button.disabled = false;
+        label.textContent = original;
+      }
+    });
+  }
+</script>

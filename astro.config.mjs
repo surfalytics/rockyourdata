@@ -27,6 +27,8 @@ export default defineConfig({
     '/services/team-development/': '/services/data-teams/',
     '/services/analytics-audit/': '/services/',
     '/services/certified-experts/': '/services/',
+    // Renamed when the AI offering was split out into its own page.
+    '/services/ai-engineering/': '/services/ai-data-engineering/',
     // Careers pages were blended into the Data Academy page.
     '/data-analyst/': '/data-academy/',
     '/career-track/': '/data-academy/',

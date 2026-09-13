@@ -2,6 +2,7 @@
 import "@fontsource-variable/inter";
 import "../styles/global.css";
 import { site } from "../data/site";
+import { socials } from "../data/socials";
 
 interface Props {
   title?: string;
@@ -10,18 +11,68 @@ interface Props {
   image?: string;
   /** Set true on pages that should not be indexed. */
   noindex?: boolean;
+  /** Extra JSON-LD blocks (Service, FAQPage, BreadcrumbList, ...). */
+  schema?: Record<string, unknown>[];
 }
 
 const {
   title,
   description = site.description,
-  image = "/favicon.png",
+  image = site.ogImage,
   noindex = false,
+  schema = [],
 } = Astro.props;
 
 const pageTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.longTitle}`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(image, site.url).href;
+
+// Site-wide Organization + WebSite markup. Helps Google build a knowledge panel
+// and understand what the company sells.
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${site.url}/#organization`,
+  name: site.name,
+  url: site.url,
+  email: site.email,
+  description: site.description,
+  logo: new URL("/favicon.png", site.url).href,
+  image: ogImage,
+  founder: { "@type": "Person", name: "Dmitry Anoshin" },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: site.location.city,
+    addressRegion: site.location.region,
+    addressCountry: site.location.country,
+  },
+  areaServed: [
+    { "@type": "Country", name: "Canada" },
+    { "@type": "Country", name: "United States" },
+  ],
+  knowsAbout: [
+    "Databricks",
+    "Snowflake",
+    "AI data engineering",
+    "Data engineering",
+    "dbt",
+    "Apache Spark",
+    "Lakehouse architecture",
+    "Cloud data platforms",
+  ],
+  sameAs: socials.map((s) => s.href),
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  publisher: { "@id": `${site.url}/#organization` },
+};
+
+const jsonLd = [organizationSchema, websiteSchema, ...schema];
 ---
 
 <!doctype html>
@@ -52,6 +103,17 @@ const ogImage = new URL(image, site.url).href;
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Structured data -->
+    {
+      jsonLd.map((block) => (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(block)}
+        />
+      ))
+    }
 
     <!-- Google Analytics (GA4) -->
     <script

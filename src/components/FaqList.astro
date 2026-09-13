@@ -1,0 +1,42 @@
+---
+import type { Faq } from "../data/services";
+
+interface Props {
+  faqs: Faq[];
+  title?: string;
+}
+const { faqs, title = "Frequently asked questions" } = Astro.props;
+---
+
+{
+  faqs.length > 0 && (
+    <div>
+      <h2 class="text-2xl font-bold text-navy">{title}</h2>
+      <div class="mt-6 divide-y divide-line border-y border-line">
+        {faqs.map((faq) => (
+          <details class="faq group">
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-left font-semibold text-navy transition-colors hover:text-periwinkle">
+              {faq.q}
+              <span
+                class="mt-1 shrink-0 text-periwinkle transition-transform duration-200 group-open:rotate-45"
+                aria-hidden="true"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </span>
+            </summary>
+            <p class="pb-5 pr-10 leading-relaxed text-ink-soft">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+<style>
+  /* Safari still paints the default disclosure triangle without this. */
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

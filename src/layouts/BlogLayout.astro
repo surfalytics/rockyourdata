@@ -11,15 +11,17 @@ interface Props {
   category?: string;
   prev?: { href: string; title: string } | null;
   next?: { href: string; title: string } | null;
+  schema?: Record<string, unknown>[];
 }
 
-const { title, description, author, date, category, prev, next } = Astro.props;
+const { title, description, author, date, category, prev, next, schema } =
+  Astro.props;
 const dateStr = date
-  ? new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(date)
+  ? new Intl.DateTimeFormat("en-US", { dateStyle: "long", timeZone: "UTC" }).format(date)
   : null;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schema={schema}>
   <Header />
   <main>
     <article class="shell max-w-3xl py-14 md:py-20">

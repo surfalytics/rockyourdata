@@ -4,11 +4,17 @@ import Hero from "../components/Hero.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import InteractionCard from "../components/InteractionCard.astro";
+import OfferCard from "../components/OfferCard.astro";
+import CaseStudyCard from "../components/CaseStudyCard.astro";
 import PlatformLogos from "../components/PlatformLogos.astro";
 import SwagSection from "../components/SwagSection.astro";
-import BlogPreview from "../components/BlogPreview.astro";
+import CtaBand from "../components/CtaBand.astro";
 import Icon from "../components/Icon.astro";
-import { services, interactionModes } from "../data/services";
+import { featuredServices, interactionModes } from "../data/services";
+import { offers } from "../data/offers";
+import { caseStudies, PUBLISH_CASE_STUDIES } from "../data/caseStudies";
+
+const homeStudies = PUBLISH_CASE_STUDIES ? caseStudies.slice(0, 2) : [];
 ---
 
 <MarketingLayout>
@@ -21,21 +27,21 @@ import { services, interactionModes } from "../data/services";
   <section class="shell pt-20 md:pt-28">
     <div class="grid gap-8 border-t border-line pt-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
       <div>
-        <span class="eyebrow">Data engineering · AI · space analytics</span>
+        <span class="eyebrow">Databricks · Snowflake · AI</span>
         <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
           Your data. Our skills.
         </h2>
       </div>
       <div class="text-lg leading-relaxed text-ink-soft">
         <p>
-          Rock Your Data is a consulting and technology firm spanning data
-          engineering, AI, and space analytics — building petabyte-scale data
-          platforms, generative-AI applications, and high-performance data teams.
+          Rock Your Data is a data consulting firm. We design and build cloud
+          data platforms on Databricks and Snowflake, engineer the AI-ready data
+          layer behind generative-AI products, and grow the teams that own them.
         </p>
         <p class="mt-4">
-          We process and analyze data at any scale, from cloud warehouses to
-          space telemetry, IoT, and image recognition — helping organizations
-          make distinctive, lasting improvements in their performance.
+          We are vendor-neutral by design. We work across Databricks, Snowflake,
+          dbt, AWS, Azure, and Google Cloud, so the recommendation you get is the
+          one that fits your workloads — not the one we happen to resell.
         </p>
         <a
           href="/about/"
@@ -52,7 +58,7 @@ import { services, interactionModes } from "../data/services";
   <section id="services" class="shell scroll-mt-24 pt-20 md:pt-28">
     <SectionHeading eyebrow="What we do" title="Our services" />
     <div class="mt-12 grid gap-6 md:grid-cols-2">
-      {services.map((service) => <ServiceCard service={service} />)}
+      {featuredServices.map((service) => <ServiceCard service={service} />)}
     </div>
     <div class="mt-10 text-center">
       <a href="/services/" class="btn-outline text-base">
@@ -62,18 +68,49 @@ import { services, interactionModes } from "../data/services";
     </div>
   </section>
 
-  <!-- How we interact -->
+  <!-- Fixed-scope entry offers -->
   <section class="shell pt-20 md:pt-28">
     <SectionHeading
-      eyebrow="Engagement models"
-      title="How we interact"
+      eyebrow="Start small"
+      title="Fixed-scope assessments"
+      subtitle="Not ready for a full build? Start with a short, fixed-scope engagement. You walk away with a plan you can act on — with us or without us."
     />
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {offers.map((offer) => <OfferCard offer={offer} />)}
+    </div>
+  </section>
+
+  <!-- Proof -->
+  {
+    homeStudies.length > 0 && (
+      <section class="shell pt-20 md:pt-28">
+        <SectionHeading eyebrow="Proof" title="Recent work" />
+        <div class="mt-12 grid gap-6 md:grid-cols-2">
+          {homeStudies.map((study) => (
+            <CaseStudyCard study={study} />
+          ))}
+        </div>
+        <div class="mt-10 text-center">
+          <a href="/case-studies/" class="btn-outline text-base">
+            All case studies
+            <Icon name="arrow-right" size={18} />
+          </a>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- How we interact -->
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading eyebrow="Engagement models" title="How we interact" />
     <div class="mt-12 grid gap-6 md:grid-cols-3">
       {interactionModes.map((m) => <InteractionCard {...m} />)}
     </div>
   </section>
 
-  <BlogPreview />
+  <section class="shell pt-20 md:pt-28">
+    <CtaBand />
+  </section>
 
   <SwagSection />
 </MarketingLayout>

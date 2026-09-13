@@ -2,23 +2,82 @@
 import MarketingLayout from "../../layouts/MarketingLayout.astro";
 import FeatureIcon from "../../components/FeatureIcon.astro";
 import Icon from "../../components/Icon.astro";
+import FaqList from "../../components/FaqList.astro";
+import OfferCard from "../../components/OfferCard.astro";
+import CaseStudyCard from "../../components/CaseStudyCard.astro";
+import CtaBand from "../../components/CtaBand.astro";
 import { services } from "../../data/services";
+import { offersForService } from "../../data/offers";
+import { caseStudiesForService } from "../../data/caseStudies";
 import { site } from "../../data/site";
 
 export function getStaticPaths() {
-  return services.map((service, i) => ({
+  return services.map((service) => ({
     params: { slug: service.slug },
     props: {
       service,
-      others: services.filter((s) => s.slug !== service.slug),
+      others: services.filter((s) => s.slug !== service.slug).slice(0, 3),
     },
   }));
 }
 
 const { service, others } = Astro.props;
+const serviceOffers = offersForService(service.slug);
+const studies = caseStudiesForService(service.slug);
+const pageUrl = new URL(`/services/${service.slug}/`, site.url).href;
+
+// Service + FAQPage + breadcrumbs. FAQPage is what earns the expandable
+// question snippets in Google results.
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${pageUrl}#service`,
+    name: service.seoTitle,
+    description: service.seoDescription,
+    serviceType: service.title,
+    url: pageUrl,
+    provider: { "@id": `${site.url}/#organization` },
+    areaServed: [
+      { "@type": "Country", name: "Canada" },
+      { "@type": "Country", name: "United States" },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${service.title} capabilities`,
+      itemListElement: service.capabilities.map((c) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: c },
+      })),
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    mainEntity: service.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${site.url}/services/` },
+      { "@type": "ListItem", position: 3, name: service.title, item: pageUrl },
+    ],
+  },
+];
 ---
 
-<MarketingLayout title={service.title} description={service.tagline}>
+<MarketingLayout
+  title={service.seoTitle}
+  description={service.seoDescription}
+  schema={schema}
+>
   <!-- Hero -->
   <section class="bg-paper">
     <div class="shell max-w-3xl pt-32 pb-12 md:pt-40 md:pb-16">
@@ -30,19 +89,24 @@ const { service, others } = Astro.props;
           <span class="rotate-180"><Icon name="arrow-right" size={16} /></span>
           All services
         </a>
-        <span
-          class="mt-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-brand text-white"
-        >
-          <FeatureIcon name={service.icon} size={30} />
-        </span>
+        <div class="mt-6">
+          <span
+            class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-brand text-white"
+          >
+            <FeatureIcon name={service.icon} size={30} />
+          </span>
+        </div>
         <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
-          {service.title}
+          {service.seoTitle}
         </h1>
         <p class="mt-5 text-lg leading-relaxed text-ink-soft">{service.tagline}</p>
-        <a href={`mailto:${site.email}`} class="btn-primary mt-8 text-base">
-          Get a quote
-          <Icon name="arrow-right" size={18} />
-        </a>
+        <div class="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <a href={site.calendly} target="_blank" rel="noopener" class="btn-primary text-base">
+            Book a 30-min call
+            <Icon name="arrow-right" size={18} />
+          </a>
+          <a href="/contact/" class="btn-outline text-base">Send an enquiry</a>
+        </div>
       </div>
     </div>
   </section>
@@ -93,24 +157,79 @@ const { service, others } = Astro.props;
     </div>
   </section>
 
+  <!-- How we work -->
+  <section class="shell pt-16 md:pt-20">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-2xl font-bold text-navy">How we work</h2>
+      <ol class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          service.process.map((step, i) => (
+            <li class="card p-6">
+              <span class="text-sm font-extrabold tracking-widest text-accent">
+                0{i + 1}
+              </span>
+              <h3 class="mt-2 text-lg font-bold text-navy">{step.title}</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-soft">
+                {step.description}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Fixed-scope offer -->
+  {
+    serviceOffers.length > 0 && (
+      <section class="shell pt-16 md:pt-20">
+        <div class="mx-auto max-w-5xl">
+          <h2 class="text-2xl font-bold text-navy">A low-risk way to start</h2>
+          <p class="mt-3 max-w-2xl leading-relaxed text-ink-soft">
+            Short, fixed scope, clear deliverable. You get a plan you can act on —
+            with us or without us.
+          </p>
+          <div
+            class:list={[
+              "mt-6 grid gap-6",
+              serviceOffers.length > 1 ? "md:grid-cols-2" : "max-w-xl",
+            ]}
+          >
+            {serviceOffers.map((offer) => (
+              <OfferCard offer={offer} showServiceLink={false} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Proof -->
+  {
+    studies.length > 0 && (
+      <section class="shell pt-16 md:pt-20">
+        <div class="mx-auto max-w-5xl">
+          <h2 class="text-2xl font-bold text-navy">Related work</h2>
+          <div class="mt-6 grid gap-6 md:grid-cols-2">
+            {studies.map((study) => (
+              <CaseStudyCard study={study} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- FAQ -->
+  <section class="shell pt-16 md:pt-20">
+    <div class="mx-auto max-w-3xl">
+      <FaqList faqs={service.faqs} />
+    </div>
+  </section>
+
   <!-- CTA band -->
   <section class="shell pt-16 md:pt-20">
-    <div class="rounded-[1.5rem] bg-brand px-7 py-12 text-center text-white md:px-14 md:py-14">
-      <h2 class="mx-auto max-w-2xl text-2xl font-extrabold leading-snug md:text-3xl">
-        Ready to talk about {service.title.toLowerCase()}?
-      </h2>
-      <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href={`mailto:${site.email}`} class="btn-accent text-base">Get a quote</a>
-        <a
-          href={site.calendly}
-          target="_blank"
-          rel="noopener"
-          class="btn-outline border-white/40 bg-white/10 text-base text-white hover:bg-white hover:text-paper"
-        >
-          Book a discovery call
-        </a>
-      </div>
-    </div>
+    <CtaBand title={`Ready to talk about ${service.title}?`} />
   </section>
 
   <!-- Other services -->
