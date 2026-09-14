@@ -5,16 +5,16 @@ import SectionHeading from "../components/SectionHeading.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import InteractionCard from "../components/InteractionCard.astro";
 import OfferCard from "../components/OfferCard.astro";
-import CaseStudyCard from "../components/CaseStudyCard.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 import PlatformLogos from "../components/PlatformLogos.astro";
 import SwagSection from "../components/SwagSection.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Icon from "../components/Icon.astro";
 import { featuredServices, interactionModes } from "../data/services";
 import { offers } from "../data/offers";
-import { caseStudies, PUBLISH_CASE_STUDIES } from "../data/caseStudies";
+import { projects } from "../data/projects";
 
-const homeStudies = PUBLISH_CASE_STUDIES ? caseStudies.slice(0, 2) : [];
+const homeProjects = projects.slice(0, 3);
 ---
 
 <MarketingLayout>
@@ -81,24 +81,22 @@ const homeStudies = PUBLISH_CASE_STUDIES ? caseStudies.slice(0, 2) : [];
   </section>
 
   <!-- Proof -->
-  {
-    homeStudies.length > 0 && (
-      <section class="shell pt-20 md:pt-28">
-        <SectionHeading eyebrow="Proof" title="Recent work" />
-        <div class="mt-12 grid gap-6 md:grid-cols-2">
-          {homeStudies.map((study) => (
-            <CaseStudyCard study={study} />
-          ))}
-        </div>
-        <div class="mt-10 text-center">
-          <a href="/case-studies/" class="btn-outline text-base">
-            All case studies
-            <Icon name="arrow-right" size={18} />
-          </a>
-        </div>
-      </section>
-    )
-  }
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading
+      eyebrow="Proof"
+      title="Selected projects"
+      subtitle="Platforms we have built at Amazon, Microsoft, and across North American SaaS, telecom and fintech — team setup, architecture and all."
+    />
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {homeProjects.map((project) => <ProjectCard project={project} />)}
+    </div>
+    <div class="mt-10 text-center">
+      <a href="/projects/" class="btn-outline text-base">
+        All projects
+        <Icon name="arrow-right" size={18} />
+      </a>
+    </div>
+  </section>
 
   <!-- How we interact -->
   <section class="shell pt-20 md:pt-28">

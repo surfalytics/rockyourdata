@@ -4,11 +4,11 @@ import FeatureIcon from "../../components/FeatureIcon.astro";
 import Icon from "../../components/Icon.astro";
 import FaqList from "../../components/FaqList.astro";
 import OfferCard from "../../components/OfferCard.astro";
-import CaseStudyCard from "../../components/CaseStudyCard.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import { services } from "../../data/services";
 import { offersForService } from "../../data/offers";
-import { caseStudiesForService } from "../../data/caseStudies";
+import { projectsForService } from "../../data/projects";
 import { site } from "../../data/site";
 
 export function getStaticPaths() {
@@ -23,7 +23,7 @@ export function getStaticPaths() {
 
 const { service, others } = Astro.props;
 const serviceOffers = offersForService(service.slug);
-const studies = caseStudiesForService(service.slug);
+const relatedProjects = projectsForService(service.slug);
 const pageUrl = new URL(`/services/${service.slug}/`, site.url).href;
 
 // Service + FAQPage + breadcrumbs. FAQPage is what earns the expandable
@@ -206,13 +206,17 @@ const schema = [
 
   <!-- Proof -->
   {
-    studies.length > 0 && (
+    relatedProjects.length > 0 && (
       <section class="shell pt-16 md:pt-20">
         <div class="mx-auto max-w-5xl">
           <h2 class="text-2xl font-bold text-navy">Related work</h2>
-          <div class="mt-6 grid gap-6 md:grid-cols-2">
-            {studies.map((study) => (
-              <CaseStudyCard study={study} />
+          <p class="mt-3 max-w-2xl leading-relaxed text-ink-soft">
+            Platforms we have built in this space, with the team setup and the
+            architecture behind each one.
+          </p>
+          <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {relatedProjects.map((p) => (
+              <ProjectCard project={p} />
             ))}
           </div>
         </div>

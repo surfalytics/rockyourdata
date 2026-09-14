@@ -1,0 +1,55 @@
+---
+import MarketingLayout from "../../layouts/MarketingLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import PlatformLogos from "../../components/PlatformLogos.astro";
+import { projects } from "../../data/projects";
+import { site } from "../../data/site";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Selected data engineering projects",
+    itemListElement: projects.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: p.title,
+      url: new URL(`/projects/${p.slug}/`, site.url).href,
+    })),
+  },
+];
+---
+
+<MarketingLayout
+  title="Projects"
+  description="Selected data engineering projects across Amazon, Microsoft, SaaS, telecom and fintech — team setup, architecture, stack and what changed."
+  schema={schema}
+>
+  <section class="shell pt-32 pb-12 text-center md:pt-40">
+    <span class="eyebrow">Experience</span>
+    <h1
+      class="mx-auto mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl"
+    >
+      Selected projects
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+      Real analytics platforms our founder helped build over 15+ years — in-house
+      at Amazon and Microsoft, and as a consultant for SaaS, telecom and fintech
+      companies across North America. For each one: the team, the architecture,
+      the stack, and what actually changed.
+    </p>
+  </section>
+
+  <section class="shell pb-8">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
+  <PlatformLogos />
+
+  <section class="shell pb-24 pt-8 md:pt-12">
+    <CtaBand title="Want this kind of platform at your company?" />
+  </section>
+</MarketingLayout>

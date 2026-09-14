@@ -1,0 +1,45 @@
+---
+import Icon from "./Icon.astro";
+import type { Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const chips = project.stack.slice(0, 4);
+const extra = project.stack.length - chips.length;
+---
+
+<a
+  href={`/projects/${project.slug}/`}
+  class="card group flex flex-col p-7 transition-shadow hover:shadow-lift"
+>
+  <span class="eyebrow">{project.industry}</span>
+  <h3 class="mt-3 text-xl font-bold leading-snug text-navy group-hover:text-periwinkle">
+    {project.title}
+  </h3>
+  <p class="mt-1 text-sm text-lilac">{project.company}</p>
+  <p class="mt-3 flex-1 leading-relaxed text-ink-soft">{project.tagline}</p>
+
+  <div class="mt-5 flex flex-wrap gap-2">
+    {
+      chips.map((s) => (
+        <span class="rounded-pill bg-fog px-2.5 py-1 text-xs font-medium text-periwinkle-200">
+          {s}
+        </span>
+      ))
+    }
+    {
+      extra > 0 && (
+        <span class="rounded-pill px-2.5 py-1 text-xs font-medium text-lilac">
+          +{extra} more
+        </span>
+      )
+    }
+  </div>
+
+  <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
+    Read the project
+    <Icon name="arrow-right" size={16} />
+  </span>
+</a>

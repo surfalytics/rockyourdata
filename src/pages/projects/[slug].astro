@@ -1,0 +1,254 @@
+---
+import { Image } from "astro:assets";
+import MarketingLayout from "../../layouts/MarketingLayout.astro";
+import Icon from "../../components/Icon.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { projects } from "../../data/projects";
+import { getService } from "../../data/services";
+import { site } from "../../data/site";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      others: projects.filter((p) => p.slug !== project.slug).slice(0, 3),
+    },
+  }));
+}
+
+const { project, others } = Astro.props;
+const service = getService(project.service);
+const pageUrl = new URL(`/projects/${project.slug}/`, site.url).href;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${pageUrl}#article`,
+    headline: project.seoTitle,
+    description: project.seoDescription,
+    url: pageUrl,
+    author: { "@type": "Person", name: "Dmitry Anoshin" },
+    publisher: { "@id": `${site.url}/#organization` },
+    about: project.stack,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+      { "@type": "ListItem", position: 2, name: "Projects", item: `${site.url}/projects/` },
+      { "@type": "ListItem", position: 3, name: project.title, item: pageUrl },
+    ],
+  },
+];
+---
+
+<MarketingLayout
+  title={project.seoTitle}
+  description={project.seoDescription}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="bg-paper">
+    <div class="shell max-w-3xl pt-32 pb-10 md:pt-40 md:pb-14">
+      <a
+        href="/projects/"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold text-periwinkle hover:text-navy"
+      >
+        <span class="rotate-180"><Icon name="arrow-right" size={16} /></span>
+        All projects
+      </a>
+      <span class="eyebrow mt-6 block">{project.industry}</span>
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
+        {project.title}
+      </h1>
+      <p class="mt-4 text-lg text-lilac">{project.company}</p>
+      <p class="mt-5 text-lg leading-relaxed text-ink-soft">{project.tagline}</p>
+
+      <div class="mt-7 flex flex-wrap gap-2">
+        {
+          project.stack.map((s) => (
+            <span class="rounded-pill bg-fog px-3 py-1.5 text-sm font-medium text-periwinkle-200">
+              {s}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Team + starting state -->
+  <section class="shell pt-10 md:pt-14">
+    <div class="mx-auto grid max-w-5xl gap-10 border-t border-line pt-12 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-bold text-navy">The team</h2>
+        <ul class="mt-5 space-y-3">
+          {
+            project.team.map((t) => (
+              <li class="flex gap-3 leading-relaxed text-ink/85">
+                <span class="mt-0.5 shrink-0 text-periwinkle">
+                  <Icon name="check" size={20} />
+                </span>
+                {t}
+              </li>
+            ))
+          }
+        </ul>
+        {
+          project.timeline && (
+            <div class="card mt-6 p-5">
+              <h3 class="text-sm font-semibold uppercase tracking-wide text-navy">
+                Timeline
+              </h3>
+              <p class="mt-2 leading-relaxed text-ink-soft">{project.timeline}</p>
+            </div>
+          )
+        }
+      </div>
+
+      <div>
+        {
+          project.startingState.length > 0 && (
+            <>
+              <h2 class="text-2xl font-bold text-navy">Starting state</h2>
+              <ul class="mt-5 space-y-3">
+                {project.startingState.map((s) => (
+                  <li class="card p-4 text-[0.975rem] leading-relaxed text-ink/85">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+        {
+          project.useCases.length > 0 && (
+            <>
+              <h2
+                class:list={[
+                  "text-2xl font-bold text-navy",
+                  project.startingState.length > 0 && "mt-10",
+                ]}
+              >
+                Use cases
+              </h2>
+              <ul class="mt-5 space-y-3">
+                {project.useCases.map((u) => (
+                  <li class="flex gap-3 leading-relaxed text-ink/85">
+                    <span class="mt-0.5 shrink-0 text-accent">
+                      <Icon name="check" size={20} />
+                    </span>
+                    {u}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture diagrams -->
+  {
+    project.diagrams.length > 0 && (
+      <section class="shell pt-16 md:pt-20">
+        <div class="mx-auto max-w-5xl">
+          <h2 class="text-2xl font-bold text-navy">Architecture</h2>
+          <div class="mt-6 space-y-8">
+            {project.diagrams.map((d) => (
+              <figure>
+                {/* Diagrams are dark-on-white, so they sit on their own light panel. */}
+                <div class="overflow-x-auto rounded-card bg-white p-4 md:p-6">
+                  <Image
+                    src={d.image}
+                    alt={d.alt}
+                    widths={[640, 1000, 1400]}
+                    sizes="(min-width: 1024px) 960px, 100vw"
+                    loading="lazy"
+                    class="mx-auto h-auto w-full min-w-[640px] max-w-none"
+                  />
+                </div>
+                <figcaption class="mt-3 text-sm leading-relaxed text-lilac">
+                  {d.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Solution + outcome -->
+  <section class="shell pt-16 md:pt-20">
+    <div class="mx-auto grid max-w-5xl gap-10 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-bold text-navy">What was built</h2>
+        <ul class="mt-5 space-y-3">
+          {
+            project.solution.map((s) => (
+              <li class="flex gap-3 text-[1.02rem] leading-relaxed text-ink/85">
+                <span class="mt-0.5 shrink-0 text-periwinkle">
+                  <Icon name="check" size={20} />
+                </span>
+                {s}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-navy">What changed</h2>
+        <ul class="mt-5 space-y-4">
+          {
+            project.outcome.map((o) => (
+              <li class="card p-5 leading-relaxed text-ink/85">{o}</li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related service -->
+  {
+    service && (
+      <section class="shell pt-16 md:pt-20">
+        <div class="mx-auto max-w-5xl">
+          <a
+            href={`/services/${service.slug}/`}
+            class="card group flex flex-col gap-4 p-7 transition-shadow hover:shadow-lift sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div>
+              <span class="eyebrow">Related service</span>
+              <h2 class="mt-2 text-xl font-bold text-navy group-hover:text-periwinkle">
+                {service.title}
+              </h2>
+              <p class="mt-1 text-ink-soft">{service.tagline}</p>
+            </div>
+            <span class="inline-flex shrink-0 items-center gap-2 font-semibold text-periwinkle">
+              Explore service
+              <Icon name="arrow-right" size={18} />
+            </span>
+          </a>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="shell pt-16 md:pt-20">
+    <CtaBand />
+  </section>
+
+  <!-- Other projects -->
+  <section class="shell pt-16 md:pt-20">
+    <h2 class="text-xl font-bold text-navy">Other projects</h2>
+    <div class="mt-6 grid gap-6 md:grid-cols-3">
+      {others.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </section>
+</MarketingLayout>

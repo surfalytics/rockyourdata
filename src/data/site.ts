@@ -1,5 +1,3 @@
-import { PUBLISH_CASE_STUDIES } from "./caseStudies";
-
 export const site = {
   name: "Rock Your Data",
   longTitle: "Databricks, Snowflake & AI Data Engineering Consulting",
@@ -35,10 +33,9 @@ export interface NavItem {
   href: string;
 }
 
-// "Case studies" only appears once PUBLISH_CASE_STUDIES is flipped on.
 export const nav: NavItem[] = [
   { label: "Services", href: "/services/" },
-  ...(PUBLISH_CASE_STUDIES ? [{ label: "Case Studies", href: "/case-studies/" }] : []),
+  { label: "Projects", href: "/projects/" },
   { label: "Data Academy", href: "/data-academy/" },
   { label: "About", href: "/about/" },
   { label: "Blog", href: "/blog/" },
