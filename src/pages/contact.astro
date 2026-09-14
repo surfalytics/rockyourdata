@@ -24,7 +24,7 @@ const reasons = [
 
 <MarketingLayout
   title="Contact"
-  description="Talk to Rock Your Data about Databricks, Snowflake, AI data engineering, or building a data team. Book a 30-minute call or send an enquiry."
+  description="Talk to Rock Your Data about Databricks, Snowflake, AI data engineering, or building a data team. Send an enquiry and we reply within one business day."
   schema={schema}
 >
   <section class="shell pt-32 pb-12 md:pt-40">
@@ -56,25 +56,15 @@ const reasons = [
       <!-- Side rail -->
       <div class="space-y-8">
         <div class="card p-7">
-          <h2 class="text-xl font-bold text-navy">Prefer to talk?</h2>
+          <h2 class="text-xl font-bold text-navy">Prefer email?</h2>
           <p class="mt-2 leading-relaxed text-ink-soft">
-            Book a 30-minute call. No pitch deck — we ask about your stack and
-            tell you what we would do.
+            Write to us directly. We reply within one business day.
           </p>
           <a
-            href={site.calendly}
-            target="_blank"
-            rel="noopener"
-            class="btn-primary mt-5 w-full text-base"
-          >
-            Book a 30-min call
-            <Icon name="arrow-right" size={18} />
-          </a>
-          <a
             href={`mailto:${site.email}`}
-            class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle hover:text-navy"
+            class="mt-4 inline-flex items-center gap-2 font-semibold text-periwinkle hover:text-navy"
           >
-            <Icon name="arrow-up-right" size={16} />
+            <Icon name="arrow-up-right" size={18} />
             {site.email}
           </a>
         </div>
