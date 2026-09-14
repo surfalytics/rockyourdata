@@ -11,7 +11,6 @@ export const site = {
   substackUrl: "blog.surfalytics.com",
   surfalytics: "https://surfalytics.com/",
   surfalyticsRoadmap: "https://surfalytics.com/roadmap/",
-  calendly: "https://calendly.com/surfalytics/surfalytics-intro-consultation",
   blog: "https://medium.com/rock-your-data",
   /** Default social-share image. Must exist in public/. */
   ogImage: "/og.png",

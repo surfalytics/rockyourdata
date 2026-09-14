@@ -101,11 +101,11 @@ const schema = [
         </h1>
         <p class="mt-5 text-lg leading-relaxed text-ink-soft">{service.tagline}</p>
         <div class="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-          <a href={site.calendly} target="_blank" rel="noopener" class="btn-primary text-base">
-            Book a 30-min call
+          <a href="/contact/" class="btn-primary text-base">
+            Start a conversation
             <Icon name="arrow-right" size={18} />
           </a>
-          <a href="/contact/" class="btn-outline text-base">Send an enquiry</a>
+          <a href={`mailto:${site.email}`} class="btn-outline text-base">Email us</a>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ interface Props {
 }
 const {
   title = "Let's talk about your data platform",
-  body = "A 30-minute call is usually enough to tell you whether we can help, and what it would take.",
+  body = "Tell us what you are working on. We reply within one business day, and we will tell you plainly if we are not the right fit.",
   class: className,
 } = Astro.props;
 ---
@@ -25,15 +25,15 @@ const {
   </h2>
   <p class="mx-auto mt-4 max-w-xl leading-relaxed text-white/75">{body}</p>
   <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-    <a href={site.calendly} target="_blank" rel="noopener" class="btn-accent text-base">
-      Book a 30-min call
+    <a href="/contact/" class="btn-accent text-base">
+      Start a conversation
       <Icon name="arrow-right" size={18} />
     </a>
     <a
-      href="/contact/"
+      href={`mailto:${site.email}`}
       class="btn-outline border-white/40 bg-white/10 text-base text-white hover:bg-white hover:text-paper"
     >
-      Send an enquiry
+      Email us
     </a>
   </div>
 </div>

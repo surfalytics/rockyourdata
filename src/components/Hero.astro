@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import heroImg from "../assets/hero/data-engineering.jpg";
-import { site } from "../data/site";
 import Icon from "./Icon.astro";
 ---
 
@@ -54,8 +53,8 @@ import Icon from "./Icon.astro";
         class="reveal mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
         style="animation-delay: 220ms"
       >
-        <a href={site.calendly} target="_blank" rel="noopener" class="btn-primary text-base">
-          Book a 30-min call
+        <a href="/contact/" class="btn-primary text-base">
+          Start a conversation
           <Icon name="arrow-right" size={18} />
         </a>
         <a href="/services/" class="btn-outline text-base"> Explore our services </a>
