@@ -7,6 +7,9 @@ import FounderCard from "../components/FounderCard.astro";
 import TeamSection from "../components/TeamSection.astro";
 import { values } from "../data/services";
 import { founder } from "../data/founder";
+import { teamCompanies } from "../data/team";
+
+const companies = [...founder.companies, ...teamCompanies];
 ---
 
 <MarketingLayout
@@ -80,11 +83,12 @@ import { founder } from "../data/founder";
   <section class="shell pt-20 md:pt-28">
     <SectionHeading
       eyebrow="Track record"
-      title="Companies Dmitry has worked with"
+      title="Companies our team has worked with"
+      subtitle="Enterprises, public sector, and fast-growing companies across the US and Canada."
     />
     <div class="mx-auto mt-12 grid max-w-5xl grid-cols-3 gap-x-6 gap-y-8 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
       {
-        founder.companies.map((company) => (
+        companies.map((company) => (
           <div class="group flex flex-col items-center gap-2.5 text-center" title={company.name}>
             <span class="flex h-14 w-14 items-center justify-center rounded-xl border border-line bg-surface p-2.5">
               <img

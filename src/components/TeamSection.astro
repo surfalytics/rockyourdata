@@ -1,6 +1,6 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
-import { team, teamYears, teamAiSkills, teamCertifiedOn } from "../data/team";
+import { team, teamYears, teamAvgYears, teamAiSkills, teamCertifiedOn } from "../data/team";
 import { platforms } from "../data/platforms";
 
 interface Props {
@@ -16,7 +16,7 @@ const certLogos = teamCertifiedOn
   <SectionHeading
     eyebrow="Our team"
     title="Senior engineers only"
-    subtitle={`Every engineer has 10+ years in data. ${teamYears}+ years combined. All of us build agentic AI workloads and AI apps for analytics. No juniors, no hand-offs to a delivery pool.`}
+    subtitle={`${teamAvgYears}+ years in data on average. ${teamYears}+ years combined. All of us build agentic AI workloads and AI apps for analytics. No juniors, no hand-offs to a delivery pool.`}
   />
 
   <div class="mt-10">

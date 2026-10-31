@@ -22,7 +22,7 @@ export const founder = {
     { value: "15+", label: "Years building data & AI" },
     { value: "10", label: "Technical books authored" },
     { value: "40k+", label: "Community followers" },
-    { value: "19+", label: "Companies served" },
+    { value: "29+", label: "Companies served" },
   ],
   credentials: [
     "PhD in Mechanical Engineering",
