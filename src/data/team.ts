@@ -21,7 +21,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Kirill",
-    role: "Senior Data Platform Engineer",
+    role: "Senior AI Platform Engineer",
     years: 12,
     skills: ["AWS lakehouse (Iceberg, Athena, Glue)", "5-year TCO models", "Terraform & Kubernetes", "LLM & RAG platforms"],
   },
@@ -33,7 +33,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Nikita V.",
-    role: "Senior Data Engineer",
+    role: "Senior Analytics Engineer",
     years: 10,
     skills: ["Databricks lakehouse & Unity Catalog", "dbt (200+ model projects)", "Terraform & CI/CD", "RAG on Databricks"],
   },
