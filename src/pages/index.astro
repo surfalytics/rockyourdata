@@ -9,6 +9,7 @@ import ProjectCard from "../components/ProjectCard.astro";
 import PlatformLogos from "../components/PlatformLogos.astro";
 import SwagSection from "../components/SwagSection.astro";
 import CtaBand from "../components/CtaBand.astro";
+import TeamSection from "../components/TeamSection.astro";
 import Icon from "../components/Icon.astro";
 import { featuredServices, interactionModes } from "../data/services";
 import { offers } from "../data/offers";
@@ -97,6 +98,8 @@ const homeProjects = projects.slice(0, 3);
       </a>
     </div>
   </section>
+
+  <TeamSection />
 
   <!-- How we interact -->
   <section class="shell pt-20 md:pt-28">

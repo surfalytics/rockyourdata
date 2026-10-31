@@ -1,0 +1,88 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import { team, teamYears, teamAiSkills, teamCertifiedOn } from "../data/team";
+import { platforms } from "../data/platforms";
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const certLogos = teamCertifiedOn
+  .map((name) => platforms.find((p) => p.name === name))
+  .filter((p) => p !== undefined);
+---
+
+<section class:list={["shell pt-20 md:pt-28", className]}>
+  <SectionHeading
+    eyebrow="Our team"
+    title="Senior engineers only"
+    subtitle={`Every engineer has 10+ years in data. ${teamYears}+ years combined. All of us build agentic AI workloads and AI apps for analytics. No juniors, no hand-offs to a delivery pool.`}
+  />
+
+  <div class="mt-10">
+    <p class="text-center text-sm font-semibold uppercase tracking-[0.18em] text-lilac">
+      Team certified on
+    </p>
+    <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-14">
+      {
+        certLogos.map((p) => (
+          <li title={p.name}>
+            <svg
+              viewBox={p.viewBox}
+              role="img"
+              aria-label={p.name}
+              class="cert-mark h-8 w-auto max-w-[8.5rem] md:h-9"
+              set:html={p.body}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      team.map((m) => (
+        <div class="card flex flex-col p-7">
+          <div class="flex items-baseline justify-between gap-4">
+            <h3 class="text-2xl font-bold text-navy">{m.name}</h3>
+            <span class="shrink-0 font-display text-2xl font-extrabold text-periwinkle">
+              {m.years}+ yrs
+            </span>
+          </div>
+          <p class="mt-1 text-sm text-lilac">{m.role}</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            {m.skills.map((s) => (
+              <span class="rounded-pill bg-fog px-2.5 py-1 text-xs font-medium text-periwinkle-200">
+                {s}
+              </span>
+            ))}
+            {teamAiSkills.map((s) => (
+              <span class="rounded-pill border border-periwinkle/40 px-2.5 py-1 text-xs font-medium text-periwinkle">
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  /* Same treatment as PlatformLogos: white silhouettes, brand color on hover. */
+  .cert-mark {
+    filter: grayscale(1) brightness(0) invert(1);
+    opacity: 0.6;
+    transition: filter 0.3s var(--ease-out-soft), opacity 0.3s var(--ease-out-soft);
+  }
+  .cert-mark:hover {
+    filter: none;
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cert-mark {
+      transition: none;
+    }
+  }
+</style>

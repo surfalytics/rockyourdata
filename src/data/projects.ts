@@ -12,8 +12,8 @@ import telecomLake from "../assets/projects/telecom-serverless-data-lake.png";
 
 /**
  * Selected projects our founder worked on across 15+ years, in-house and as a
- * consultant. Source: the "Data Architectures and Teams" talk (Sept 2023),
- * which is where the team sizes, stacks, and architecture diagrams come from.
+ * consultant. Source: the "Data Architectures and Teams" talks (Sept 2023 and
+ * Jan 2025), which is where the team sizes, stacks, and diagrams come from.
  *
  * RULE: everything here is taken from that deck. No invented metrics. If you
  * add a number, it must be one you can actually stand behind.
@@ -484,10 +484,10 @@ export const projects: Project[] = [
     slug: "open-source-analytics-fintech",
     title: "Open Source Analytics for a FinTech",
     tagline:
-      "A small data team running an open-source analytics stack at a trading company.",
-    seoTitle: "Open Source Analytics Stack for a FinTech Trading Company",
+      "Moving a trading company from BigQuery to an Apache Iceberg and Trino lakehouse on Kubernetes.",
+    seoTitle: "BigQuery to Apache Iceberg and Trino — Open Source Lakehouse for a FinTech",
     seoDescription:
-      "How a four-person data team ran an open-source analytics solution at one of the largest North American FinTech trading companies.",
+      "How a four-person data team moved a FinTech brokerage from BigQuery to an Iceberg and Trino lakehouse with Airbyte, Redpanda, Airflow, dbt and Metabase on GKE.",
     company: "One of the largest North American FinTech trading companies",
     industry: "Financial technology · trading",
     service: "data-platforms",
@@ -496,15 +496,155 @@ export const projects: Project[] = [
       "1 Analytics Engineer",
       "1 Data Director",
     ],
-    startingState: [],
-    useCases: [],
-    solution: [
-      "An open-source analytics stack owned end to end by a four-person data team",
+    startingState: ["Google BigQuery as the warehouse"],
+    useCases: [
+      "BigQuery to Trino migration",
+      "Financial reporting",
+      "Product analytics from product logs and Amplitude",
+      "Reverse ETL to business tools",
     ],
-    stack: ["dbt", "Open source data stack"],
+    solution: [
+      "Apache Iceberg tables with Trino as the query engine",
+      "Airbyte for ingestion from PostgreSQL, market-maker quotes and product logs",
+      "Redpanda (Kafka-compatible) for streaming",
+      "dbt core for business logic",
+      "Airflow for orchestration, deployed with Helm charts on GKE",
+      "One Docker container per reverse ETL integration",
+      "Metabase for BI",
+    ],
+    stack: [
+      "Apache Iceberg",
+      "Trino",
+      "dbt",
+      "Airbyte",
+      "Redpanda",
+      "Apache Airflow",
+      "Metabase",
+      "Kubernetes (GKE)",
+    ],
     outcome: [
       "A reminder that team size, not tooling, sets the ceiling: four people owning an open-source stack spend a meaningful share of their time on the stack itself.",
       "Open source for data solutions tends to slow delivery and raise technical debt — it often means reading, modifying and fixing source code, which is not fast time to market.",
+    ],
+    diagrams: [],
+  },
+  {
+    slug: "geo-data-delivery-observability",
+    title: "Geo-Data Delivery with SLA Observability",
+    tagline:
+      "Delivering location data to an external buyer every 30 minutes, where a missed SLA costs money.",
+    seoTitle: "Reverse ETL and Data Observability on AWS Athena and Glue",
+    seoDescription:
+      "An AWS pipeline that delivers geo-data to a third party every 30 minutes with Athena, Glue, Lambda, CloudWatch and PagerDuty — and why 90% of the work was observability.",
+    company: "A large North American location-data company",
+    industry: "Consumer technology · location data",
+    service: "data-platforms",
+    team: [
+      "1 Director of Data Engineering",
+      "1 Engineering Manager",
+      "4 Data Engineers",
+    ],
+    startingState: [],
+    useCases: [
+      "Metrics calculation",
+      "Reverse ETL: data delivery to an external client",
+      "Data quality metrics",
+      "Data observability with SLA enforcement and on-call",
+    ],
+    solution: [
+      "Athena SQL run from a Glue Python Shell job every 30 minutes",
+      "Results written as Parquet partitions into the client's landing zone",
+      "Lambda compliance checks before data leaves the account",
+      "CloudWatch metrics and alerts on every step",
+      "PagerDuty on-call rotation for the data team",
+    ],
+    stack: [
+      "AWS Athena",
+      "AWS Glue",
+      "AWS Lambda",
+      "Amazon S3",
+      "Amazon CloudWatch",
+      "PagerDuty",
+    ],
+    outcome: [
+      "About 90% of the engineering effort went into observability, not transformation — because an SLA breach meant a financial penalty.",
+      "Compliance checks ran inside the pipeline, so non-compliant data never reached the buyer.",
+      "A hard lesson: part of the SLA depended on upstream systems the data team did not own. Contracts and alerts must cover that.",
+    ],
+    diagrams: [],
+  },
+  {
+    slug: "iot-startup-snowflake-warehouse",
+    title: "Greenfield Data Warehouse for an IoT Startup",
+    tagline:
+      "A low-code Snowflake stack for a smart GPS dog collar company — built by one data engineer.",
+    seoTitle: "Greenfield Snowflake Data Warehouse for an IoT Startup",
+    seoDescription:
+      "Fivetran, Azure Data Factory, Snowflake medallion layers, Sigma and Deepnote: how a three-person data team built analytics for a consumer IoT product.",
+    company: "A US consumer IoT startup (smart GPS dog collar)",
+    industry: "Consumer IoT · e-commerce",
+    service: "snowflake",
+    team: ["1 Product Manager", "1 Analyst", "1 Data Engineer"],
+    startingState: ["No data warehouse — a greenfield build"],
+    useCases: [
+      "Data warehouse modelling from scratch",
+      "API, telemetry and SaaS source integration",
+      "Reporting for e-commerce, marketing and product",
+      "Reverse ETL for marketing automation",
+      "AI agent integration",
+      "Product improvement analytics",
+    ],
+    solution: [
+      "Fivetran for SaaS sources: ads platforms, NetSuite, Stripe, Amazon Selling Partner API, Amplitude, reviews, exchange rates",
+      "Azure Data Factory for custom sources: App Insights events and an Azure SQL replica",
+      "Device telemetry from Azure Cosmos DB",
+      "Snowflake with raw, silver and gold layers",
+      "Sigma Computing for BI",
+      "Deepnote for data science",
+    ],
+    stack: [
+      "Snowflake",
+      "Fivetran",
+      "Azure Data Factory",
+      "Azure Cosmos DB",
+      "Sigma",
+      "Deepnote",
+    ],
+    outcome: [
+      "One data engineer could run the whole platform, because ingestion was bought, not built.",
+      "Product, finance and marketing data landed in one warehouse with the same layered model.",
+      "The same gold layer feeds BI, reverse ETL for marketing, and AI agent use cases.",
+    ],
+    diagrams: [],
+  },
+  {
+    slug: "public-health-tableau-dashboard",
+    title: "Public COVID-19 Vaccination Dashboard",
+    tagline:
+      "A highly available Tableau Server on AWS behind a national, public-facing government dashboard.",
+    seoTitle: "Tableau Server High Availability on AWS for a Government Dashboard",
+    seoDescription:
+      "Tableau Prep, Desktop and a high-availability Tableau Server on AWS with infrastructure as code, serving the Government of Canada COVID-19 vaccination dashboard.",
+    company: "Public health agency, Government of Canada (with Deloitte)",
+    industry: "Government · public health",
+    service: "data-platforms",
+    team: ["Tableau administrator embedded in a Deloitte delivery team"],
+    startingState: [],
+    useCases: [
+      "COVID-19 vaccination tracking: doses distributed, doses given, coverage",
+      "A public dashboard on canada.ca",
+      "High availability for national traffic",
+    ],
+    solution: [
+      "Tableau Prep for data preparation",
+      "Tableau Desktop for dashboard development",
+      "Tableau Server in a high-availability setup on AWS",
+      "Infrastructure as code for the AWS environment",
+    ],
+    stack: ["Tableau Server", "Tableau Prep", "Tableau Desktop", "AWS", "Infrastructure as code"],
+    outcome: [
+      "The dashboard was published to canada.ca for the public, so the server setup was built for high availability.",
+      "The server environment was code, so it could be rebuilt and scaled in a repeatable way.",
     ],
     diagrams: [],
   },
