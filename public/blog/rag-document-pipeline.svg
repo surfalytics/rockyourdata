@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Inter, system-ui, -apple-system, sans-serif" role="img" aria-label="RAG document pipeline: sources, ingest, parse and chunk, embed, index, retrieve, answer, with monitoring">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#7488f6"/>
+    </marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#ff7a4d"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" rx="18" fill="#11152b" stroke="#283057"/>
+
+  <!-- Row labels -->
+  <text x="40" y="44" fill="#8d94b8" font-size="12" font-weight="700" letter-spacing="1.5">INGESTION (RUNS ON A SCHEDULE)</text>
+  <text x="40" y="310" fill="#8d94b8" font-size="12" font-weight="700" letter-spacing="1.5">SERVING (RUNS PER QUESTION)</text>
+
+  <!-- Row 1 -->
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="40" y="64" width="180" height="96" rx="12"/>
+    <rect x="260" y="64" width="180" height="96" rx="12"/>
+    <rect x="480" y="64" width="180" height="96" rx="12"/>
+    <rect x="700" y="64" width="220" height="96" rx="12"/>
+  </g>
+  <g fill="#eef1fb" font-size="15" font-weight="700">
+    <text x="130" y="90" text-anchor="middle">Sources</text>
+    <text x="350" y="90" text-anchor="middle">Ingest</text>
+    <text x="570" y="90" text-anchor="middle">Parse + chunk</text>
+    <text x="810" y="90" text-anchor="middle">Embed + enrich</text>
+  </g>
+  <g fill="#abb2d0" font-size="12">
+    <text x="130" y="112" text-anchor="middle">Wiki, PDFs, tickets,</text>
+    <text x="130" y="128" text-anchor="middle">call transcripts</text>
+    <text x="350" y="112" text-anchor="middle">Incremental sync</text>
+    <text x="350" y="128" text-anchor="middle">Track versions + deletes</text>
+    <text x="570" y="112" text-anchor="middle">Split on headings</text>
+    <text x="570" y="128" text-anchor="middle">Keep tables whole</text>
+    <text x="810" y="112" text-anchor="middle">Vectors + metadata:</text>
+    <text x="810" y="128" text-anchor="middle">source, version, access level</text>
+  </g>
+  <g stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M220 112H258"/>
+    <path d="M440 112H478"/>
+    <path d="M660 112H698"/>
+    <path d="M810 160V190H350V218"/>
+  </g>
+
+  <!-- Index -->
+  <rect x="260" y="220" width="180" height="60" rx="12" fill="#2a3470" stroke="#7488f6"/>
+  <text x="350" y="245" text-anchor="middle" fill="#eef1fb" font-size="15" font-weight="700">Search index</text>
+  <text x="350" y="265" text-anchor="middle" fill="#b9c0ee" font-size="12">Vector + keyword (hybrid)</text>
+
+  <!-- Row 3 -->
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="40" y="330" width="180" height="96" rx="12"/>
+    <rect x="260" y="330" width="180" height="96" rx="12"/>
+    <rect x="480" y="330" width="180" height="96" rx="12"/>
+    <rect x="700" y="330" width="220" height="96" rx="12"/>
+  </g>
+  <g fill="#eef1fb" font-size="15" font-weight="700">
+    <text x="130" y="356" text-anchor="middle">User question</text>
+    <text x="350" y="356" text-anchor="middle">Retrieve + rerank</text>
+    <text x="570" y="356" text-anchor="middle">LLM</text>
+    <text x="810" y="356" text-anchor="middle">Answer</text>
+  </g>
+  <g fill="#abb2d0" font-size="12">
+    <text x="130" y="378" text-anchor="middle">Filtered by the</text>
+    <text x="130" y="394" text-anchor="middle">user's permissions</text>
+    <text x="350" y="378" text-anchor="middle">Top 50 candidates,</text>
+    <text x="350" y="394" text-anchor="middle">rerank to top 5</text>
+    <text x="570" y="378" text-anchor="middle">Grounded in chunks,</text>
+    <text x="570" y="394" text-anchor="middle">cites every source</text>
+    <text x="810" y="378" text-anchor="middle">With citations, or a refusal</text>
+    <text x="810" y="394" text-anchor="middle">when retrieval is weak</text>
+  </g>
+  <g stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M220 378H258"/>
+    <path d="M440 378H478"/>
+    <path d="M660 378H698"/>
+    <path d="M350 280V328"/>
+  </g>
+
+  <!-- Monitoring bar -->
+  <rect x="40" y="456" width="880" height="56" rx="12" fill="#0e1326" stroke="#ff7a4d" stroke-dasharray="6 4"/>
+  <text x="60" y="480" fill="#ff7a4d" font-size="12" font-weight="700" letter-spacing="1.5">MONITORING</text>
+  <text x="60" y="500" fill="#abb2d0" font-size="12">Document count per source · embedding failures · freshness lag · deletes applied · retrieval hit rate on the eval set · cost per answer</text>
+</svg>

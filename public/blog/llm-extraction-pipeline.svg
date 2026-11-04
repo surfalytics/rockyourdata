@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" width="960" height="460" font-family="Inter, system-ui, -apple-system, sans-serif" role="img" aria-label="LLM extraction inside a batch pipeline: raw documents, batch LLM extraction, validation, silver table, gold and BI, with a human review queue feeding examples back">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#7488f6"/>
+    </marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#ff7a4d"/>
+    </marker>
+  </defs>
+  <rect width="960" height="460" rx="18" fill="#11152b" stroke="#283057"/>
+
+  <!-- Row 1 -->
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="40" y="60" width="150" height="110" rx="12"/>
+    <rect x="225" y="60" width="150" height="110" rx="12"/>
+    <rect x="410" y="60" width="150" height="110" rx="12"/>
+    <rect x="595" y="60" width="150" height="110" rx="12"/>
+    <rect x="780" y="60" width="150" height="110" rx="12"/>
+  </g>
+  <rect x="225" y="60" width="150" height="110" rx="12" fill="#2a3470" stroke="#7488f6"/>
+  <g fill="#eef1fb" font-size="15" font-weight="700">
+    <text x="115" y="86" text-anchor="middle">Bronze</text>
+    <text x="300" y="86" text-anchor="middle">LLM extraction</text>
+    <text x="485" y="86" text-anchor="middle">Validate</text>
+    <text x="670" y="86" text-anchor="middle">Silver</text>
+    <text x="855" y="86" text-anchor="middle">Gold / BI / ML</text>
+  </g>
+  <g fill="#abb2d0" font-size="12">
+    <text x="115" y="108" text-anchor="middle">Raw tickets, contracts,</text>
+    <text x="115" y="124" text-anchor="middle">call notes, invoices</text>
+    <text x="115" y="140" text-anchor="middle">+ document version</text>
+    <text x="300" y="108" text-anchor="middle" fill="#b9c0ee">Batch SQL function</text>
+    <text x="300" y="124" text-anchor="middle" fill="#b9c0ee">Fixed JSON schema</text>
+    <text x="300" y="140" text-anchor="middle" fill="#b9c0ee">Prompt version stored</text>
+    <text x="485" y="108" text-anchor="middle">Schema + enum checks</text>
+    <text x="485" y="124" text-anchor="middle">Required fields present</text>
+    <text x="485" y="140" text-anchor="middle">Confidence threshold</text>
+    <text x="670" y="108" text-anchor="middle">One row per document,</text>
+    <text x="670" y="124" text-anchor="middle">typed columns, tested</text>
+    <text x="670" y="140" text-anchor="middle">like any other model</text>
+    <text x="855" y="108" text-anchor="middle">Joins to customers,</text>
+    <text x="855" y="124" text-anchor="middle">orders, products.</text>
+    <text x="855" y="140" text-anchor="middle">Dashboards, features</text>
+  </g>
+  <g stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M190 115H223"/>
+    <path d="M375 115H408"/>
+    <path d="M560 115H593"/>
+    <path d="M745 115H778"/>
+  </g>
+
+  <!-- Review queue -->
+  <rect x="410" y="240" width="150" height="90" rx="12" fill="#1a2039" stroke="#ff7a4d"/>
+  <text x="485" y="266" text-anchor="middle" fill="#eef1fb" font-size="15" font-weight="700">Review queue</text>
+  <text x="485" y="288" text-anchor="middle" fill="#abb2d0" font-size="12">A person fixes the</text>
+  <text x="485" y="304" text-anchor="middle" fill="#abb2d0" font-size="12">failed rows</text>
+  <path d="M485 170V238" stroke="#ff7a4d" stroke-width="2" fill="none" marker-end="url(#ao)"/>
+  <text x="495" y="210" fill="#ff7a4d" font-size="11">failed</text>
+  <path d="M410 285H300V172" stroke="#ff7a4d" stroke-width="2" fill="none" stroke-dasharray="4 4" marker-end="url(#ao)"/>
+  <text x="290" y="235" fill="#ff7a4d" font-size="11" text-anchor="end">corrections become</text>
+  <text x="290" y="250" fill="#ff7a4d" font-size="11" text-anchor="end">few-shot examples</text>
+  <path d="M560 285H670V172" stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text x="680" y="240" fill="#abb2d0" font-size="11">fixed rows</text>
+
+  <!-- Rules bar -->
+  <rect x="40" y="360" width="890" height="76" rx="12" fill="#0e1326" stroke="#283057"/>
+  <text x="60" y="384" fill="#8d94b8" font-size="12" font-weight="700" letter-spacing="1.5">PIPELINE RULES</text>
+  <text x="60" y="404" fill="#abb2d0" font-size="12">Run once per document version (idempotent) · cache results · small model first, big model only for rows that fail</text>
+  <text x="60" y="422" fill="#abb2d0" font-size="12">Hard cost ceiling per run · backfill in slices · the prompt is code: versioned, reviewed, tested</text>
+</svg>

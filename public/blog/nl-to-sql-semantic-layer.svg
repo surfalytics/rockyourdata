@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="960" height="500" font-family="Inter, system-ui, -apple-system, sans-serif" role="img" aria-label="NL-to-SQL architecture: question, LLM agent, generated SQL, gold tables, answer, backed by a semantic layer and an evaluation loop">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#7488f6"/>
+    </marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#ff7a4d"/>
+    </marker>
+  </defs>
+  <rect width="960" height="500" rx="18" fill="#11152b" stroke="#283057"/>
+
+  <!-- Row 1: request path -->
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="40" y="50" width="180" height="90" rx="12"/>
+    <rect x="260" y="50" width="180" height="90" rx="12"/>
+    <rect x="480" y="50" width="180" height="90" rx="12"/>
+    <rect x="700" y="50" width="220" height="90" rx="12"/>
+  </g>
+  <g fill="#eef1fb" font-size="15" font-weight="700">
+    <text x="130" y="76" text-anchor="middle">Business question</text>
+    <text x="350" y="76" text-anchor="middle">LLM agent</text>
+    <text x="570" y="76" text-anchor="middle">Generated SQL</text>
+    <text x="810" y="76" text-anchor="middle">Warehouse</text>
+  </g>
+  <g fill="#abb2d0" font-size="12">
+    <text x="130" y="98" text-anchor="middle">"What was net revenue</text>
+    <text x="130" y="114" text-anchor="middle">in EMEA last quarter?"</text>
+    <text x="350" y="98" text-anchor="middle">Reads the semantic layer</text>
+    <text x="350" y="114" text-anchor="middle">before it writes SQL</text>
+    <text x="570" y="98" text-anchor="middle">Checked: allowed tables,</text>
+    <text x="570" y="114" text-anchor="middle">row limit, read-only</text>
+    <text x="810" y="98" text-anchor="middle">Gold tables and metric views only.</text>
+    <text x="810" y="114" text-anchor="middle">Never the raw schema.</text>
+  </g>
+  <g stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M220 95H258"/>
+    <path d="M440 95H478"/>
+    <path d="M660 95H698"/>
+  </g>
+
+  <!-- Answer box -->
+  <rect x="700" y="180" width="220" height="70" rx="12" fill="#1a2039" stroke="#283057"/>
+  <text x="810" y="206" text-anchor="middle" fill="#eef1fb" font-size="15" font-weight="700">Answer</text>
+  <text x="810" y="226" text-anchor="middle" fill="#abb2d0" font-size="12">Number + the SQL that produced it</text>
+  <path d="M810 140V178" stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <!-- Semantic layer -->
+  <rect x="40" y="180" width="620" height="150" rx="14" fill="#2a3470" stroke="#7488f6"/>
+  <text x="60" y="206" fill="#b9c0ee" font-size="12" font-weight="700" letter-spacing="1.5">SEMANTIC LAYER (VERSIONED IN GIT)</text>
+  <g stroke="#7488f6" fill="#222a5c">
+    <rect x="60" y="222" width="180" height="88" rx="10"/>
+    <rect x="260" y="222" width="180" height="88" rx="10"/>
+    <rect x="460" y="222" width="180" height="88" rx="10"/>
+  </g>
+  <g fill="#eef1fb" font-size="14" font-weight="700">
+    <text x="150" y="247" text-anchor="middle">Metric definitions</text>
+    <text x="350" y="247" text-anchor="middle">Table + column docs</text>
+    <text x="550" y="247" text-anchor="middle">Verified queries</text>
+  </g>
+  <g fill="#b9c0ee" font-size="12">
+    <text x="150" y="268" text-anchor="middle">One "revenue", one "churn".</text>
+    <text x="150" y="284" text-anchor="middle">dbt metrics or metric views</text>
+    <text x="350" y="268" text-anchor="middle">Business meaning,</text>
+    <text x="350" y="284" text-anchor="middle">not just data types</text>
+    <text x="550" y="268" text-anchor="middle">Known-good question → SQL</text>
+    <text x="550" y="284" text-anchor="middle">pairs, used as examples</text>
+  </g>
+  <path d="M350 180V142" stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <!-- Eval loop -->
+  <rect x="40" y="380" width="620" height="80" rx="12" fill="#0e1326" stroke="#ff7a4d" stroke-dasharray="6 4"/>
+  <text x="60" y="406" fill="#ff7a4d" font-size="12" font-weight="700" letter-spacing="1.5">EVALUATION LOOP (RUNS IN CI)</text>
+  <text x="60" y="428" fill="#abb2d0" font-size="12">50–100 real questions with expected numbers. Score every change to prompts, docs, or metrics.</text>
+  <text x="60" y="446" fill="#abb2d0" font-size="12">A wrong answer is fixed in the semantic layer first. The model is the last thing you change.</text>
+  <path d="M350 380V332" stroke="#ff7a4d" stroke-width="2" fill="none" marker-end="url(#ao)"/>
+  <text x="362" y="362" fill="#ff7a4d" font-size="11">fixes go here</text>
+  <path d="M700 215H680V420H662" stroke="#ff7a4d" stroke-width="2" fill="none" stroke-dasharray="4 4" marker-end="url(#ao)"/>
+  <text x="712" y="330" fill="#ff7a4d" font-size="11" transform="rotate(90 712 330)" text-anchor="middle">wrong answers become test cases</text>
+</svg>
