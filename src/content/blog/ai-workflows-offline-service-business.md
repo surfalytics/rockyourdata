@@ -56,7 +56,7 @@ We describe the extraction version of this loop in [LLMs inside the pipeline](/b
 
 ## Measure hours, not accuracy
 
-Accuracy on a test set is necessary. It is not the result. The result is time.
+Accuracy on a test set is necessary. It is not the result. The result is time. The full method is in [how to prove AI raised the margin](/blog/measuring-ai-margin-gains-roll-up/).
 
 | Metric | How to measure it |
 |---|---|

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Inter, system-ui, -apple-system, sans-serif" role="img" aria-label="Identity resolution flow: standardize, block, match in three tiers, review the uncertain pairs, and store every decision as a link.">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#7488f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" rx="18" fill="#11152b" stroke="#283057"/>
+
+  <!-- Row labels -->
+  <g fill="#8d94b8" font-size="12" font-weight="700" letter-spacing="1.5">
+    <text x="40" y="44">PREPARE</text>
+    <text x="40" y="202">MATCH IN TIERS</text>
+    <text x="40" y="352">STORE THE DECISION</text>
+  </g>
+
+  <!-- Row 1 -->
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="40" y="60" width="200" height="96" rx="12"/>
+    <rect x="270" y="60" width="200" height="96" rx="12"/>
+    <rect x="500" y="60" width="200" height="96" rx="12"/>
+    <rect x="730" y="60" width="190" height="96" rx="12"/>
+  </g>
+  <g fill="#eef1fb" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="140" y="88">Source records</text>
+    <text x="370" y="88">Standardize</text>
+    <text x="600" y="88">Block</text>
+    <text x="825" y="88">Compare</text>
+  </g>
+  <g fill="#abb2d0" font-size="12" text-anchor="middle">
+    <text x="140" y="110">Per company and system,</text>
+    <text x="140" y="126">original keys kept</text>
+    <text x="370" y="110">Names, phones, emails,</text>
+    <text x="370" y="126">postal addresses</text>
+    <text x="600" y="110">Same postal code, phone,</text>
+    <text x="600" y="126">email, or surname start</text>
+    <text x="825" y="110">Only inside a block,</text>
+    <text x="825" y="126">never all against all</text>
+  </g>
+  <g stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M240 108H268"/>
+    <path d="M470 108H498"/>
+    <path d="M700 108H728"/>
+    <path d="M825 156V178H180V214"/>
+    <path d="M480 178V214"/>
+    <path d="M780 178V214"/>
+  </g>
+
+  <!-- Row 2: tiers -->
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="40" y="216" width="280" height="96" rx="12"/>
+    <rect x="340" y="216" width="280" height="96" rx="12"/>
+  </g>
+  <rect x="640" y="216" width="280" height="96" rx="12" fill="#1a2039" stroke="#ff7a4d" stroke-dasharray="6 4"/>
+  <g fill="#eef1fb" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="180" y="244">Tier 1 · Strong keys</text>
+    <text x="480" y="244">Tier 2 · Name and address</text>
+    <text x="780" y="244">Tier 3 · Probability score</text>
+  </g>
+  <g fill="#abb2d0" font-size="12" text-anchor="middle">
+    <text x="180" y="266">Tax ID, or email and surname</text>
+    <text x="180" y="284">Merge automatically</text>
+    <text x="480" y="266">Or phone and name</text>
+    <text x="480" y="284">Merge, then sample and check</text>
+    <text x="780" y="266">Several weak signals agree</text>
+    <text x="780" y="284">A person decides in a review queue</text>
+  </g>
+  <g stroke="#7488f6" stroke-width="2" fill="none">
+    <path d="M180 312V332H780V312"/>
+    <path d="M480 312V332"/>
+  </g>
+  <path d="M255 332V364" stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <!-- Row 3 -->
+  <rect x="40" y="366" width="430" height="84" rx="12" fill="#2a3470" stroke="#7488f6"/>
+  <rect x="490" y="366" width="430" height="84" rx="12" fill="#1a2039" stroke="#283057"/>
+  <g fill="#eef1fb" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="255" y="396">Cross-reference</text>
+    <text x="705" y="396">Golden record</text>
+  </g>
+  <text x="255" y="418" fill="#b9c0ee" font-size="12" text-anchor="middle">One link per source record: rule, confidence,</text>
+  <text x="255" y="434" fill="#b9c0ee" font-size="12" text-anchor="middle">who decided, valid from and to</text>
+  <text x="705" y="418" fill="#abb2d0" font-size="12" text-anchor="middle">Built from the linked rows by survivorship</text>
+  <text x="705" y="434" fill="#abb2d0" font-size="12" text-anchor="middle">rules that the business agreed</text>
+  <path d="M470 408H488" stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <!-- Rule -->
+  <rect x="40" y="470" width="880" height="44" rx="12" fill="#0e1326" stroke="#ff7a4d" stroke-dasharray="6 4"/>
+  <text x="60" y="497" fill="#abb2d0" font-size="12"><tspan fill="#ff7a4d" font-weight="700" letter-spacing="1.5">RULE</tspan>  Source rows are never overwritten. Every merge has a rule, a date, and an owner, so it can be undone.</text>
+</svg>

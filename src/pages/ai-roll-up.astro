@@ -339,6 +339,15 @@ const schema = [
         ))
       }
     </ol>
+    <p class="mt-8 text-center">
+      <a
+        href="/blog/roll-up-first-100-days/"
+        class="inline-flex items-center gap-2 py-2 font-semibold text-periwinkle hover:text-navy"
+      >
+        Read the 100-day plan in detail
+        <Icon name="arrow-right" size={18} />
+      </a>
+    </p>
   </section>
 
   <!-- Workflows -->
@@ -398,6 +407,13 @@ const schema = [
             ))
           }
         </ul>
+        <a
+          href="/blog/measuring-ai-margin-gains-roll-up/"
+          class="mt-6 inline-flex items-center gap-2 py-2 font-semibold text-periwinkle hover:text-navy"
+        >
+          How to prove the gain
+          <Icon name="arrow-right" size={18} />
+        </a>
       </div>
 
       <div class="card p-7 md:p-10">
@@ -420,6 +436,13 @@ const schema = [
           carries over. The domain knowledge comes from your operators, so we
           design every workflow with them in the loop.
         </p>
+        <a
+          href="/blog/ai-roll-up-accounting-firms/"
+          class="mt-6 inline-flex items-center gap-2 py-2 font-semibold text-periwinkle hover:text-navy"
+        >
+          Example: inside an accounting firm
+          <Icon name="arrow-right" size={18} />
+        </a>
       </div>
     </div>
   </section>
@@ -504,32 +527,30 @@ const schema = [
       <section class="shell pt-20 md:pt-28">
         <SectionHeading
           eyebrow="Go deeper"
-          title="The playbook, one phase at a time"
+          title="The playbook, one post at a time"
+          subtitle="Start at the top. Each post covers one part of the work."
         />
-        <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {/* A plain numbered list, not cards: ten cards would add two screens
+            on a phone. Descriptions show from `sm` up. */}
+        <ol class="mx-auto mt-12 grid max-w-5xl gap-x-12 border-b border-line sm:grid-cols-2">
           {reading.map((post, i) => (
-            <a
-              href={`/blog/${post.id}/`}
-              class="card card-link group flex gap-5 p-6 md:p-7"
-            >
-              <span class="font-display text-sm font-extrabold tracking-widest text-accent">
-                0{i + 1}
-              </span>
-              <span class="flex flex-col">
-                <span class="text-lg font-bold leading-snug text-navy group-hover:text-periwinkle">
-                  {post.data.title}
+            <li class="border-t border-line">
+              <a href={`/blog/${post.id}/`} class="group flex gap-4 py-5">
+                <span class="w-7 shrink-0 pt-0.5 font-display text-sm font-extrabold tracking-widest text-accent">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <span class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
-                  {post.data.description}
+                <span>
+                  <span class="block font-semibold leading-snug text-navy transition-colors group-hover:text-periwinkle">
+                    {post.data.title}
+                  </span>
+                  <span class="mt-1.5 hidden text-sm leading-relaxed text-ink-soft sm:block">
+                    {post.data.description}
+                  </span>
                 </span>
-                <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
-                  Read article
-                  <Icon name="arrow-right" size={16} />
-                </span>
-              </span>
-            </a>
+              </a>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
     )
   }

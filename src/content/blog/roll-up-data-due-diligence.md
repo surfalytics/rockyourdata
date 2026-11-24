@@ -108,7 +108,7 @@ Sometimes it changes the price. More often it changes the plan: which company to
 
 That last number is worth knowing. One roll-up co-founder [traces every failure seen in this market](https://www.newsletter.lukesophinos.com/p/linear-186-ai-roll-ups-two-years) to acquisition pace outrunning integration capacity. Diligence is where you learn your real pace.
 
-After close, the scorecard becomes the build plan for [the shared data layer](/blog/roll-up-data-layer/).
+After close, the scorecard becomes the input to [the first 100 days](/blog/roll-up-first-100-days/) and the build plan for [the shared data layer](/blog/roll-up-data-layer/).
 
 ---
 

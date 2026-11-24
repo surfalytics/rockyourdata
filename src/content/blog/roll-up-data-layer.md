@@ -56,7 +56,7 @@ The same customer exists in three companies under three spellings. The same empl
 - Agree the survivorship rules with the business. Which source wins for each field is not an engineering decision.
 - Never destroy the originals. A golden record is a link between source records, so a wrong merge can be undone.
 
-Reporting should not wait for this. Consolidated reports can go live on the conformed model while identity work is still in progress.
+Reporting should not wait for this. Consolidated reports can go live on the conformed model while identity work is still in progress. The full method is in [identity resolution for a roll-up](/blog/roll-up-identity-resolution/).
 
 ## 4. Define each KPI once
 
@@ -73,7 +73,7 @@ Companies in a roll-up are still separate legal entities, with their own clients
 - Roles per company. A manager at company A does not see company B.
 - Tag sensitive columns once in the shared model, so masking follows the data.
 
-On Databricks this is a Unity Catalog catalog per company plus a shared catalog. On Snowflake it is a database per company plus row access policies on the shared tables.
+On Databricks this is a Unity Catalog catalog per company plus a shared catalog. On Snowflake it is a database per company plus row access policies on the shared tables. We compare the two in [Databricks or Snowflake for a roll-up](/blog/databricks-vs-snowflake-roll-up/).
 
 ## Company N+1 is configuration
 

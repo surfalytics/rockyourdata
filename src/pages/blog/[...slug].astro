@@ -36,7 +36,8 @@ const schema = [
     "@type": "BlogPosting",
     headline: post.data.title,
     description: post.data.description,
-    datePublished: post.data.date.toISOString(),
+    // Date only. The time part of `date` only orders same-day posts.
+    datePublished: post.data.date.toISOString().slice(0, 10),
     author: { "@type": "Person", name: post.data.author },
     publisher: { "@id": `${site.url}/#organization` },
     mainEntityOfPage: pageUrl,

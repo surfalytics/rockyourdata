@@ -98,8 +98,14 @@ What we can say from building data platforms is this. The work after close is or
 The other posts in this series cover it step by step:
 
 - [Data due diligence before the deal](/blog/roll-up-data-due-diligence/)
+- [The first 100 days after close](/blog/roll-up-first-100-days/)
 - [The shared data layer](/blog/roll-up-data-layer/)
+- [Identity resolution: one customer, five records](/blog/roll-up-identity-resolution/)
+- [Databricks or Snowflake for a roll-up](/blog/databricks-vs-snowflake-roll-up/)
 - [Where AI removes work first](/blog/ai-workflows-offline-service-business/)
+- [How to prove AI raised the margin](/blog/measuring-ai-margin-gains-roll-up/)
+- [An example sector: accounting firms](/blog/ai-roll-up-accounting-firms/)
+- [The same playbook for operators who are not buying anyone](/blog/ai-playbook-multi-location-operators/)
 
 ## Sources
 

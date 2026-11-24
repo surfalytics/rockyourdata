@@ -536,10 +536,19 @@ export const rollupFaqs: Faq[] = [
   },
 ];
 
-/** Posts that go deeper on each phase. Slugs in src/content/blog. */
+/**
+ * The blog series, in reading order. Slugs in src/content/blog.
+ * The posts carry UTC times in `date` so the blog index shows the same order.
+ */
 export const rollupReading = [
   "ai-roll-ups-explained",
   "roll-up-data-due-diligence",
+  "roll-up-first-100-days",
   "roll-up-data-layer",
+  "roll-up-identity-resolution",
+  "databricks-vs-snowflake-roll-up",
   "ai-workflows-offline-service-business",
+  "measuring-ai-margin-gains-roll-up",
+  "ai-roll-up-accounting-firms",
+  "ai-playbook-multi-location-operators",
 ];
