@@ -18,6 +18,7 @@ const reasons = [
   "You need a Databricks or Snowflake platform built, migrated, or tuned.",
   "Your cloud data bill is growing and nobody can explain why.",
   "You want to ship an AI feature but the data underneath is not ready.",
+  "You are buying service businesses and need one data layer across them.",
   "You are hiring or growing a data team and want it done right.",
 ];
 ---
@@ -27,7 +28,7 @@ const reasons = [
   description="Talk to Rock Your Data about Databricks, Snowflake, AI data engineering, or building a data team. Send an enquiry and we reply within one business day."
   schema={schema}
 >
-  <section class="shell pt-32 pb-12 md:pt-40">
+  <section class="shell pt-14 pb-12 md:pt-20">
     <div class="mx-auto max-w-2xl text-center">
       <span class="eyebrow">Get in touch</span>
       <h1 class="mt-3 text-4xl font-extrabold leading-tight text-navy md:text-5xl">
@@ -40,8 +41,10 @@ const reasons = [
     </div>
   </section>
 
-  <section class="shell pb-20 md:pb-28">
-    <div class="mx-auto grid max-w-5xl gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-14">
+  {/* The form and the side rail split at `lg`. At tablet width two columns
+      made the form fields too narrow to read their placeholders. */}
+  <section class="shell">
+    <div class="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
       <!-- Form -->
       <div class="card p-7 md:p-9">
         <h2 class="text-xl font-bold text-navy">Send an enquiry</h2>
@@ -70,9 +73,7 @@ const reasons = [
         </div>
 
         <div>
-          <h2 class="text-sm font-semibold uppercase tracking-wide text-navy">
-            Good reasons to call us
-          </h2>
+          <h2 class="label text-lilac">Good reasons to call us</h2>
           <ul class="mt-4 space-y-3">
             {
               reasons.map((r) => (

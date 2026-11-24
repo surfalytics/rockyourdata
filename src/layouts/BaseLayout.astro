@@ -13,6 +13,8 @@ interface Props {
   noindex?: boolean;
   /** Extra JSON-LD blocks (Service, FAQPage, BreadcrumbList, ...). */
   schema?: Record<string, unknown>[];
+  /** Open Graph type. Blog posts pass "article". */
+  ogType?: string;
 }
 
 const {
@@ -21,6 +23,7 @@ const {
   image = site.ogImage,
   noindex = false,
   schema = [],
+  ogType = "website",
 } = Astro.props;
 
 const pageTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.longTitle}`;
@@ -88,10 +91,11 @@ const jsonLd = [organizationSchema, websiteSchema, ...schema];
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <meta name="author" content="Dmitry Anoshin" />
-    <meta name="theme-color" content="#2b3673" />
+    {/* Matches the page background, so the browser bar blends in on phones. */}
+    <meta name="theme-color" content="#090c18" />
 
     <!-- Open Graph / Twitter -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />

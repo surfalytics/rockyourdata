@@ -6,13 +6,18 @@ import { services } from "../data/services";
 import SocialLinks from "./SocialLinks.astro";
 
 const year = new Date().getFullYear();
+const explore = [...nav, { label: "Contact", href: "/contact/" }];
+// `inline-block py-1.5` gives every link a 32px tap target without adding
+// visual space between the rows.
+const linkClass = "inline-block py-1.5 transition-colors hover:text-white";
 ---
 
 <footer class="mt-24 bg-brand text-white">
-  <div class="shell py-16">
-    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1.2fr]">
+  <div class="shell py-12 md:py-16">
+    <!-- Phones: brand on top, then the two link lists side by side. -->
+    <div class="grid grid-cols-2 gap-x-6 gap-y-10 md:gap-x-12 lg:grid-cols-[1.8fr_1fr_1.2fr]">
       <!-- Brand -->
-      <div>
+      <div class="col-span-2 lg:col-span-1">
         <Image
           src={logo}
           alt="Rock Your Data"
@@ -23,42 +28,39 @@ const year = new Date().getFullYear();
         <p class="mt-5 max-w-xs text-sm leading-relaxed text-white/70">
           {site.description}
         </p>
-        <SocialLinks tone="light" class="mt-6" />
+        <a
+          href={`mailto:${site.email}`}
+          class="mt-4 inline-block py-1 text-sm font-medium text-white/90 transition-colors hover:text-white"
+        >
+          {site.email}
+        </a>
+        <SocialLinks tone="light" class="mt-4" />
       </div>
 
       <!-- Nav -->
       <nav aria-label="Footer">
-        <h2 class="text-sm font-semibold uppercase tracking-widest text-periwinkle-200">
-          Explore
-        </h2>
-        <ul class="mt-4 space-y-3 text-sm text-white/80">
+        <h2 class="label text-periwinkle-200">Explore</h2>
+        <ul class="mt-3 text-sm text-white/80">
           {
-            nav.map((item) => (
+            explore.map((item) => (
               <li>
-                <a href={item.href} class="transition-colors hover:text-white">
+                <a href={item.href} class={linkClass}>
                   {item.label}
                 </a>
               </li>
             ))
           }
-          <li>
-            <a href={`mailto:${site.email}`} class="transition-colors hover:text-white">
-              {site.email}
-            </a>
-          </li>
         </ul>
       </nav>
 
       <!-- Services -->
       <nav aria-label="Services">
-        <h2 class="text-sm font-semibold uppercase tracking-widest text-periwinkle-200">
-          Services
-        </h2>
-        <ul class="mt-4 space-y-3 text-sm text-white/80">
+        <h2 class="label text-periwinkle-200">Services</h2>
+        <ul class="mt-3 text-sm text-white/80">
           {
             services.map((s) => (
               <li>
-                <a href={`/services/${s.slug}/`} class="transition-colors hover:text-white">
+                <a href={`/services/${s.slug}/`} class={linkClass}>
                   {s.title}
                 </a>
               </li>
@@ -69,7 +71,7 @@ const year = new Date().getFullYear();
     </div>
 
     <div
-      class="mt-14 flex flex-col items-start justify-between gap-3 border-t border-white/15 pt-6 text-sm text-white/60 sm:flex-row sm:items-center"
+      class="mt-10 border-t border-white/15 pt-6 text-sm text-white/60 md:mt-14"
     >
       <p>&copy; {year} {site.name}. All rights reserved.</p>
     </div>

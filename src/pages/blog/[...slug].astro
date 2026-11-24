@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 import { site } from "../../data/site";
+import { getOffering } from "../../data/offerings";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
@@ -24,6 +25,9 @@ const { Content } = await render(post);
 
 const link = (p: typeof post | null) =>
   p ? { href: `/blog/${p.id}/`, title: p.data.title } : null;
+
+// The `service` frontmatter field links the post to what it supports.
+const related = getOffering(post.data.service);
 
 const pageUrl = new URL(`/blog/${post.id}/`, site.url).href;
 const schema = [
@@ -50,6 +54,7 @@ const schema = [
   category={post.data.category}
   prev={link(prev)}
   next={link(next)}
+  related={related}
   schema={schema}
 >
   <Content />

@@ -3,25 +3,22 @@
 /* ------------------------------------------------------------------ */
 /*  Self-hosted display typeface (brand: Futura).                      */
 /*  Body type (Inter Variable) is imported in BaseLayout.              */
+/*                                                                     */
+/*  Two cuts only: Book for regular, Heavy for every bold weight.      */
+/*  Do not add a separate 700 file: the old one was Futura Bold        */
+/*  Condensed, so card titles did not match the section headings.      */
 /* ------------------------------------------------------------------ */
 @font-face {
   font-family: "Futura";
   src: url("/fonts/futura/futura-400.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Futura";
-  src: url("/fonts/futura/futura-700.woff2") format("woff2");
-  font-weight: 700;
+  font-weight: 400 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Futura";
   src: url("/fonts/futura/futura-800.woff2") format("woff2");
-  font-weight: 800;
+  font-weight: 600 900;
   font-style: normal;
   font-display: swap;
 }
@@ -43,6 +40,8 @@
   --color-periwinkle-200: #b9c0ee;
   --color-accent: #ff7a4d;
   --color-accent-600: #ff6a37;
+  /* Text on periwinkle / accent fills. White fails WCAG AA on both. */
+  --color-on-bright: #0b1020;
 
   /* Navy brand panels / chips (bg-brand) */
   --color-brand: #2a3470;
@@ -109,7 +108,7 @@
 
   ::selection {
     background-color: var(--color-periwinkle);
-    color: #fff;
+    color: var(--color-on-bright);
   }
 
   :focus-visible {
@@ -169,7 +168,7 @@
     padding: 0.8rem 1.5rem;
     border-radius: var(--radius-btn);
     font-weight: 600;
-    color: #fff;
+    color: var(--color-on-bright);
     background-color: var(--color-periwinkle);
     transition: transform 0.25s var(--ease-out-soft),
       filter 0.25s var(--ease-out-soft);
@@ -208,7 +207,7 @@
     padding: 0.8rem 1.5rem;
     border-radius: var(--radius-btn);
     font-weight: 600;
-    color: #fff;
+    color: var(--color-on-bright);
     background-color: var(--color-accent);
     transition: transform 0.25s var(--ease-out-soft),
       background-color 0.25s var(--ease-out-soft);
@@ -223,6 +222,29 @@
     background-color: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
+  }
+
+  /* A card that is a link. A shadow is invisible on a dark page, so the
+     hover state is a brighter hairline and a slightly lighter surface. */
+  .card-link {
+    transition: border-color 0.25s var(--ease-out-soft),
+      background-color 0.25s var(--ease-out-soft);
+  }
+  .card-link:hover,
+  .card-link:focus-visible {
+    border-color: color-mix(in srgb, var(--color-periwinkle) 60%, var(--color-line));
+    background-color: #151a35;
+  }
+
+  /* Small uppercase label. Always Inter, also when the element is a heading
+     (headings default to Futura). */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
   /* Uppercase eyebrow label */

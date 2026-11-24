@@ -1,6 +1,7 @@
 ---
 import { site } from "../data/site";
 import { services } from "../data/services";
+import { rollup } from "../data/aiRollup";
 import Icon from "./Icon.astro";
 
 // The site is static (GitHub Pages), so the form posts to Web3Forms.
@@ -45,10 +46,14 @@ const inputClass =
           <label for="topic" class="mb-1.5 block text-sm font-semibold text-navy">
             What do you need?
           </label>
+          {/* Starts on a neutral option. With a preselected service, every
+              lead who skipped the field looked like a Databricks lead. */}
           <select id="topic" name="topic" class={inputClass}>
+            <option value="" selected>Select a topic</option>
             {services.map((s) => (
               <option value={s.title}>{s.title}</option>
             ))}
+            <option value={rollup.title}>{rollup.title}</option>
             <option value="Not sure yet">Not sure yet</option>
           </select>
         </div>

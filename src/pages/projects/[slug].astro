@@ -51,24 +51,27 @@ const schema = [
   description={project.seoDescription}
   schema={schema}
 >
+  {/* Same rule as the service pages: one `max-w-5xl` column for every block,
+      so the hero and the sections share a left edge. */}
+
   <!-- Hero -->
-  <section class="bg-paper">
-    <div class="shell max-w-3xl pt-32 pb-10 md:pt-40 md:pb-14">
+  <section class="shell pt-14 pb-10 md:pt-20 md:pb-14">
+    <div class="mx-auto max-w-5xl">
       <a
         href="/projects/"
-        class="inline-flex items-center gap-1.5 text-sm font-semibold text-periwinkle hover:text-navy"
+        class="inline-flex items-center gap-1.5 py-2 text-sm font-semibold text-periwinkle hover:text-navy"
       >
         <span class="rotate-180"><Icon name="arrow-right" size={16} /></span>
         All projects
       </a>
-      <span class="eyebrow mt-6 block">{project.industry}</span>
-      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
+      <span class="eyebrow mt-4 block">{project.industry}</span>
+      <h1 class="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
         {project.title}
       </h1>
       <p class="mt-4 text-lg text-lilac">{project.company}</p>
-      <p class="mt-5 text-lg leading-relaxed text-ink-soft">{project.tagline}</p>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-ink-soft">{project.tagline}</p>
 
-      <div class="mt-7 flex flex-wrap gap-2">
+      <div class="mt-7 flex max-w-3xl flex-wrap gap-2">
         {
           project.stack.map((s) => (
             <span class="rounded-pill bg-fog px-3 py-1.5 text-sm font-medium text-periwinkle-200">
@@ -81,7 +84,7 @@ const schema = [
   </section>
 
   <!-- Team + starting state -->
-  <section class="shell pt-10 md:pt-14">
+  <section class="shell">
     <div class="mx-auto grid max-w-5xl gap-10 border-t border-line pt-12 md:grid-cols-2">
       <div>
         <h2 class="text-2xl font-bold text-navy">The team</h2>
@@ -100,9 +103,7 @@ const schema = [
         {
           project.timeline && (
             <div class="card mt-6 p-5">
-              <h3 class="text-sm font-semibold uppercase tracking-wide text-navy">
-                Timeline
-              </h3>
+              <h3 class="label text-lilac">Timeline</h3>
               <p class="mt-2 leading-relaxed text-ink-soft">{project.timeline}</p>
             </div>
           )
@@ -174,6 +175,9 @@ const schema = [
                 </div>
                 <figcaption class="mt-3 text-sm leading-relaxed text-lilac">
                   {d.caption}
+                  <span class="mt-1 block text-xs md:hidden">
+                    Swipe sideways to see the full diagram.
+                  </span>
                 </figcaption>
               </figure>
             ))}
@@ -221,7 +225,7 @@ const schema = [
         <div class="mx-auto max-w-5xl">
           <a
             href={`/services/${service.slug}/`}
-            class="card group flex flex-col gap-4 p-7 transition-shadow hover:shadow-lift sm:flex-row sm:items-center sm:justify-between"
+            class="card card-link group flex flex-col gap-4 p-7 sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
               <span class="eyebrow">Related service</span>
@@ -241,14 +245,20 @@ const schema = [
   }
 
   <section class="shell pt-16 md:pt-20">
-    <CtaBand />
+    <div class="mx-auto max-w-5xl">
+      <CtaBand />
+    </div>
   </section>
 
   <!-- Other projects -->
   <section class="shell pt-16 md:pt-20">
-    <h2 class="text-xl font-bold text-navy">Other projects</h2>
-    <div class="mt-6 grid gap-6 md:grid-cols-3">
-      {others.map((p) => <ProjectCard project={p} />)}
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-xl font-bold text-navy">Other projects</h2>
+      <div
+        class="mt-6 grid gap-6 md:grid-cols-2 md:max-lg:[&>*:last-child]:col-span-2 lg:grid-cols-3"
+      >
+        {others.map((p) => <ProjectCard project={p} />)}
+      </div>
     </div>
   </section>
 </MarketingLayout>

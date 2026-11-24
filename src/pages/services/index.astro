@@ -2,6 +2,7 @@
 import MarketingLayout from "../../layouts/MarketingLayout.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
 import InteractionCard from "../../components/InteractionCard.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
 import PlatformLogos from "../../components/PlatformLogos.astro";
 import OfferCard from "../../components/OfferCard.astro";
 import CtaBand from "../../components/CtaBand.astro";
@@ -10,6 +11,7 @@ import FeatureIcon from "../../components/FeatureIcon.astro";
 import { services, interactionModes } from "../../data/services";
 import { offers } from "../../data/offers";
 import { site } from "../../data/site";
+import { rollup } from "../../data/aiRollup";
 
 const schema = [
   {
@@ -33,7 +35,7 @@ const schema = [
 >
   <!-- Intro -->
   <section class="bg-paper">
-    <div class="shell pt-32 pb-12 text-center md:pt-40 md:pb-16">
+    <div class="shell pt-14 pb-12 text-center md:pt-20 md:pb-16">
       <span class="eyebrow">Services</span>
       <h1
         class="mx-auto mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl"
@@ -44,7 +46,7 @@ const schema = [
         From picking the platform to building it, tuning its cost, and growing the
         team that runs it — we cover the full analytics lifecycle.
       </p>
-      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
         <a href="/contact/" class="btn-primary text-base">
           Start a conversation
           <Icon name="arrow-right" size={18} />
@@ -56,38 +58,55 @@ const schema = [
 
   <!-- Service grid -->
   <section class="shell pt-8 md:pt-12">
+    <h2 class="sr-only">All services</h2>
     <div class="grid gap-6 md:grid-cols-2">
       {
         services.map((service) => (
-          <a
-            href={`/services/${service.slug}/`}
-            class="card group flex flex-col p-7 transition-shadow hover:shadow-lift md:p-8"
-          >
-            <span class="inline-flex h-13 w-13 items-center justify-center rounded-xl bg-brand p-3 text-white">
-              <FeatureIcon name={service.icon} size={26} />
-            </span>
-            <h2 class="mt-5 text-xl font-bold text-navy group-hover:text-periwinkle md:text-2xl">
-              {service.title}
-            </h2>
-            <p class="mt-2 text-ink-soft">{service.tagline}</p>
-            <ul class="mt-4 flex-1 space-y-2">
-              {service.bullets.map((b) => (
-                <li class="flex gap-2.5 text-[0.95rem] leading-relaxed text-ink/75">
-                  <span class="mt-0.5 shrink-0 text-periwinkle">
-                    <Icon name="check" size={17} />
-                  </span>
-                  {b}
-                </li>
-              ))}
-            </ul>
-            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
-              Explore service
-              <Icon name="arrow-right" size={16} />
-            </span>
-          </a>
+          <ServiceCard
+            service={service}
+            tagline={service.tagline}
+            linkLabel="Explore service"
+          />
         ))
       }
     </div>
+
+    <!-- The AI roll-up practice has its own landing page. -->
+    <a
+      href={rollup.href}
+      class="card card-link group mt-6 grid gap-6 p-7 md:grid-cols-[1.1fr_0.9fr] md:items-center md:gap-10 md:p-8"
+    >
+      <div>
+        <div class="flex items-center gap-4">
+          <span class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-brand text-white">
+            <FeatureIcon name={rollup.icon} size={30} />
+          </span>
+          <span class="rounded-pill border border-accent/60 px-3 py-1 text-xs font-semibold tracking-wide text-accent">
+            New practice
+          </span>
+        </div>
+        <h3 class="mt-5 text-xl font-bold text-navy group-hover:text-periwinkle md:text-2xl">
+          {rollup.title}
+        </h3>
+        <p class="mt-2 leading-relaxed text-ink-soft">{rollup.tagline}</p>
+        <span class="mt-5 inline-flex items-center gap-2 font-semibold text-periwinkle">
+          See how it works
+          <Icon name="arrow-right" size={18} />
+        </span>
+      </div>
+      <ul class="space-y-3 border-t border-line pt-6 md:border-l md:border-t-0 md:pl-10 md:pt-0">
+        {
+          rollup.bullets.map((b) => (
+            <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/80">
+              <span class="mt-1 shrink-0 text-periwinkle">
+                <Icon name="check" size={18} />
+              </span>
+              {b}
+            </li>
+          ))
+        }
+      </ul>
+    </a>
   </section>
 
   <!-- Fixed-scope offers -->

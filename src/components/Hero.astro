@@ -4,7 +4,9 @@ import heroImg from "../assets/hero/data-engineering.jpg";
 import Icon from "./Icon.astro";
 ---
 
-<section class="relative isolate flex min-h-[90vh] items-center overflow-hidden">
+<!-- The negative margin cancels the header spacer, so the photo runs under
+     the floating nav instead of starting below it. -->
+<section class="relative isolate -mt-[4.75rem] flex min-h-[90vh] items-center overflow-hidden">
   <!-- Banner image -->
   <Image
     src={heroImg}
@@ -27,7 +29,7 @@ import Icon from "./Icon.astro";
   >
   </div>
 
-  <div class="shell w-full pt-32 pb-20 md:pt-40 md:pb-28">
+  <div class="shell w-full pt-28 pb-14 md:pt-40 md:pb-28">
     <div class="max-w-3xl">
       <span class="reveal eyebrow" style="animation-delay: 20ms">
         Data consulting · North America
@@ -50,14 +52,19 @@ import Icon from "./Icon.astro";
       </p>
 
       <div
-        class="reveal mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+        class="reveal mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
         style="animation-delay: 220ms"
       >
         <a href="/contact/" class="btn-primary text-base">
           Start a conversation
           <Icon name="arrow-right" size={18} />
         </a>
-        <a href="/services/" class="btn-outline text-base"> Explore our services </a>
+        <a
+          href="/services/"
+          class="btn-outline border-white/25 bg-paper/40 text-base backdrop-blur-sm"
+        >
+          Explore our services
+        </a>
       </div>
 
       <p class="reveal mt-8 text-sm text-lilac" style="animation-delay: 280ms">

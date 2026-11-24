@@ -14,6 +14,7 @@ import Icon from "../components/Icon.astro";
 import { featuredServices, interactionModes } from "../data/services";
 import { offers } from "../data/offers";
 import { projects } from "../data/projects";
+import { rollup } from "../data/aiRollup";
 
 const homeProjects = projects.slice(0, 3);
 ---
@@ -22,7 +23,7 @@ const homeProjects = projects.slice(0, 3);
   <Hero />
 
   <!-- Platform credibility strip -->
-  <PlatformLogos class="!pt-10 md:!pt-12" />
+  <PlatformLogos class="!pt-10 !pb-0 md:!pt-12" />
 
   <!-- About band -->
   <section class="shell pt-20 md:pt-28">
@@ -60,6 +61,8 @@ const homeProjects = projects.slice(0, 3);
     <SectionHeading eyebrow="What we do" title="Our services" />
     <div class="mt-12 grid gap-6 md:grid-cols-2">
       {featuredServices.map((service) => <ServiceCard service={service} />)}
+      {/* Sixth card: the AI roll-up practice has its own landing page. */}
+      <ServiceCard service={rollup} href={rollup.href} badge="New" />
     </div>
     <div class="mt-10 text-center">
       <a href="/services/" class="btn-outline text-base">
@@ -88,7 +91,11 @@ const homeProjects = projects.slice(0, 3);
       title="Selected projects"
       subtitle="Platforms we have built at Amazon, Microsoft, and across North American SaaS, telecom and fintech — team setup, architecture and all."
     />
-    <div class="mt-12 grid gap-6 md:grid-cols-3">
+    {/* Two columns on tablets (three are too narrow for the chips); the
+        third card then spans the row so it does not leave a hole. */}
+    <div
+      class="mt-12 grid gap-6 md:grid-cols-2 md:max-lg:[&>*:last-child]:col-span-2 lg:grid-cols-3"
+    >
       {homeProjects.map((project) => <ProjectCard project={project} />)}
     </div>
     <div class="mt-10 text-center">

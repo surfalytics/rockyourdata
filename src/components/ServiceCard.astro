@@ -1,27 +1,48 @@
 ---
 import FeatureIcon from "./FeatureIcon.astro";
+import type { FeatureIconName } from "./FeatureIcon.astro";
 import Icon from "./Icon.astro";
-import type { Service } from "../data/services";
 
 interface Props {
-  service: Service;
+  /** A service from services.ts, or anything with the same card fields. */
+  service: { slug: string; icon: FeatureIconName; title: string; bullets: string[] };
+  /** Link target. Defaults to the service detail page. */
+  href?: string;
+  /** Short chip next to the icon, e.g. "New". */
+  badge?: string;
+  /** Optional line under the title (used on the services index). */
+  tagline?: string;
+  linkLabel?: string;
 }
-const { service } = Astro.props;
+const {
+  service,
+  href = `/services/${service.slug}/`,
+  badge,
+  tagline,
+  linkLabel = "Learn more",
+} = Astro.props;
 ---
 
-<a
-  href={`/services/${service.slug}/`}
-  class="card group flex flex-col p-7 transition-shadow hover:shadow-lift md:p-8"
->
-  <span
-    class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-brand text-white"
-  >
-    <FeatureIcon name={service.icon} size={30} />
+<a href={href} class="card card-link group flex flex-col p-7 md:p-8">
+  <span class="flex items-start justify-between gap-4">
+    <span
+      class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-brand text-white"
+    >
+      <FeatureIcon name={service.icon} size={30} />
+    </span>
+    {
+      badge && (
+        <span class="rounded-pill border border-accent/60 px-3 py-1 text-xs font-semibold tracking-wide text-accent">
+          {badge}
+        </span>
+      )
+    }
   </span>
   <h3 class="mt-5 text-xl font-bold text-navy group-hover:text-periwinkle md:text-2xl">
     {service.title}
   </h3>
-  <ul class="mt-4 space-y-3">
+  {tagline && <p class="mt-2 leading-relaxed text-ink-soft">{tagline}</p>}
+  <ul class="mt-4 flex-1 space-y-3">
     {
       service.bullets.map((b) => (
         <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/80">
@@ -34,7 +55,7 @@ const { service } = Astro.props;
     }
   </ul>
   <span class="mt-6 inline-flex items-center gap-2 font-semibold text-periwinkle">
-    Learn more
+    {linkLabel}
     <Icon name="arrow-right" size={18} />
   </span>
 </a>

@@ -2,7 +2,7 @@
 import MarketingLayout from "../layouts/MarketingLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import InteractionCard from "../components/InteractionCard.astro";
-import PlatformLogos from "../components/PlatformLogos.astro";
+import CtaBand from "../components/CtaBand.astro";
 import FounderCard from "../components/FounderCard.astro";
 import TeamSection from "../components/TeamSection.astro";
 import { values } from "../data/services";
@@ -17,8 +17,10 @@ const companies = [...founder.companies, ...teamCompanies];
   description="Rock Your Data turns raw data into actionable insights, helping businesses make smarter, faster decisions with cloud analytics."
 >
   <!-- Intro -->
-  <section class="shell pt-28 md:pt-36">
-    <div class="card relative overflow-hidden p-8 text-center md:p-14">
+  {/* Left-aligned on phones: long centered paragraphs are hard to read in a
+      narrow column. Centered from `sm` up. */}
+  <section class="shell pt-10 md:pt-16">
+    <div class="card relative overflow-hidden p-6 text-left sm:p-8 sm:text-center md:p-14">
       <!-- decorative glow + faint grid -->
       <div
         class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-periwinkle/15 blur-3xl"
@@ -32,17 +34,17 @@ const companies = [...founder.companies, ...teamCompanies];
       </div>
       <div class="relative mx-auto max-w-3xl">
         <span class="eyebrow">About us</span>
-        <h1 class="text-navy mt-3 text-4xl font-extrabold leading-tight md:text-5xl">
-          Empowering business with data-driven solutions
+        <h1 class="text-navy mt-3 text-3xl font-extrabold leading-tight sm:text-4xl md:text-5xl">
+          Empowering business with data&#8209;driven solutions
         </h1>
-        <p class="mt-6 text-lg leading-relaxed text-ink-soft">
+        <p class="mt-6 text-base leading-relaxed text-ink-soft sm:text-lg">
           Operating since 2018, Rock Your Data started as a space analytics company —
           working with large-scale space telemetry, IoT data, and image recognition
           for Earth observation. We've since expanded into traditional business
           segments, where our team builds petabyte-scale solutions and drives
           analytics modernization and AI workloads.
         </p>
-        <p class="mt-4 text-lg leading-relaxed text-ink-soft">
+        <p class="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
           Our mission is to harness the power of data to drive meaningful change —
           unlocking new growth, streamlining operations, and innovating with
           confidence, on Earth and in orbit.
@@ -113,7 +115,7 @@ const companies = [...founder.companies, ...teamCompanies];
   <!-- Books -->
   <section class="shell pt-20 md:pt-28">
     <SectionHeading eyebrow="Published author" title="10 technical books" />
-    <div class="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+    <div class="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-5">
       {
         founder.books.map((book) => (
           <figure class="group flex flex-col">
@@ -121,6 +123,8 @@ const companies = [...founder.companies, ...teamCompanies];
               <img
                 src={book.cover}
                 alt={`Cover of ${book.title}`}
+                width="200"
+                height="300"
                 loading="lazy"
                 class="aspect-[2/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
@@ -135,5 +139,7 @@ const companies = [...founder.companies, ...teamCompanies];
     </div>
   </section>
 
-  <PlatformLogos heading="Platforms we're certified on" />
+  <section class="shell pt-20 md:pt-28">
+    <CtaBand />
+  </section>
 </MarketingLayout>

@@ -115,11 +115,13 @@ export const skillGroups = [
   { heading: "Soft skills", items: ["Presentations", "Gathering requirements"] },
 ];
 
+// `height` is the bar height as a percent of the tallest bar. Keep it
+// proportional to the amount (80 / 180 = 44, and so on).
 export const salaries = [
-  { level: "Junior", amount: "$80k", height: 38 },
-  { level: "Middle", amount: "$120k", height: 58 },
-  { level: "Senior", amount: "$150k", height: 78 },
-  { level: "Staff", amount: "$180k", height: 100 },
+  { level: "Junior", amount: "$80k", height: 44, highlight: false },
+  { level: "Middle", amount: "$120k", height: 67, highlight: true },
+  { level: "Senior", amount: "$150k", height: 83, highlight: false },
+  { level: "Staff", amount: "$180k", height: 100, highlight: false },
 ];
 
 export const salaryInsights = [

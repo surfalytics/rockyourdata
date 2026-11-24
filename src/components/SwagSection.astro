@@ -11,7 +11,7 @@ const perks = [
 ];
 ---
 
-<section class="shell py-16 md:py-20">
+<section class="shell pt-16 md:pt-20">
   <div
     class="relative overflow-hidden rounded-[1.5rem] bg-brand px-7 py-12 text-white md:px-14 md:py-16"
   >
@@ -20,7 +20,9 @@ const perks = [
       aria-hidden="true"
     >
     </div>
-    <div class="grid items-center gap-10 md:grid-cols-[1.3fr_1fr]">
+    {/* The illustration only appears at `lg`. Next to it at tablet width the
+        text column was squeezed to a third of the band. */}
+    <div class="grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
       <div>
         <h2 class="text-3xl font-extrabold leading-tight md:text-4xl">
           Empower your data career with Surfalytics 🏄
@@ -53,8 +55,10 @@ const perks = [
       <img
         src={cloudNetwork}
         alt=""
+        width="500"
+        height="372"
         loading="lazy"
-        class="mx-auto w-full max-w-sm"
+        class="mx-auto hidden h-auto w-full max-w-sm lg:block"
         aria-hidden="true"
       />
     </div>

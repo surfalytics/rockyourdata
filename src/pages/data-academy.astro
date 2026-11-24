@@ -2,6 +2,7 @@
 import MarketingLayout from "../layouts/MarketingLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import Icon from "../components/Icon.astro";
+import FeatureIcon from "../components/FeatureIcon.astro";
 import { site } from "../data/site";
 import { academyIntro, tracks, pillars } from "../data/academy";
 import { stats, gains, salaries, salaryInsights } from "../data/dataAnalyst";
@@ -13,7 +14,7 @@ import { stats, gains, salaries, salaryInsights } from "../data/dataAnalyst";
 >
   <!-- Hero -->
   <section class="bg-paper">
-    <div class="shell pt-32 pb-14 text-center md:pt-40 md:pb-20">
+    <div class="shell pt-14 pb-14 text-center md:pt-20 md:pb-20">
       <span class="reveal eyebrow">Surfalytics Data Academy</span>
       <h1 class="reveal mx-auto mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-navy sm:text-5xl md:text-6xl" style="animation-delay:80ms">
         Learn data the <span class="text-accent">apprenticeship</span> way
@@ -23,7 +24,7 @@ import { stats, gains, salaries, salaryInsights } from "../data/dataAnalyst";
         community that takes you from zero to your first data job with real projects,
         mock interviews, and a proven roadmap.
       </p>
-      <div class="reveal mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="animation-delay:240ms">
+      <div class="reveal mt-9 flex flex-col justify-center gap-3 sm:flex-row sm:items-center" style="animation-delay:240ms">
         <a href={site.surfalytics} target="_blank" rel="noopener" class="btn-accent text-base">
           Join Surfalytics
           <Icon name="arrow-up-right" size={18} />
@@ -45,9 +46,11 @@ import { stats, gains, salaries, salaryInsights } from "../data/dataAnalyst";
     <div class="grid gap-6 sm:grid-cols-3">
       {
         stats.map((s) => (
-          <div class="card p-8 text-center">
-            <p class="font-display text-5xl font-extrabold text-navy">{s.value}</p>
-            <p class="mt-3 text-ink-soft">{s.label}</p>
+          <div class="card flex items-center gap-5 p-5 text-left sm:block sm:p-8 sm:text-center">
+            <p class="w-28 shrink-0 font-display text-4xl font-extrabold text-navy sm:w-auto sm:text-5xl">
+              {s.value}
+            </p>
+            <p class="text-ink-soft sm:mt-3">{s.label}</p>
           </div>
         ))
       }
@@ -64,11 +67,13 @@ import { stats, gains, salaries, salaryInsights } from "../data/dataAnalyst";
       Every track follows the same proven structure — and leads to a specific,
       in-demand data role.
     </p>
-    <div class="mt-12 grid gap-6 md:grid-cols-3">
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
       {
         tracks.map((track) => (
           <article class="card flex flex-col p-7">
-            <span class="text-4xl" aria-hidden="true">{track.icon}</span>
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">
+              <FeatureIcon name={track.icon} size={26} />
+            </span>
             <h3 class="mt-4 text-xl font-bold text-navy">{track.label}</h3>
             <p class="mt-2 text-[0.975rem] leading-relaxed text-ink-soft">{track.summary}</p>
             <ul class="mt-5 space-y-2.5 border-t border-line pt-5">
@@ -92,8 +97,10 @@ import { stats, gains, salaries, salaryInsights } from "../data/dataAnalyst";
       {
         pillars.map((p) => (
           <div class="card p-6">
-            <span class="text-3xl" aria-hidden="true">{p.icon}</span>
-            <h3 class="mt-3 text-lg font-bold text-navy">{p.label}</h3>
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-fog text-navy">
+              <FeatureIcon name={p.icon} size={24} />
+            </span>
+            <h3 class="mt-4 text-lg font-bold text-navy">{p.label}</h3>
             <p class="mt-2 text-sm leading-relaxed text-ink/70">{p.desc}</p>
           </div>
         ))
@@ -125,12 +132,21 @@ import { stats, gains, salaries, salaryInsights } from "../data/dataAnalyst";
         $120k CAD — average Data Analyst salary in 2024
       </h2>
       <div class="mt-8 grid gap-10 md:grid-cols-2">
-        <div class="flex items-end justify-between gap-4" style="height: 240px;">
+        {/* Bar height is in px (1.8px per percent, 180px for the tallest), and
+            the bar cannot shrink. A percent height inside this flex column
+            made the two tallest bars render the same size. */}
+        <div class="flex items-end justify-between gap-4">
           {
             salaries.map((s) => (
-              <div class="flex h-full flex-1 flex-col items-center justify-end gap-2">
+              <div class="flex flex-1 flex-col items-center gap-2">
                 <span class="text-sm font-bold text-navy">{s.amount}</span>
-                <div class="w-full rounded-t-lg bg-brand" style={`height: ${s.height}%`} />
+                <div
+                  class:list={[
+                    "w-full shrink-0 rounded-t-lg",
+                    s.highlight ? "bg-periwinkle" : "bg-periwinkle/40",
+                  ]}
+                  style={`height: ${s.height * 1.8}px`}
+                />
                 <span class="text-xs font-medium text-lilac">{s.level}</span>
               </div>
             ))
@@ -151,7 +167,7 @@ import { stats, gains, salaries, salaryInsights } from "../data/dataAnalyst";
   </section>
 
   <!-- CTA -->
-  <section class="shell pt-16 pb-4 md:pt-20">
+  <section class="shell pt-16 md:pt-20">
     <div class="rounded-[1.5rem] bg-brand px-7 py-12 text-center text-white md:px-14 md:py-16">
       <h2 class="mx-auto max-w-2xl text-2xl font-extrabold leading-snug md:text-3xl">
         Ready to follow a full structured path?
@@ -159,7 +175,7 @@ import { stats, gains, salaries, salaryInsights } from "../data/dataAnalyst";
       <p class="mx-auto mt-4 max-w-xl text-white/80">
         Join the Surfalytics community and start your roadmap today.
       </p>
-      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
         <a href={site.surfalytics} target="_blank" rel="noopener" class="btn-accent text-base">
           Join Surfalytics
         </a>

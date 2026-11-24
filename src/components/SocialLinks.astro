@@ -10,7 +10,9 @@ const { class: className, tone = "navy" } = Astro.props;
 const color = tone === "light" ? "text-white/80 hover:text-white" : "text-navy hover:text-periwinkle";
 ---
 
-<ul class:list={["flex items-center gap-4", className]}>
+{/* Each icon has 8px of padding, so the tap target is 42px. The negative
+    margin keeps the first icon aligned with the text above it. */}
+<ul class:list={["-ml-2 flex items-center", className]}>
   {
     socials.map((s) => (
       <li>
@@ -19,7 +21,7 @@ const color = tone === "light" ? "text-white/80 hover:text-white" : "text-navy h
           target="_blank"
           rel="noopener"
           aria-label={s.label}
-          class:list={["inline-flex transition-colors", color]}
+          class:list={["inline-flex p-2 transition-colors", color]}
         >
           <Icon name={s.icon} size={26} title={s.label} />
         </a>

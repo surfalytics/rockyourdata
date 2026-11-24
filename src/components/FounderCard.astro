@@ -6,8 +6,13 @@ import Icon from "./Icon.astro";
 ---
 
 <section class="shell pt-16 md:pt-24">
-  <div class="card grid gap-10 overflow-hidden p-6 md:grid-cols-[0.85fr_1.15fr] md:p-10">
-    <div>
+  {/* Three grid children. On desktop the credentials sit under the photo, so
+      the left column is as tall as the bio. On phones the order is photo,
+      bio, credentials. */}
+  <div
+    class="card grid gap-8 overflow-hidden p-6 md:grid-cols-[0.85fr_1.15fr] md:gap-x-10 md:p-10"
+  >
+    <div class="md:col-start-1 md:row-start-1">
       <Image
         src={founderPhoto}
         alt="Dmitry Anoshin, founder of Rock Your Data"
@@ -16,7 +21,7 @@ import Icon from "./Icon.astro";
         class="w-full rounded-xl border border-line object-cover"
       />
     </div>
-    <div>
+    <div class="md:col-start-2 md:row-span-2 md:row-start-1">
       <span class="eyebrow">Meet the founder</span>
       <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
         {founder.name}
@@ -26,19 +31,19 @@ import Icon from "./Icon.astro";
       <div class="mt-5 space-y-4 leading-relaxed text-ink-soft">
         {founder.bio.map((p) => <p>{p}</p>)}
       </div>
-
-      <ul class="mt-6 space-y-3">
-        {
-          founder.credentials.map((c) => (
-            <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/85">
-              <span class="mt-0.5 shrink-0 text-periwinkle">
-                <Icon name="check" size={20} />
-              </span>
-              {c}
-            </li>
-          ))
-        }
-      </ul>
     </div>
+
+    <ul class="space-y-3 md:col-start-1 md:row-start-2">
+      {
+        founder.credentials.map((c) => (
+          <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/85">
+            <span class="mt-0.5 shrink-0 text-periwinkle">
+              <Icon name="check" size={20} />
+            </span>
+            {c}
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>

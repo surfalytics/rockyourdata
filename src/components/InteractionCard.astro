@@ -10,10 +10,8 @@ interface Props {
 const { icon, title, description } = Astro.props;
 ---
 
-<article class="card group h-full p-7 transition-shadow hover:shadow-lift">
-  <span
-    class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-fog text-navy transition-colors group-hover:bg-brand group-hover:text-white"
-  >
+<article class="card h-full p-6 lg:p-7">
+  <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-fog text-navy">
     <FeatureIcon name={icon} size={26} />
   </span>
   <h3 class="mt-5 text-lg font-bold text-navy">{title}</h3>

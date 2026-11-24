@@ -23,7 +23,10 @@ export function getStaticPaths() {
 
 const { service, others } = Astro.props;
 const serviceOffers = offersForService(service.slug);
-const relatedProjects = projectsForService(service.slug);
+const allRelated = projectsForService(service.slug);
+// Show at most two full rows of projects; the rest are one click away.
+const relatedProjects = allRelated.slice(0, 6);
+const moreProjects = allRelated.length - relatedProjects.length;
 const pageUrl = new URL(`/services/${service.slug}/`, site.url).href;
 
 // Service + FAQPage + breadcrumbs. FAQPage is what earns the expandable
@@ -78,44 +81,46 @@ const schema = [
   description={service.seoDescription}
   schema={schema}
 >
+  {/* Every block on this page sits in the same `max-w-5xl` column, so the
+      hero, the sections, and the CTA share one left edge. Long text is capped
+      at `max-w-3xl` inside that column. */}
+
   <!-- Hero -->
-  <section class="bg-paper">
-    <div class="shell max-w-3xl pt-32 pb-12 md:pt-40 md:pb-16">
-      <div class="reveal">
-        <a
-          href="/services/"
-          class="inline-flex items-center gap-1.5 text-sm font-semibold text-periwinkle hover:text-navy"
+  <section class="shell pt-14 pb-12 md:pt-20 md:pb-16">
+    <div class="reveal mx-auto max-w-5xl">
+      <a
+        href="/services/"
+        class="inline-flex items-center gap-1.5 py-2 text-sm font-semibold text-periwinkle hover:text-navy"
+      >
+        <span class="rotate-180"><Icon name="arrow-right" size={16} /></span>
+        All services
+      </a>
+      <div class="mt-4">
+        <span
+          class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-brand text-white"
         >
-          <span class="rotate-180"><Icon name="arrow-right" size={16} /></span>
-          All services
+          <FeatureIcon name={service.icon} size={30} />
+        </span>
+      </div>
+      <h1 class="mt-5 max-w-3xl text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
+        {service.seoTitle}
+      </h1>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-ink-soft">{service.tagline}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a href="/contact/" class="btn-primary text-base">
+          Start a conversation
+          <Icon name="arrow-right" size={18} />
         </a>
-        <div class="mt-6">
-          <span
-            class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-brand text-white"
-          >
-            <FeatureIcon name={service.icon} size={30} />
-          </span>
-        </div>
-        <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
-          {service.seoTitle}
-        </h1>
-        <p class="mt-5 text-lg leading-relaxed text-ink-soft">{service.tagline}</p>
-        <div class="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-          <a href="/contact/" class="btn-primary text-base">
-            Start a conversation
-            <Icon name="arrow-right" size={18} />
-          </a>
-          <a href={`mailto:${site.email}`} class="btn-outline text-base">Email us</a>
-        </div>
+        <a href={`mailto:${site.email}`} class="btn-outline text-base">Email us</a>
       </div>
     </div>
   </section>
 
   <!-- Overview -->
-  <section class="shell pt-12 md:pt-16">
-    <div class="mx-auto max-w-3xl border-t border-line pt-12">
+  <section class="shell">
+    <div class="mx-auto max-w-5xl border-t border-line pt-12">
       <span class="eyebrow">Overview</span>
-      <div class="mt-4 space-y-5 text-lg leading-relaxed text-ink-soft">
+      <div class="mt-4 max-w-3xl space-y-5 text-lg leading-relaxed text-ink-soft">
         {service.overview.map((p) => <p>{p}</p>)}
       </div>
     </div>
@@ -179,7 +184,7 @@ const schema = [
     </div>
   </section>
 
-  <!-- Fixed-scope offer -->
+  <!-- Fixed-scope offer. One offer renders as a full-width card. -->
   {
     serviceOffers.length > 0 && (
       <section class="shell pt-16 md:pt-20">
@@ -190,13 +195,14 @@ const schema = [
             with us or without us.
           </p>
           <div
-            class:list={[
-              "mt-6 grid gap-6",
-              serviceOffers.length > 1 ? "md:grid-cols-2" : "max-w-xl",
-            ]}
+            class:list={["mt-6 grid gap-6", serviceOffers.length > 1 && "md:grid-cols-2"]}
           >
             {serviceOffers.map((offer) => (
-              <OfferCard offer={offer} showServiceLink={false} />
+              <OfferCard
+                offer={offer}
+                showServiceLink={false}
+                wide={serviceOffers.length === 1}
+              />
             ))}
           </div>
         </div>
@@ -204,9 +210,32 @@ const schema = [
     )
   }
 
-  <!-- Proof -->
+  <!-- Proof. The grid follows the number of projects, so no row is half empty. -->
   {
-    relatedProjects.length > 0 && (
+    relatedProjects.length === 1 && (
+      <section class="shell pt-16 md:pt-20">
+        <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 md:items-center md:gap-10">
+          <div>
+            <h2 class="text-2xl font-bold text-navy">Related work</h2>
+            <p class="mt-3 leading-relaxed text-ink-soft">
+              A platform we have built in this space, with the team setup and the
+              architecture behind it.
+            </p>
+            <a
+              href="/projects/"
+              class="mt-5 inline-flex items-center gap-2 py-2 font-semibold text-periwinkle hover:text-navy"
+            >
+              All projects
+              <Icon name="arrow-right" size={18} />
+            </a>
+          </div>
+          <ProjectCard project={relatedProjects[0]} />
+        </div>
+      </section>
+    )
+  }
+  {
+    relatedProjects.length > 1 && (
       <section class="shell pt-16 md:pt-20">
         <div class="mx-auto max-w-5xl">
           <h2 class="text-2xl font-bold text-navy">Related work</h2>
@@ -214,11 +243,25 @@ const schema = [
             Platforms we have built in this space, with the team setup and the
             architecture behind each one.
           </p>
-          <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div
+            class:list={[
+              "mt-6 grid gap-6 md:grid-cols-2",
+              relatedProjects.length > 2 && "lg:grid-cols-3",
+            ]}
+          >
             {relatedProjects.map((p) => (
               <ProjectCard project={p} />
             ))}
           </div>
+          {moreProjects > 0 && (
+            <a
+              href="/projects/"
+              class="mt-6 inline-flex items-center gap-2 py-2 font-semibold text-periwinkle hover:text-navy"
+            >
+              {moreProjects} more on the projects page
+              <Icon name="arrow-right" size={18} />
+            </a>
+          )}
         </div>
       </section>
     )
@@ -226,35 +269,38 @@ const schema = [
 
   <!-- FAQ -->
   <section class="shell pt-16 md:pt-20">
-    <div class="mx-auto max-w-3xl">
-      <FaqList faqs={service.faqs} />
+    <div class="mx-auto max-w-5xl">
+      <div class="max-w-3xl">
+        <FaqList faqs={service.faqs} />
+      </div>
     </div>
   </section>
 
   <!-- CTA band -->
   <section class="shell pt-16 md:pt-20">
-    <CtaBand title={`Ready to talk about ${service.title}?`} />
+    <div class="mx-auto max-w-5xl">
+      <CtaBand title={`Ready to talk about ${service.title}?`} />
+    </div>
   </section>
 
   <!-- Other services -->
   <section class="shell pt-16 md:pt-20">
-    <h2 class="text-xl font-bold text-navy">Other services</h2>
-    <div class="mt-6 grid gap-5 sm:grid-cols-3">
-      {
-        others.map((o) => (
-          <a
-            href={`/services/${o.slug}/`}
-            class="card group flex items-center gap-4 p-5 transition-shadow hover:shadow-lift"
-          >
-            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-fog text-navy transition-colors group-hover:bg-brand group-hover:text-white">
-              <FeatureIcon name={o.icon} size={22} />
-            </span>
-            <span class="font-semibold text-navy group-hover:text-periwinkle">
-              {o.title}
-            </span>
-          </a>
-        ))
-      }
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-xl font-bold text-navy">Other services</h2>
+      <div class="mt-6 grid gap-5 sm:grid-cols-3">
+        {
+          others.map((o) => (
+            <a href={`/services/${o.slug}/`} class="card card-link group flex items-center gap-4 p-5">
+              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-fog text-navy">
+                <FeatureIcon name={o.icon} size={22} />
+              </span>
+              <span class="font-semibold text-navy group-hover:text-periwinkle">
+                {o.title}
+              </span>
+            </a>
+          ))
+        }
+      </div>
     </div>
   </section>
 </MarketingLayout>

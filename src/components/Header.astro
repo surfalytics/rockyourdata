@@ -5,8 +5,9 @@ import { nav } from "../data/site";
 import Icon from "./Icon.astro";
 
 const path = Astro.url.pathname;
-const isActive = (href: string) =>
-  href.startsWith("/") && !href.includes("#") && path === href;
+// A section stays highlighted on its sub-pages: /services/databricks/ lights
+// up "Services", a blog post lights up "Blog".
+const isActive = (href: string) => path === href || path.startsWith(href);
 ---
 
 <header class="fixed inset-x-0 top-0 z-50">
@@ -27,6 +28,7 @@ const isActive = (href: string) =>
               <li>
                 <a
                   href={item.href}
+                  aria-current={isActive(item.href) ? "page" : undefined}
                   class:list={[
                     "relative transition-colors hover:text-periwinkle",
                     isActive(item.href) && "text-periwinkle",
@@ -41,26 +43,32 @@ const isActive = (href: string) =>
         <a href="/contact/" class="btn-primary">Get in touch</a>
       </div>
 
-      <!-- Mobile toggle -->
-      <button
-        type="button"
-        id="menu-toggle"
-        class="inline-flex items-center justify-center rounded-lg p-2 text-navy lg:hidden"
-        aria-label="Open menu"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-      >
-        <Icon name="menu" size={28} />
-      </button>
+      <!-- Tablet + phone: CTA (tablet only) and menu toggle -->
+      <div class="flex items-center gap-2 lg:hidden">
+        <a href="/contact/" class="btn-primary hidden py-2.5 md:inline-flex">Get in touch</a>
+        <button
+          type="button"
+          id="menu-toggle"
+          class="inline-flex items-center justify-center rounded-lg p-2 text-navy"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <Icon name="menu" size={28} />
+        </button>
+      </div>
     </div>
   </nav>
 
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 z-40 hidden bg-brand/95 backdrop-blur-md lg:hidden"
+    class="fixed inset-0 z-40 hidden overflow-y-auto bg-brand/95 backdrop-blur-md lg:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menu"
   >
-    <div class="shell flex min-h-screen flex-col gap-2 pt-24 pb-12">
+    <div class="shell flex min-h-full flex-col gap-2 pt-24 pb-12">
       <button
         type="button"
         id="menu-close"
@@ -73,7 +81,11 @@ const isActive = (href: string) =>
         nav.map((item) => (
           <a
             href={item.href}
-            class="border-b border-white/15 py-4 text-2xl font-semibold text-white transition-colors hover:text-accent"
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class:list={[
+              "border-b border-white/15 py-4 text-2xl font-semibold transition-colors hover:text-accent",
+              isActive(item.href) ? "text-accent" : "text-white",
+            ]}
           >
             {item.label}
           </a>
@@ -99,6 +111,9 @@ const isActive = (href: string) =>
     menu.classList.toggle("hidden", !open);
     toggle.setAttribute("aria-expanded", String(open));
     document.body.style.overflow = open ? "hidden" : "";
+    // Move focus with the menu so keyboard users are not left behind it.
+    if (open) close?.focus();
+    else toggle.focus();
   }
 
   toggle?.addEventListener("click", () => setOpen(true));
@@ -107,6 +122,6 @@ const isActive = (href: string) =>
     a.addEventListener("click", () => setOpen(false))
   );
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") setOpen(false);
+    if (e.key === "Escape" && menu && !menu.classList.contains("hidden")) setOpen(false);
   });
 </script>
