@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Inter, system-ui, -apple-system, sans-serif" role="img" aria-label="Two-by-two matrix for picking AI workflows: time spent today against the cost of a wrong answer.">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#8d94b8"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" rx="18" fill="#11152b" stroke="#283057"/>
+
+  <!-- Axes -->
+  <g stroke="#8d94b8" stroke-width="1.5" fill="none" marker-end="url(#a)">
+    <path d="M104 452V52"/>
+    <path d="M104 452H924"/>
+  </g>
+  <g fill="#8d94b8" font-size="12" font-weight="700" letter-spacing="1.5">
+    <text transform="translate(68 252) rotate(-90)" text-anchor="middle">TIME SPENT TODAY</text>
+    <text x="525" y="496" text-anchor="middle">COST OF A WRONG ANSWER</text>
+  </g>
+  <g fill="#8d94b8" font-size="12">
+    <text transform="translate(90 146) rotate(-90)" text-anchor="middle">High</text>
+    <text transform="translate(90 346) rotate(-90)" text-anchor="middle">Low</text>
+    <text x="323" y="474" text-anchor="middle">Low: caught before it leaves the building</text>
+    <text x="726" y="474" text-anchor="middle">High: reaches a customer or a regulator</text>
+  </g>
+
+  <!-- Quadrants -->
+  <rect x="130" y="60" width="387" height="172" rx="12" fill="#2a3470" stroke="#7488f6"/>
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="533" y="60" width="387" height="172" rx="12"/>
+    <rect x="130" y="248" width="387" height="172" rx="12"/>
+    <rect x="533" y="248" width="387" height="172" rx="12"/>
+  </g>
+
+  <!-- Top left: start here -->
+  <text x="154" y="94" fill="#ff7a4d" font-size="12" font-weight="700" letter-spacing="1.5">1 · START HERE</text>
+  <text x="154" y="126" fill="#eef1fb" font-size="18" font-weight="700">Automate with a review queue</text>
+  <g fill="#b9c0ee" font-size="13">
+    <text x="154" y="156">Document extraction: invoices, forms, leases</text>
+    <text x="154" y="178">Inbound triage: calls, email, web requests</text>
+    <text x="154" y="200">Scheduling suggestions a dispatcher approves</text>
+  </g>
+
+  <!-- Top right -->
+  <text x="557" y="94" fill="#7488f6" font-size="12" font-weight="700" letter-spacing="1.5">2 · NEXT</text>
+  <text x="557" y="126" fill="#eef1fb" font-size="18" font-weight="700">AI prepares, a person decides</text>
+  <g fill="#abb2d0" font-size="13">
+    <text x="557" y="156">Drafted client replies and estimates</text>
+    <text x="557" y="178">Pre-filled filings and month-end reports</text>
+    <text x="557" y="200">Every output is approved before it is sent</text>
+  </g>
+
+  <!-- Bottom left -->
+  <text x="154" y="282" fill="#8d94b8" font-size="12" font-weight="700" letter-spacing="1.5">3 · LATER</text>
+  <text x="154" y="314" fill="#eef1fb" font-size="18" font-weight="700">Cheap once the plumbing exists</text>
+  <g fill="#abb2d0" font-size="13">
+    <text x="154" y="344">Search over policies and procedures</text>
+    <text x="154" y="366">Meeting notes and internal summaries</text>
+    <text x="154" y="388">Not worth building the plumbing for alone</text>
+  </g>
+
+  <!-- Bottom right -->
+  <text x="557" y="282" fill="#8d94b8" font-size="12" font-weight="700" letter-spacing="1.5">4 · LEAVE IT ALONE</text>
+  <text x="557" y="314" fill="#eef1fb" font-size="18" font-weight="700">Rare work that needs judgement</text>
+  <g fill="#abb2d0" font-size="13">
+    <text x="557" y="344">Disputes, exceptions, and client advice</text>
+    <text x="557" y="366">Little time to save, a lot to lose</text>
+    <text x="557" y="388">Keep it with your most senior people</text>
+  </g>
+</svg>

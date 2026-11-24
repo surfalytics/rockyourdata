@@ -12,10 +12,17 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    /**
+     * Plain `YYYY-MM-DD`. Add a UTC time (`2026-11-24T16:00:00Z`) only to
+     * order several posts published on the same day; newest sorts first.
+     */
     date: z.coerce.date(),
     author: z.string().default("Dmitry Anoshin"),
     category: z.string().default("Data engineering"),
-    /** Optional cross-link to the service this post supports. */
+    /**
+     * Optional cross-link shown under the post: a service slug from
+     * services.ts, or "ai-roll-up" for the practice page.
+     */
     service: z.string().optional(),
     draft: z.boolean().default(false),
   }),

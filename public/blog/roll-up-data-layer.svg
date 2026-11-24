@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Inter, system-ui, -apple-system, sans-serif" role="img" aria-label="Roll-up data layer: acquired companies feed a raw zone, a conformed model, and golden records with KPIs. AI workflows and reporting read from the shared layer.">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#7488f6"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" rx="18" fill="#11152b" stroke="#283057"/>
+
+  <!-- Column labels -->
+  <g fill="#8d94b8" font-size="12" font-weight="700" letter-spacing="1.5">
+    <text x="40" y="44">ACQUIRED COMPANIES</text>
+    <text x="256" y="44">SHARED DATA LAYER</text>
+    <text x="776" y="44">RUNS ON IT</text>
+  </g>
+
+  <!-- Acquired companies -->
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="40" y="64" width="180" height="80" rx="12"/>
+    <rect x="40" y="164" width="180" height="80" rx="12"/>
+  </g>
+  <rect x="40" y="264" width="180" height="80" rx="12" fill="#1a2039" stroke="#ff7a4d" stroke-dasharray="6 4"/>
+  <g fill="#eef1fb" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="130" y="98">Company A</text>
+    <text x="130" y="198">Company B</text>
+    <text x="130" y="298">Company N+1</text>
+  </g>
+  <g fill="#abb2d0" font-size="12" text-anchor="middle">
+    <text x="130" y="120">Accounting system, CRM</text>
+    <text x="130" y="220">Legacy app, spreadsheets</text>
+    <text x="130" y="320">A config file + mappings</text>
+  </g>
+
+  <!-- Shared layer -->
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="256" y="64" width="148" height="280" rx="12"/>
+    <rect x="424" y="64" width="148" height="280" rx="12"/>
+  </g>
+  <rect x="592" y="64" width="148" height="280" rx="12" fill="#2a3470" stroke="#7488f6"/>
+  <g fill="#eef1fb" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="330" y="96">Raw</text>
+    <text x="498" y="96">Conformed</text>
+    <text x="666" y="96">Golden + KPIs</text>
+  </g>
+  <g fill="#abb2d0" font-size="12" text-anchor="middle">
+    <text x="330" y="128">Per company</text>
+    <text x="330" y="146">and per source</text>
+    <text x="330" y="186">As delivered</text>
+    <text x="330" y="204">Every load kept</text>
+    <text x="330" y="244">Read-only extract,</text>
+    <text x="330" y="262">no writes back</text>
+
+    <text x="498" y="128">Eight shared entities:</text>
+    <text x="498" y="146">customer, location,</text>
+    <text x="498" y="164">employee, service,</text>
+    <text x="498" y="182">job, time entry,</text>
+    <text x="498" y="200">invoice, payment</text>
+    <text x="498" y="244">Mappings are data</text>
+    <text x="498" y="262">Source keys kept</text>
+  </g>
+  <g fill="#b9c0ee" font-size="12" text-anchor="middle">
+    <text x="666" y="128">One record per</text>
+    <text x="666" y="146">customer, employee,</text>
+    <text x="666" y="164">and location</text>
+    <text x="666" y="204">One definition</text>
+    <text x="666" y="222">per KPI</text>
+    <text x="666" y="262">The baseline for AI</text>
+  </g>
+
+  <!-- Consumers -->
+  <g stroke="#283057" fill="#1a2039">
+    <rect x="776" y="64" width="144" height="130" rx="12"/>
+    <rect x="776" y="214" width="144" height="130" rx="12"/>
+  </g>
+  <g fill="#eef1fb" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="848" y="104">AI workflows</text>
+    <text x="848" y="254">Reporting</text>
+  </g>
+  <g fill="#abb2d0" font-size="12" text-anchor="middle">
+    <text x="848" y="128">Extraction, triage,</text>
+    <text x="848" y="146">drafting, search</text>
+    <text x="848" y="278">Portfolio KPIs,</text>
+    <text x="848" y="296">margin by company</text>
+  </g>
+
+  <!-- Arrows -->
+  <g stroke="#7488f6" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M220 104H254"/>
+    <path d="M220 204H254"/>
+    <path d="M220 304H254"/>
+    <path d="M404 204H422"/>
+    <path d="M572 204H590"/>
+    <path d="M740 129H774"/>
+    <path d="M740 279H774"/>
+  </g>
+
+  <!-- Guardrails -->
+  <rect x="40" y="372" width="880" height="56" rx="12" fill="#0e1326" stroke="#ff7a4d" stroke-dasharray="6 4"/>
+  <text x="60" y="396" fill="#ff7a4d" font-size="12" font-weight="700" letter-spacing="1.5">GUARDRAILS</text>
+  <text x="60" y="416" fill="#abb2d0" font-size="12">Catalog per company · row-level rules on shared models · evaluation sets · human review queues · cost per task</text>
+
+  <!-- Onboarding -->
+  <rect x="40" y="444" width="880" height="56" rx="12" fill="#0e1326" stroke="#7488f6"/>
+  <text x="60" y="468" fill="#7488f6" font-size="12" font-weight="700" letter-spacing="1.5">ONBOARDING COMPANY N+1</text>
+  <text x="60" y="488" fill="#abb2d0" font-size="12">1 Access and first raw load · 2 Mappings reviewed · 3 Revenue reconciles · 4 Merges approved · 5 KPIs published, baseline frozen</text>
+</svg>
