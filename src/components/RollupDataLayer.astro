@@ -1,0 +1,118 @@
+---
+// The roll-up data layer, drawn in HTML so it reflows: three columns on
+// desktop, one stacked column on phones. Text stays real text (readable,
+// selectable, indexable) instead of living inside an image.
+import Icon from "./Icon.astro";
+import FeatureIcon from "./FeatureIcon.astro";
+import { dataLayer } from "../data/aiRollup";
+
+const { sources, connect, platform, workflows, outcomes, guardrails } = dataLayer;
+const boxLabel = "label";
+---
+
+<figure class="card p-4 sm:p-6 md:p-8">
+  <figcaption class="sr-only">
+    Diagram of the roll-up data layer. Acquired companies keep their own systems.
+    Read-only connectors copy their data into a shared data layer with three
+    levels: raw, conformed, and golden records with KPIs. AI workflows and
+    reporting for operators and the board run on that shared layer. Access
+    control, evaluation sets, human review, and cost tracking apply to every
+    layer.
+  </figcaption>
+
+  <div class="grid gap-3 lg:grid-cols-[1fr_auto_1.15fr_auto_1fr] lg:items-stretch lg:gap-4">
+    <!-- 1. Sources -->
+    <div class="rounded-xl border border-line bg-mist p-5">
+      <p class:list={[boxLabel, "text-lilac"]}>{sources.title}</p>
+      <ul class="mt-4 space-y-2.5">
+        {
+          sources.items.map((item) => (
+            <li class="rounded-lg border border-line bg-fog px-3.5 py-2.5 text-sm leading-snug text-ink">
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-4 text-sm leading-relaxed text-ink-soft">{sources.note}</p>
+    </div>
+
+    <!-- Arrow: connectors -->
+    <div
+      class="flex items-center justify-center gap-3 py-1 text-periwinkle lg:w-28 lg:flex-col lg:gap-2 lg:py-0 lg:text-center"
+    >
+      <span class="text-ink-soft">
+        <FeatureIcon name="plug" size={22} />
+      </span>
+      <span class="text-sm leading-snug">
+        <span class="block font-semibold text-navy">{connect.title}</span>
+        <span class="block text-ink-soft">{connect.note}</span>
+      </span>
+      <span class="rotate-90 lg:rotate-0" aria-hidden="true">
+        <Icon name="arrow-right" size={22} />
+      </span>
+    </div>
+
+    <!-- 2. Shared data layer -->
+    <div class="rounded-xl border border-periwinkle/60 bg-brand p-5">
+      <p class:list={[boxLabel, "text-periwinkle-200"]}>{platform.title}</p>
+      <ol class="mt-4 space-y-2.5">
+        {
+          platform.layers.map((layer, i) => (
+            <li class="flex gap-3 rounded-lg bg-paper/45 px-3.5 py-3">
+              <span class="font-display text-sm font-extrabold text-accent">
+                0{i + 1}
+              </span>
+              <span class="text-sm leading-snug">
+                <span class="block font-semibold text-navy">{layer.name}</span>
+                <span class="block text-white/75">{layer.detail}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mt-4 text-sm leading-relaxed text-white/75">{platform.note}</p>
+    </div>
+
+    <!-- Arrow -->
+    <div
+      class="flex items-center justify-center py-1 text-periwinkle lg:py-0"
+      aria-hidden="true"
+    >
+      <span class="rotate-90 lg:rotate-0">
+        <Icon name="arrow-right" size={22} />
+      </span>
+    </div>
+
+    <!-- 3. What runs on it -->
+    <div class="grid gap-3 lg:gap-4">
+      {
+        [workflows, outcomes].map((box) => (
+          <div class="rounded-xl border border-line bg-mist p-5">
+            <p class:list={[boxLabel, "text-lilac"]}>{box.title}</p>
+            <ul class="mt-3 space-y-2">
+              {box.items.map((item) => (
+                <li class="flex gap-2.5 text-sm leading-snug text-ink">
+                  <span class="mt-0.5 shrink-0 text-periwinkle">
+                    <Icon name="check" size={16} />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p class="mt-3 text-sm leading-relaxed text-ink-soft">{box.note}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Guardrails -->
+  <div
+    class="mt-3 rounded-xl border border-dashed border-accent/70 bg-mist px-5 py-4 lg:mt-4"
+  >
+    <p class:list={[boxLabel, "text-accent"]}>Guardrails on every layer</p>
+    <ul class="mt-2 flex flex-wrap gap-x-6 gap-y-1.5 text-sm text-ink-soft">
+      {guardrails.map((g) => <li>{g}</li>)}
+    </ul>
+  </div>
+</figure>

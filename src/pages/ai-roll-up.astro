@@ -1,0 +1,575 @@
+---
+import { getCollection } from "astro:content";
+import MarketingLayout from "../layouts/MarketingLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import FeatureIcon from "../components/FeatureIcon.astro";
+import Icon from "../components/Icon.astro";
+import InteractionCard from "../components/InteractionCard.astro";
+import OfferCard from "../components/OfferCard.astro";
+import FaqList from "../components/FaqList.astro";
+import CtaBand from "../components/CtaBand.astro";
+import RollupDataLayer from "../components/RollupDataLayer.astro";
+import { site } from "../data/site";
+import { teamAvgYears } from "../data/team";
+import {
+  rollup,
+  loop,
+  marketFacts,
+  failureQuote,
+  problems,
+  principles,
+  phases,
+  workflows,
+  industries,
+  metrics,
+  audiences,
+  rollupOffers,
+  reasons,
+  rollupFaqs,
+  rollupReading,
+  sources,
+  getSource,
+} from "../data/aiRollup";
+
+// Deep-dive posts, in reading order. A missing or draft post is skipped.
+const posts = await getCollection("blog");
+const reading = rollupReading
+  .map((slug) => posts.find((p) => p.id === slug && !p.data.draft))
+  .filter((p) => p !== undefined);
+
+const pageUrl = new URL(rollup.href, site.url).href;
+const quoteSource = getSource(failureQuote.source);
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${pageUrl}#service`,
+    name: rollup.seoTitle,
+    description: rollup.seoDescription,
+    serviceType: rollup.title,
+    url: pageUrl,
+    provider: { "@id": `${site.url}/#organization` },
+    areaServed: [
+      { "@type": "Country", name: "Canada" },
+      { "@type": "Country", name: "United States" },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${rollup.title} engagements`,
+      itemListElement: rollupOffers.map((o) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: o.title, description: o.summary },
+      })),
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    mainEntity: rollupFaqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+      { "@type": "ListItem", position: 2, name: rollup.title, item: pageUrl },
+    ],
+  },
+];
+---
+
+<MarketingLayout
+  title={rollup.seoTitle}
+  description={rollup.seoDescription}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden">
+    <div
+      class="pointer-events-none absolute -right-32 -top-24 -z-10 h-[28rem] w-[28rem] rounded-full bg-periwinkle/15 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute -left-40 top-1/2 -z-10 h-80 w-80 rounded-full bg-accent/10 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div
+      class="shell grid gap-12 pt-14 pb-4 md:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16"
+    >
+      <div>
+        <span class="reveal eyebrow" style="animation-delay: 20ms">
+          AI roll-ups · Offline businesses
+        </span>
+        <h1
+          class="reveal mt-4 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl lg:text-6xl"
+          style="animation-delay: 60ms"
+        >
+          AI roll-up engineering for <span class="text-accent">offline businesses</span>
+        </h1>
+        <p
+          class="reveal mt-6 max-w-xl text-lg leading-relaxed text-ink-soft md:text-xl"
+          style="animation-delay: 140ms"
+        >
+          You buy the service businesses. We build what makes the thesis work
+          after close: one data layer across every company, and AI workflows
+          that remove real work.
+        </p>
+        <div
+          class="reveal mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+          style="animation-delay: 220ms"
+        >
+          <a href="/contact/" class="btn-primary text-base">
+            Talk to an engineer
+            <Icon name="arrow-right" size={18} />
+          </a>
+          <a href="#data-layer" class="btn-outline text-base">See the data layer</a>
+        </div>
+        <p class="reveal mt-7 max-w-xl text-sm leading-relaxed text-lilac" style="animation-delay: 280ms">
+          For holding companies, PE-backed platforms, search funds, and
+          multi-location operators.
+        </p>
+      </div>
+
+      <!-- The loop -->
+      <div class="reveal card relative p-6 md:p-8" style="animation-delay: 180ms">
+        <p class="label text-lilac">The AI roll-up loop</p>
+        <ol class="mt-6 space-y-6">
+          {
+            loop.map((s) => (
+              <li class="flex gap-4">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand font-display text-sm font-extrabold text-white">
+                  {s.step}
+                </span>
+                <div>
+                  <p class="font-display text-xl font-extrabold text-navy">{s.title}</p>
+                  <p class="mt-1.5 text-[0.95rem] leading-relaxed text-ink-soft">
+                    {s.description}
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <p
+          class="mt-7 flex items-start gap-3 border-t border-line pt-5 text-sm leading-relaxed text-ink-soft"
+        >
+          <span class="mt-0.5 shrink-0 text-accent">
+            <FeatureIcon name="repeat" size={20} />
+          </span>
+          Then repeat. Step two is where the engineering is, and where most
+          roll-ups slow down.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What it is -->
+  <section class="shell pt-20 md:pt-28">
+    <div class="grid gap-8 border-t border-line pt-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+      <div>
+        <span class="eyebrow">The model</span>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+          What is an AI roll-up?
+        </h2>
+      </div>
+      <div class="space-y-4 text-lg leading-relaxed text-ink-soft">
+        <p>
+          An AI roll-up buys established, profitable service businesses and
+          rebuilds how they work with AI. The targets are offline businesses:
+          accounting firms, property managers, IT service providers,
+          home-services companies, clinics. The margin gained in each one helps
+          pay for the next acquisition.
+        </p>
+        <p>
+          A classic roll-up wins on scale and purchasing power. An AI roll-up has
+          to change how the work itself gets done. That makes it an engineering
+          project as much as a financial one.
+        </p>
+        <p>
+          Investors such as General Catalyst and Thrive Holdings have committed
+          billions to the model since 2024. The results published so far are
+          company statements, not audits. What is already clear is where the
+          work is: in the data and the workflows after close.
+        </p>
+      </div>
+    </div>
+
+    <!-- Market facts -->
+    <dl class="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {
+        marketFacts.map((fact) => {
+          const src = getSource(fact.source);
+          return (
+            <div class="card flex flex-col p-5 md:p-6">
+              <dt class="order-2 mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
+                {fact.label}
+              </dt>
+              <dd class="order-1 font-display text-4xl font-extrabold text-navy md:text-5xl">
+                {fact.value}
+              </dd>
+              <dd class="order-3 mt-4 text-xs text-lilac">
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener"
+                  class="underline decoration-line underline-offset-4 transition-colors hover:text-periwinkle"
+                >
+                  {src.publisher}, {src.date}
+                </a>
+              </dd>
+            </div>
+          );
+        })
+      }
+    </dl>
+  </section>
+
+  <!-- Where it breaks -->
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading
+      eyebrow="The hard part"
+      title="The thesis is simple. The execution is a data problem."
+      subtitle="Critics of AI roll-ups rarely doubt the AI. They doubt the integration."
+      class="!max-w-3xl"
+    />
+
+    <figure class="mx-auto mt-10 max-w-3xl border-l-2 border-accent pl-5 md:pl-7">
+      <blockquote class="text-xl leading-relaxed text-navy md:text-2xl">
+        “{failureQuote.text}”
+      </blockquote>
+      <figcaption class="mt-4 text-sm text-lilac">
+        {failureQuote.author}, {failureQuote.role}.
+        <a
+          href={quoteSource.url}
+          target="_blank"
+          rel="noopener"
+          class="underline decoration-line underline-offset-4 transition-colors hover:text-periwinkle"
+        >
+          Source
+        </a>
+      </figcaption>
+    </figure>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {
+        problems.map((p) => (
+          <article class="card flex flex-col gap-4 p-6 sm:flex-row sm:gap-5 md:p-7">
+            <span class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-fog text-navy">
+              <FeatureIcon name={p.icon} size={26} />
+            </span>
+            <div>
+              <h3 class="text-xl font-bold text-navy">{p.title}</h3>
+              <p class="mt-2.5 text-[0.975rem] leading-relaxed text-ink-soft">
+                {p.description}
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- The data layer -->
+  <section id="data-layer" class="shell scroll-mt-24 pt-20 md:pt-28">
+    <SectionHeading
+      eyebrow="The asset that compounds"
+      title="One data layer. Every company plugs into it."
+      subtitle="Each acquisition adds data and workflows to the same platform, instead of adding one more silo."
+      class="!max-w-3xl"
+    />
+    <div class="mt-12">
+      <RollupDataLayer />
+    </div>
+
+    <div class="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        principles.map((p) => (
+          <div class="border-t border-line pt-5">
+            <h3 class="text-lg font-bold text-navy">{p.title}</h3>
+            <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-soft">{p.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Phases -->
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading
+      eyebrow="What we build"
+      title="From diligence to company N+1"
+      subtitle="A typical sequence. We set the dates after diligence, when we know the systems and the data quality."
+    />
+    <ol class="mx-auto mt-12 max-w-5xl space-y-5">
+      {
+        phases.map((phase, i) => (
+          <li class="card grid gap-5 p-6 md:grid-cols-[17rem_1fr] md:gap-8 md:p-7">
+            <div>
+              <div class="flex items-center gap-3">
+                <span class="font-display text-sm font-extrabold tracking-widest text-accent">
+                  0{i + 1}
+                </span>
+                <span class="rounded-pill bg-fog px-3 py-1 text-xs font-semibold tracking-wide text-periwinkle-200">
+                  {phase.when}
+                </span>
+              </div>
+              <h3 class="mt-3 text-xl font-bold text-navy">{phase.title}</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-soft">{phase.summary}</p>
+            </div>
+            <ul class="space-y-2.5 border-t border-line pt-5 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+              {phase.items.map((item) => (
+                <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/85">
+                  <span class="mt-0.5 shrink-0 text-periwinkle">
+                    <Icon name="check" size={18} />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <!-- Workflows -->
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading
+      eyebrow="Where AI removes work first"
+      title="Workflows we automate first"
+      subtitle="We start where the volume is high, the input is messy, and a wrong answer is cheap to catch."
+    />
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        workflows.map((w) => (
+          <article class="card flex flex-col p-7">
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">
+              <FeatureIcon name={w.icon} size={26} />
+            </span>
+            <h3 class="mt-5 text-xl font-bold text-navy">{w.title}</h3>
+            <p class="mt-2.5 flex-1 text-[0.975rem] leading-relaxed text-ink-soft">
+              {w.description}
+            </p>
+            {w.post && (
+              <a
+                href={w.post.href}
+                class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle hover:text-navy"
+              >
+                {w.post.label}
+                <Icon name="arrow-right" size={16} />
+              </a>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Measurement + industries -->
+  <section class="shell pt-20 md:pt-28">
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="card p-7 md:p-10">
+        <span class="eyebrow">How we measure</span>
+        <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-navy md:text-3xl">
+          Measure the gain, or it did not happen
+        </h2>
+        <p class="mt-4 leading-relaxed text-ink-soft">
+          We do not promise a margin number. What we commit to is the baseline
+          and the measurement, so you can see what changed and what did not.
+        </p>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+          {
+            metrics.map((m) => (
+              <li class="flex gap-3 text-[0.975rem] leading-relaxed text-ink/85">
+                <span class="mt-0.5 shrink-0 text-accent">
+                  <Icon name="check" size={18} />
+                </span>
+                {m}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="card p-7 md:p-10">
+        <span class="eyebrow">Where the model is applied</span>
+        <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-navy md:text-3xl">
+          Service businesses with heavy back-office work
+        </h2>
+        <ul class="mt-6 flex flex-wrap gap-2">
+          {
+            industries.map((name) => (
+              <li class="rounded-pill bg-fog px-3.5 py-1.5 text-sm font-medium text-periwinkle-200">
+                {name}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-6 leading-relaxed text-ink-soft">
+          Our own background is data and AI platforms in e-commerce, SaaS,
+          telecom, fintech, gaming, and the public sector. The engineering
+          carries over. The domain knowledge comes from your operators, so we
+          design every workflow with them in the loop.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audiences -->
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading eyebrow="Who this is for" title="Who we work with" />
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {audiences.map((a) => <InteractionCard {...a} />)}
+    </div>
+  </section>
+
+  <!-- Offers -->
+  <section class="shell pt-20 md:pt-28">
+    <SectionHeading
+      eyebrow="Start small"
+      title="Three fixed-scope ways to start"
+      subtitle="Each one ends with something you can use, with us or without us."
+    />
+    <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        rollupOffers.map((o) => (
+          <OfferCard offer={{ ...o, service: rollup.slug }} showServiceLink={false} />
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Why us -->
+  <section class="shell pt-20 md:pt-28">
+    <div class="grid gap-10 border-t border-line pt-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div>
+        <span class="eyebrow">Why Rock Your Data</span>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+          The engineering side of the roll-up
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-ink-soft">
+          You bring the thesis, the deals, and the operators. We bring the data
+          layer, the AI workflows, and the measurement. The team averages
+          {teamAvgYears}+ years in data.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+          <a
+            href="/about/"
+            class="inline-flex items-center gap-2 font-semibold text-periwinkle hover:text-navy"
+          >
+            Meet the team
+            <Icon name="arrow-right" size={18} />
+          </a>
+          <a
+            href="/projects/"
+            class="inline-flex items-center gap-2 font-semibold text-periwinkle hover:text-navy"
+          >
+            See platforms we built
+            <Icon name="arrow-right" size={18} />
+          </a>
+        </div>
+      </div>
+      <ul class="grid gap-x-8 gap-y-7 sm:grid-cols-2">
+        {
+          reasons.map((r) => (
+            <li class="flex gap-3">
+              <span class="mt-1 shrink-0 text-accent">
+                <Icon name="check" size={20} />
+              </span>
+              <div>
+                <h3 class="text-lg font-bold text-navy">{r.title}</h3>
+                <p class="mt-1.5 text-[0.95rem] leading-relaxed text-ink-soft">
+                  {r.description}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Reading -->
+  {
+    reading.length > 0 && (
+      <section class="shell pt-20 md:pt-28">
+        <SectionHeading
+          eyebrow="Go deeper"
+          title="The playbook, one phase at a time"
+        />
+        <div class="mt-12 grid gap-6 md:grid-cols-2">
+          {reading.map((post, i) => (
+            <a
+              href={`/blog/${post.id}/`}
+              class="card card-link group flex gap-5 p-6 md:p-7"
+            >
+              <span class="font-display text-sm font-extrabold tracking-widest text-accent">
+                0{i + 1}
+              </span>
+              <span class="flex flex-col">
+                <span class="text-lg font-bold leading-snug text-navy group-hover:text-periwinkle">
+                  {post.data.title}
+                </span>
+                <span class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
+                  {post.data.description}
+                </span>
+                <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-periwinkle">
+                  Read article
+                  <Icon name="arrow-right" size={16} />
+                </span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- FAQ -->
+  <section class="shell pt-20 md:pt-28">
+    <div class="mx-auto max-w-3xl">
+      <FaqList faqs={rollupFaqs} title="AI roll-up questions" />
+    </div>
+  </section>
+
+  <!-- Sources -->
+  <section class="shell pt-12">
+    <div class="mx-auto max-w-3xl text-sm leading-relaxed text-lilac">
+      <h2 class="label text-lilac">Sources</h2>
+      <ul class="mt-3 space-y-1.5">
+        {
+          sources.map((s) => (
+            <li>
+              {s.publisher},
+              <a
+                href={s.url}
+                target="_blank"
+                rel="noopener"
+                class="underline decoration-line underline-offset-4 transition-colors hover:text-periwinkle"
+              >
+                {s.title}
+              </a>
+              ({s.date})
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="shell pt-16 md:pt-20">
+    <CtaBand
+      title="Planning a roll-up, or already running one?"
+      body="Tell us where you are: thesis, first deal, or tenth. We reply within one business day, and we will tell you plainly if we are not the right fit."
+    />
+  </section>
+</MarketingLayout>
